@@ -1,35 +1,52 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // <-- Import Router here
+import { Component, OnInit } from '@angular/core'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from "@angular/router";
+
+import { userPwd } from "../userpwd";
+import { userObj } from '../userObj';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+const BACKEND_URL = "http://localhost:3000";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  userpwd: userPwd = { username: "", pwd: "" };
 
-  user = {
-    email: '',
-    password: ''
-  };
+  constructor(private router: Router, private http: HttpClient) { }
 
-  users = [
-    {email: 'michael@com.au', password: '123'},
-    {email: 'beyonce@com.au', password: '456'},
-    {email: 'post@com.au', password: '789'}
-  ];
+  ngOnInit() {}
 
+  public loginfunc() {
+    this.http.post(BACKEND_URL + "/login", this.userpwd, httpOptions)
+    .subscribe(
+        (data: any) => {
+            alert(JSON.stringify(this.userpwd));
 
-  errorMessage = '';
+            if (data.ok && data.user) {
+                sessionStorage.setItem("userid", data.user.userid);
+                sessionStorage.setItem("username", data.user.username);
+                sessionStorage.setItem("userbirthdate", data.user.birthdate);
+                sessionStorage.setItem("userage", data.user.age);
 
-  constructor(private router: Router) { }
+                this.http.post<userObj>(BACKEND_URL + "/loginAfter", data.user, httpOptions)
+                .subscribe(
+                    (m: any) => {console.log(m[0]);},
+                    error => {console.error('There was an error:', error);}
+                );
 
-  onSubmit() {
-    const validUser = this.users.find(u => u.email === this.user.email && u.password === this.user.password);
-    if (validUser) {
-      this.router.navigate(['/account']);
-    } else {
-      this.errorMessage = 'Invalid email or password. Please try again.';
-    }
+                this.router.navigateByUrl('account');
+            } else {
+                alert("Sorry, username or password is incorrect");
+            }
+        },
+        error => {console.error('There was an error:', error);}
+    );
   }
 }

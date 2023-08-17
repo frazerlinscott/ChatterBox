@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" [(ngModel)]="user.username" name="username" id="username">
+    </div>
+  
+    <div class="form-group">
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" class="form-control" [(ngModel)]="user.userbirthdate" name="birthdate" id="birthdate">
+    </div>
+  
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" class="form-control" [(ngModel)]="user.userage" name="age" id="age">
+    </div>
+  
+    <!-- Add other form groups for other data... -->
+  
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+    <button (click)="closeProfile()" class="btn btn-secondary">Close</button>
+
+  </form>
+  
