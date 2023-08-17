@@ -17,6 +17,7 @@ const BACKEND_URL = "http://localhost:3000";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   userpwd: userPwd = { username: "", pwd: "" };
 
   constructor(private router: Router, private http: HttpClient) { }
@@ -27,7 +28,9 @@ export class LoginComponent implements OnInit {
     this.http.post(BACKEND_URL + "/login", this.userpwd, httpOptions)
     .subscribe(
         (data: any) => {
+          //console.log("main" +  data);
             alert(JSON.stringify(this.userpwd));
+
 
             if (data.ok && data.user) {
                 sessionStorage.setItem("userid", data.user.userid);
@@ -37,7 +40,7 @@ export class LoginComponent implements OnInit {
 
                 this.http.post<userObj>(BACKEND_URL + "/loginAfter", data.user, httpOptions)
                 .subscribe(
-                    (m: any) => {console.log(m[0]);},
+                    //(m: any) => {console.log(m[0]);},
                     error => {console.error('There was an error:', error);}
                 );
 

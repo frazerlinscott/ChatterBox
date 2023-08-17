@@ -30,8 +30,4 @@ export class ProfileComponent implements OnInit {
   closeProfile() {
     this.router.navigateByUrl('/account'); // Assuming '/account' is your account page route
   }
-
-  
-
-  
 }
