@@ -1,0 +1,26 @@
+[
+  {
+    "username": "user",
+    "email": "user",
+    "password": "user",
+    "roles": [
+      1
+    ],
+    "groups": [
+      1
+    ]
+  },
+  {
+    "username": "frazer",
+    "email": "frazerlinscott@me.com",
+    "password": "frazer",
+    "password2": "frazer",
+    "birthday": "2023-09-07",
+    "roles": [
+      1
+    ],
+    "groups": [
+      1
+    ]
+  }
+]

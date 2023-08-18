@@ -18,4 +18,7 @@ var server = http.listen(3000, function(){
 })
 
 app.post("/login", require("./routes/postLogin"));
-app.post("/loginAfter", require("./routes/postLoginAfter"));
+
+const postCreateUser = require('./routes/postCreateUser');
+
+app.post('/create-user', postCreateUser);
