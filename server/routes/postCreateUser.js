@@ -2,14 +2,44 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function(req, res) {
-    const newUser = req.body;
 
+    const newUser = req.body;
+    //console.log("Received data:", newUser);
+
+    // if (!newUser.username) return res.status(400).json({ success: false, message: 'Username is required.' });
+    // if (!newUser.email) return res.status(400).json({ success: false, message: 'Email is required.' });
+    // if (!newUser.password) return res.status(400).json({ success: false, message: 'Password is required.' });
+    // if (!newUser.birthdate) return res.status(400).json({ success: false, message: 'Birthdate is required.' });
+
+    
     // Validate the user data (add any other necessary validations)
-    if (!newUser.username || !newUser.email || !newUser.password || !newUser.birthday) {
+    if (!newUser.username || !newUser.email || !newUser.password || !newUser.birthdate) {
+        console.log("400 Error: Missing required fields");
         return res.status(400).json({ success: false, message: 'All fields are required.' });
+        
     }
 
-    // Read the current users data
+// ________________________________________________________________________________________________________________________________
+//Calculate Age based on Birthday Input
+
+    function calculateAge(birthdate) {
+        const today = new Date();
+        const birthDate = new Date(birthdate);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+    
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--; // Decrease age if birthdate has not occurred this year yet
+        }
+    
+        return age;
+    }
+
+    const age = calculateAge(newUser.birthdate);
+    newUser.age = age;
+// ________________________________________________________________________________________________________________________________
+// Read the current users data
+
     fs.readFile(path.join(__dirname, '..', 'data', 'usersData.json'), 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading the usersData.json file:', err);

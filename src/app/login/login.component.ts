@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
     .subscribe(
         (data: any) => {
             if (data.ok && data.user) {
-                // Save all the necessary user data to the session storage
-                sessionStorage.setItem("userid", "1"); // Just a placeholder, ideally you would get this from the server.
-                sessionStorage.setItem("username", data.user.username);
-                sessionStorage.setItem("userbirthdate", data.user.birthday || "1997-02-18");
-                sessionStorage.setItem("userage", data.user.age);
+                // // Save all the necessary user data to the session storage
+                // sessionStorage.setItem("userid", "1"); // Just a placeholder, ideally you would get this from the server.
+                // sessionStorage.setItem("username", data.user.username);
+                // sessionStorage.setItem("userbirthdate", data.user.birthday || "1997-02-18");
+                // sessionStorage.setItem("userage", data.user.age);
                 
-                // Navigate to account page after successful login
+                // // Navigate to account page after successful login
                 this.router.navigateByUrl('account');
             } else {
                 alert("Sorry, username or password is incorrect");
