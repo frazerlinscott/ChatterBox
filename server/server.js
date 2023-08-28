@@ -18,21 +18,15 @@ var server = http.listen(3000, function(){
     console.log('listening on *:3000');
 })
 
-const postCreateUser = require('./routes/postCreateUser');
+const postCreateUser = require('./routes/postCreateUser.js');
+
 const updateUser = require('./routes/updateUser');
 
 app.post("/login", require("./routes/postLogin"));
 
-const postCreateUser = require('./routes/postCreateUser');
-
-// // Dummy users
-// const users = [
-//     new User('user1', '1990-01-01', 32, 'user1@example.com', 'password1', true),
-//     new User('user2', '1985-05-15', 37, 'user2@example.com', 'password2', true),
-//     new User('user3', '2000-10-20', 22, 'user3@example.com', 'password3', true)
-// ];
-
 app.post('/update-user', updateUser);
+
+app.post('/create-user', postCreateUser);
 
 
 app.get("/usernames", (req, res) => {

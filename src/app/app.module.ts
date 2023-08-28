@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     LoginComponent,
     AccountComponent,
-    ProfileComponent
+    ProfileComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
