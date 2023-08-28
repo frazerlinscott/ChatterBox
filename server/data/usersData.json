@@ -1,15 +1,12 @@
 [
   {
-    "username": "super12355",
-    "birthdate": "1999-10-22",
-    "age": 23,
-    "email": "email@super.com.au",
-    "password": "123",
-    "pwdconfirm": "123",
-    "roles": [
-      1,
-      2,
-      3
+    "username": "user1",
+    "age": 26,
+    "email": "1",
+    "password": "1",
+    "pwdconfirm": "1",
+    "role": [
+      1
     ],
     "group": [
       1
@@ -17,12 +14,12 @@
     "valid": true
   },
   {
-    "username": "super123",
-    "birthdate": "2023-08-16",
-    "age": 0,
-    "email": "email@333",
-    "password": "1",
-    "pwdconfirm": "1",
+    "username": "super",
+    "birthdate": "2000-02-18",
+    "age": 23,
+    "email": "123",
+    "password": "123",
+    "pwdconfirm": "123",
     "role": [
       1
     ],

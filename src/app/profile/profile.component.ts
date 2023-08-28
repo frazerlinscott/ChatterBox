@@ -16,13 +16,21 @@ const httpOptions = {
 })
 export class ProfileComponent implements OnInit {
   user: any = {};
+  allUsernames: string[] = [];
+  isUniqueUsername: boolean = true;
+  isUniqueEmail:boolean = true;
   
   constructor(private router: Router, private http: HttpClient) { }
 
-  
   ngOnInit() {
 
     const storedUserData = sessionStorage.getItem('current.user');
+
+    this.http.get<string[]>(BACKEND_URL + "/usernames").subscribe(usernames => {
+      this.allUsernames = usernames;
+      console.log(this.allUsernames);
+    });
+
 
     if (storedUserData) {
         const retrievedUser = JSON.parse(storedUserData);
@@ -35,6 +43,12 @@ export class ProfileComponent implements OnInit {
 
       }
 }
+
+  onUsernameInput() {
+  // Check if username is unique while the user is typing
+    this.isUniqueUsername = !this.allUsernames.includes(this.user.username);
+    console.log(this.isUniqueUsername)
+  }
 
   onSubmit() {
 
@@ -65,10 +79,12 @@ export class ProfileComponent implements OnInit {
       response => {
           console.log('User details updated on the server.', response);
           alert('Profile updated!');
+          this.isUniqueEmail=false
       },
       error => {
           console.error('There was an error updating the user details on the server.', error);
           alert('Error updating profile. Please try again.');
+          this.isUniqueEmail=false
       }
   )
     alert('Profile updated!');

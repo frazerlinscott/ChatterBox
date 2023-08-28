@@ -1,0 +1,12 @@
+.container {
+    max-width: 600px;
+}
+
+.is-unique {
+    border: 2px solid green;
+  }
+  
+  .not-unique {
+    border: 2px solid red;
+  }
+

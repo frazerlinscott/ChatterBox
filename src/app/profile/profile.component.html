@@ -1,8 +1,14 @@
 <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" [(ngModel)]="user.username" name="username" id="username">
-    </div>
+            <label for="username" class="form-label">Username</label>
+            <input type="text"  class="form-control" id="username"[(ngModel)]="user.username" name="username" required (input)="onUsernameInput()" [ngClass]="{
+                'is-unique': user.username && isUniqueUsername, 
+                'not-unique': user.username && !isUniqueUsername}"></div>
+
+        <div *ngIf="!isUniqueUsername" class="invalid-feedback d-block">
+            User already exists, Please choose a new username
+        </div>
+
   
     <div class="form-group">
       <label for="birthdate">Birthdate:</label>
@@ -10,10 +16,10 @@
     </div>
   
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="text" class="form-control" [(ngModel)]="user.email" name="email" id="email">
-    </div>
-  
+      
+      <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+          </div>
     <!-- Add other form groups for other data... -->
   
     <button type="submit" class="btn btn-primary">Update Profile</button>
