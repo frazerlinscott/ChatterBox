@@ -1,0 +1,49 @@
+[
+  {
+    "username": "super123",
+    "birthdate": "1999-10-22",
+    "age": 23,
+    "email": "email@super.com",
+    "password": "123",
+    "pwdconfirm": "123",
+    "roles": [
+      1,
+      2,
+      3
+    ],
+    "group": [
+      1
+    ],
+    "valid": true
+  },
+  {
+    "username": "user123",
+    "birthdate": "2023-06-07",
+    "age": 0,
+    "email": "user@me.com",
+    "password": "user1",
+    "pwdconfirm": "user1",
+    "role": [
+      1
+    ],
+    "group": [
+      1
+    ],
+    "valid": true
+  },
+  {
+    "username": "super1235",
+    "birthdate": "2023-08-10",
+    "age": 0,
+    "email": "email@sddd",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": [
+      1
+    ],
+    "group": [
+      1
+    ],
+    "valid": true
+  }
+]
