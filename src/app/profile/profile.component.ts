@@ -83,7 +83,6 @@ export class ProfileComponent implements OnInit {
     this.http.post(BACKEND_URL+"/update-user", newDetails).subscribe(
       response => {
           console.log('User details updated on the server.', response);
-          alert('Profile updated!');
           this.isUniqueEmail=false
       },
       error => {
@@ -93,6 +92,7 @@ export class ProfileComponent implements OnInit {
       }
   )
     alert('Profile updated!');
+    this.router.navigateByUrl('/account'); // Assuming '/account' is your account page route
   }
 
   closeProfile() {

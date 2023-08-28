@@ -1,11 +1,26 @@
 [
   {
-    "username": "super",
+    "username": "super123",
     "birthdate": "1997-02-18",
     "age": 26,
     "email": "super@me",
     "password": "frazer",
     "pwdconfirm": "frazer",
+    "role": [
+      1
+    ],
+    "group": [
+      1
+    ],
+    "valid": true
+  },
+  {
+    "username": "super1234",
+    "birthdate": "1997-02-18",
+    "age": 26,
+    "email": "super@me.com",
+    "password": "linscott",
+    "pwdconfirm": "linscott",
     "role": [
       1
     ],
