@@ -1,29 +1,43 @@
-<form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-            <label for="username" class="form-label">Username</label>
-            <input type="text"  class="form-control" id="username"[(ngModel)]="user.username" name="username" required (input)="onUsernameInput()" [ngClass]="{
-                'is-unique': user.username && isUniqueUsername, 
-                'not-unique': user.username && !isUniqueUsername}"></div>
+<form (ngSubmit)="onSubmit()" class="bg-light p-4 rounded border">
+  <h3 class="mb-4">Update Profile Details</h3>
 
-        <div *ngIf="!isUniqueUsername" class="invalid-feedback d-block">
-            User already exists, Please choose a new username
-        </div>
+  <div class="form-group mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" required 
+             (input)="onUsernameInput()" 
+             [ngClass]="{'is-invalid': user.username && !isUniqueUsername}">
+      <div *ngIf="!isUniqueUsername" class="invalid-feedback">
+          User already exists, Please choose a new username
+      </div>
+  </div>
 
-  
-    <div class="form-group">
-      <label for="birthdate">Birthdate:</label>
+  <div class="form-group mb-3">
+      <label for="birthdate" class="form-label">Birthdate</label>
       <input type="date" class="form-control" [(ngModel)]="user.userbirthdate" name="birthdate" id="birthdate">
-    </div>
-  
-    <div class="form-group">
-      
-      <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
-          </div>
-    <!-- Add other form groups for other data... -->
-  
-    <button type="submit" class="btn btn-primary">Update Profile</button>
-    <button (click)="closeProfile()" class="btn btn-secondary">Close</button>
+  </div>
 
-  </form>
-  
+  <div class="form-group mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required 
+             [ngClass]="{'is-invalid': user.password && !isUniquePassword}">
+  </div>
+
+  <div class="form-group mb-3">
+      <label for="pwdconfirm" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="pwdconfirm" [(ngModel)]="user.pwdconfirm" name="pwdconfirm" required 
+             [ngClass]="{'is-invalid': user.pwdconfirm && !isUniquePassword}">
+      <div *ngIf="!isUniquePassword" class="invalid-feedback">
+          Passwords do not match, Please try again.
+      </div>
+  </div>
+
+  <div class="form-group mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+  </div>
+
+  <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">Update Profile</button>
+      <button (click)="closeProfile()" class="btn btn-secondary">Close</button>
+  </div>
+</form>

@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   allUsernames: string[] = [];
   isUniqueUsername: boolean = true;
   isUniqueEmail:boolean = true;
+  isUniquePassword: boolean = true;
   
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -40,7 +41,8 @@ export class ProfileComponent implements OnInit {
         this.user.username = retrievedUser.username;
         this.user.userbirthdate = retrievedUser.birthdate
         this.user.email = retrievedUser.email
-
+        this.user.password=retrievedUser.password
+        this.user.pwdconfirm=retrievedUser.pwdconfirm
       }
 }
 
@@ -63,6 +65,9 @@ export class ProfileComponent implements OnInit {
         retrievedUser.username = this.user.username;
         retrievedUser.birthdate = this.user.userbirthdate;
         retrievedUser.email = this.user.email;
+        retrievedUser.email = this.user.email;
+        retrievedUser.password = this.user.password
+        retrievedUser.pwdconfirm = this.user.pwdconfirm
 
         // Update session storage with the new user data
         sessionStorage.setItem('current.user', JSON.stringify(retrievedUser));

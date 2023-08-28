@@ -8,7 +8,7 @@ module.exports = function(req, res) {
     console.log(updatedDetails.userbirthdate)
 
 
-    if (!updatedDetails.username || !updatedDetails.email || !updatedDetails.userbirthdate || !originalUsername) {
+    if (!updatedDetails.username || !updatedDetails.email || !updatedDetails.userbirthdate || !updatedDetails.password ||!updatedDetails.pwdconfirm || !originalUsername) {
         console.log("400 Error: Missing required fields");
         return res.status(400).json({ success: false, message: 'Username, email, and birthdate are required.' });
    }
@@ -51,11 +51,7 @@ module.exports = function(req, res) {
         if (users.some((u, idx) => u.username === updatedDetails.username && idx !== userIndex)) {
             return res.status(400).json({ success: false, message: 'Username already exists.' });
         }
-    
-        // Assuming you also want to check for an existing email (this is common in many applications)
-        if (users.some((u, idx) => u.email === updatedDetails.email && idx !== userIndex)) {
-            return res.status(400).json({ success: false, message: 'Email already exists.' });
-        }
+
     
         // Update the user's details
         // If the username or email aren't changed in updatedDetails, these assignments are redundant but harmless.
@@ -63,6 +59,8 @@ module.exports = function(req, res) {
         users[userIndex].email = updatedDetails.email;
         users[userIndex].birthdate = updatedDetails.userbirthdate;
         users[userIndex].age = updatedDetails.age;
+        users[userIndex].password = updatedDetails.password;
+        users[userIndex].pwdconfirm = updatedDetails.pwdconfirm;
         
         console.log("User details updated successfully");
     
