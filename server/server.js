@@ -22,11 +22,15 @@ const postCreateUser = require('./routes/postCreateUser.js');
 
 const updateUser = require('./routes/updateUser');
 
+const AllUserData = require('./routes/getAllUsers');
+
 app.post("/login", require("./routes/postLogin"));
 
 app.post('/update-user', updateUser);
 
 app.post('/create-user', postCreateUser);
+
+app.post('/all-users', AllUserData);
 
 
 app.get("/usernames", (req, res) => {

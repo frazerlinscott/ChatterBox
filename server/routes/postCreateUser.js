@@ -4,12 +4,7 @@ const path = require('path');
 module.exports = function(req, res) {
 
     const newUser = req.body;
-    //console.log("Received data:", newUser);
 
-    // if (!newUser.username) return res.status(400).json({ success: false, message: 'Username is required.' });
-    // if (!newUser.email) return res.status(400).json({ success: false, message: 'Email is required.' });
-    // if (!newUser.password) return res.status(400).json({ success: false, message: 'Password is required.' });
-    // if (!newUser.birthdate) return res.status(400).json({ success: false, message: 'Birthdate is required.' });
 
     
     // Validate the user data (add any other necessary validations)

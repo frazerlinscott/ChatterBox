@@ -1,13 +1,15 @@
 [
   {
-    "username": "super123",
+    "username": "super",
     "birthdate": "1997-02-18",
     "age": 26,
-    "email": "super@me",
-    "password": "frazer",
-    "pwdconfirm": "frazer",
+    "email": "super@me.com",
+    "password": "123",
+    "pwdconfirm": "123",
     "role": [
-      1
+      1,
+      2,
+      3
     ],
     "group": [
       1
@@ -15,12 +17,12 @@
     "valid": true
   },
   {
-    "username": "super1234",
+    "username": "frazerlinscott1",
     "birthdate": "1997-02-18",
     "age": 26,
-    "email": "super@me.com",
-    "password": "linscott",
-    "pwdconfirm": "linscott",
+    "email": "frazerlinscott@me.com",
+    "password": "123",
+    "pwdconfirm": "123",
     "role": [
       1
     ],

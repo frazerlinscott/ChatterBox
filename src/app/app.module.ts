@@ -8,6 +8,8 @@ import { AccountComponent } from './account/account.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { UsersComponent } from './users/users.component';
+import { GroupsComponent } from './groups/groups.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
     LoginComponent,
     AccountComponent,
     ProfileComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    UsersComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,

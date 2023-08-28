@@ -26,4 +26,14 @@ export class AccountComponent {
     // Redirect to login page
     this.router.navigateByUrl('/login');
   }
+
+  openUsers() {
+    // Redirect to users page
+    this.router.navigateByUrl('/users');
+  }
+  openGroups() {
+  
+    // Redirect to groups page
+    this.router.navigateByUrl('/groups');
+  }
 }
