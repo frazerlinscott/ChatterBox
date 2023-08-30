@@ -5,11 +5,11 @@ export class User {
     email: string;
     password: string;
     pwdconfirm: string;
-    role: number[];
+    role: number;
     group: number[];
     valid: boolean;
 
-    constructor(username: string, birthdate: string, age: number, email: string, password: string, pwdconfirm: string, role: number[], group: number[], valid: boolean) {
+    constructor(username: string, birthdate: string, age: number, email: string, password: string, pwdconfirm: string, role: number, group: number[], valid: boolean) {
         this.username = username;
         this.birthdate = birthdate;
         this.age = age;

@@ -1,10 +1,54 @@
-<div *ngIf="userData">
-    <!-- Display your userData content here. For example: -->
-    <div>
-      <strong>Name:</strong> {{ userData.name }}
-    </div>
-    <div>
-      <strong>Email:</strong> {{ userData.email }}
-    </div>
-    <!-- ... -->
+<div class="container mt-5">
+  <div style="height: 400px; overflow-y: auto;">
+    <table class="table border-0">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Profile</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: #ccc;"></div>
+          </td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ getRoleName(user.role) }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="openEditModal(user)">Edit User</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
+<div class="modal fade" id="editUserRoleModal" tabindex="-1" aria-labelledby="editUserRoleLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="selectedUser" class="modal-title" id="editUserRoleLabel">{{selectedUser.username}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="roleSelect">Select Role:</label>
+        <select class="form-control" id="roleSelect" [(ngModel)]="selectedRole">
+          <option value="1">User</option>
+          <option value="2">Admin</option>
+          <option value="3">Super Admin</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateUserRole()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
