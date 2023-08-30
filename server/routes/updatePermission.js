@@ -4,9 +4,9 @@ const path = require('path');
 module.exports = function(req, res) {
     const newPermission = req.body;
 
-    console.log(newPermission)
-    console.log(newPermission.username)
-    console.log(newPermission.role)
+    // console.log(newPermission)
+    // console.log(newPermission.username)
+    // console.log(newPermission.role)
 
 
         //Read the current users data
@@ -25,13 +25,16 @@ module.exports = function(req, res) {
                 console.log("User not found");
                 return res.status(404).json({ success: false, message: 'User not found.' });
             }
-    
-        
-            // Update the user's details
-            // If the username or email aren't changed in updatedDetails, these assignments are redundant but harmless.
-            users[userIndex].role = newPermission.role;
+
+            if (newPermission.valid === false) {
+                console.log("DELETE USER");
+                users.splice(userIndex, 1); 
+            } else {
+
+                users[userIndex].role = newPermission.role;
+            }
             
-            console.log("User Permission successfully");
+            //console.log("User Permission successfully");
         
             // Write back to the file
             fs.writeFile(path.join(__dirname, '..', 'data', 'usersData.json'), JSON.stringify(users, null, 2), 'utf8', (err) => {

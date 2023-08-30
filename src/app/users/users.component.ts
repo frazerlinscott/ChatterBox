@@ -33,24 +33,10 @@ export class UsersComponent implements OnInit {
     if (storedUser) {
       this.loggedInUser = JSON.parse(storedUser);
       //console.log(this.loggedInUser.role)
-      //this.loggedInUser.role=3
+      this.loggedInUser.role=3
     }
 
-    this.http.post(BACKEND_URL + "/all-users", httpOptions)
-    .subscribe(
-        (data: any) => {
-            if (data) {
-
-              //console.log(data)
-              this.users = data
-
-
-            } else {
-                alert("no Data Soz");
-            }
-        },
-        error => {console.error('There was an error:', error);}
-    );
+    this.getUsers()
   }
 
 
@@ -87,6 +73,8 @@ export class UsersComponent implements OnInit {
     this.http.post(BACKEND_URL+"/update-permission", this.selectedUser).subscribe(
       response => {
           console.log('User details updated on the server.', response);
+          //refesh User list 
+          this.getUsers();
       },
       error => {
           console.error('There was an error updating the user details on the server.', error);
@@ -98,7 +86,50 @@ export class UsersComponent implements OnInit {
   //-------------------------------------------------------------
     
     // Close the modal
+    this.closeModal()
+ 
+  }
+
+  deleteUser(){
+    this.selectedUser.valid = false
+    console.log(this.selectedUser)
+
+    this.http.post(BACKEND_URL+"/update-permission", this.selectedUser).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+
+          //refesh User list 
+          this.getUsers();
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+  )
+    this.closeModal()
+  }
+
+
+  closeModal(){
     $('#editUserRoleModal').modal('hide');
+  }
+
+  getUsers(){
+    this.http.post(BACKEND_URL + "/all-users", httpOptions)
+    .subscribe(
+        (data: any) => {
+            if (data) {
+
+              //console.log(data)
+              this.users = data
+
+
+            } else {
+                alert("no Data Soz");
+            }
+        },
+        error => {console.error('There was an error:', error);}
+    );
   }
 
 }
