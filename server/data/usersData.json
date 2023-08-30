@@ -6,7 +6,7 @@
     "email": "super@me.com",
     "password": "123",
     "pwdconfirm": "123",
-    "role": 3,
+    "role": 2,
     "group": [
       1
     ],
@@ -19,7 +19,7 @@
     "email": "frazerlinscott@me.com",
     "password": "123",
     "pwdconfirm": "123",
-    "role": 1,
+    "role": 3,
     "group": [
       1
     ],

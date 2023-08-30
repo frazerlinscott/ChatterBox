@@ -24,6 +24,8 @@ const updateUser = require('./routes/updateUser');
 
 const AllUserData = require('./routes/getAllUsers');
 
+const newPermission = require('./routes/updatePermission');
+
 app.post("/login", require("./routes/postLogin"));
 
 app.post('/update-user', updateUser);
@@ -31,6 +33,8 @@ app.post('/update-user', updateUser);
 app.post('/create-user', postCreateUser);
 
 app.post('/all-users', AllUserData);
+
+app.post('/update-permission', newPermission);
 
 
 app.get("/usernames", (req, res) => {
