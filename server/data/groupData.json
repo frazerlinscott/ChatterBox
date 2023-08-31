@@ -1,0 +1,60 @@
+[
+  {
+    "groupID": "001",
+    "groupName": "supportGroup",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  },
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  },
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  }
+  ,
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  }
+  ,
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  },
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  },
+  {
+    "groupID": "002",
+    "groupName": "supportGroup2",
+    "createdBy": "super",
+    "groupAdmins": ["super"],
+    "members": ["super"],
+    "valid": true
+  } 
+]

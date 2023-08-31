@@ -1,1 +1,22 @@
-<p>groups works!</p>
+<div class="container my-5"> <!-- Container for center alignment and margin -->
+
+    <!-- Add Group Button at the top, spanning across the cards div -->
+    <div class="mb-4">
+        <button class="btn btn-success btn-block" (click)="onAddGroup()">Add Group-AdminSuper</button>
+        <button class="btn btn-success btn-block" (click)="onAddGroup()">My Groups</button>
+    </div>
+  
+    <div class="row justify-content-center"> <!-- Center the cards -->
+        <div class="col-md-3 mx-2 my-2" *ngFor="let group of groups"> <!-- Spacing between cards -->
+            <div class="card square-card" (click)="onGroupCardClick(group)">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
+                    <div class="mt-auto">
+                        <button class="btn btn-sm btn-primary" (click)="onButton1Click(group); $event.stopPropagation()">Button 1</button>
+                        <button class="btn btn-sm btn-secondary" (click)="onButton2Click(group); $event.stopPropagation()">Button 2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
