@@ -13,7 +13,7 @@ module.exports = function(req, res) {
 
         // Parse the data to get the array of users
         const groups = JSON.parse(data);
-        console.log(groups)
+        //console.log(groups)
 
     //Send the array of users
 

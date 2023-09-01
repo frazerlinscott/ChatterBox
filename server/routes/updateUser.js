@@ -5,7 +5,7 @@ module.exports = function(req, res) {
     const originalUsername = req.body.originalUsername;
     const updatedDetails = req.body.updatedDetails;
 
-    console.log(updatedDetails.userbirthdate)
+    //console.log(updatedDetails.userbirthdate)
 
 
     if (!updatedDetails.username || !updatedDetails.email || !updatedDetails.userbirthdate || !updatedDetails.password ||!updatedDetails.pwdconfirm || !originalUsername) {

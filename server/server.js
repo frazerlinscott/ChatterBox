@@ -28,6 +28,8 @@ const newPermission = require('./routes/updatePermission');
 
 const getGroups = require('./routes/getGroups');
 
+const updateGroups = require('./routes/updateGroups');
+
 app.post("/login", require("./routes/postLogin"));
 
 app.post('/update-user', updateUser);
@@ -39,6 +41,8 @@ app.post('/all-users', AllUserData);
 app.post('/update-permission', newPermission);
 
 app.post('/all-groups', getGroups);
+
+app.post('/update-groups', updateGroups);
 
 
 app.get("/usernames", (req, res) => {
@@ -52,9 +56,28 @@ app.get("/usernames", (req, res) => {
       console.log("Data from file:", data);  // Check the file contents
 
       const users = JSON.parse(data);
-      console.log("Parsed users:", users);  // Check the parsed data
+      //console.log("Parsed users:", users);  // Check the parsed data
 
       const usernames = users.map(u => u.username);
       res.json(usernames);
+    });
+});
+
+app.get("/groups", (req, res) => {
+    //console.log("Inside /groups route handler");  // Check if the route is triggered
+
+    fs.readFile(path.join(__dirname, 'data', 'groupData.json'), 'utf8', (err, data) => {
+      if (err) {
+          console.error("Error reading file:", err);  // Log any file reading errors
+          return res.status(500).json({ success: false, message: 'Internal Server Error.' });
+      }
+      //console.log("Data from file:", data);  // Check the file contents
+
+      const groups = JSON.parse(data);
+
+      //console.log("Groups:", groups)
+      const groupsNames = groups.map(g => g.groupName);
+      console.log("Groups:", groupsNames)
+      res.json(groupsNames);
     });
 });

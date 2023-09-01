@@ -1,60 +1,78 @@
 [
   {
-    "groupID": "001",
-    "groupName": "supportGroup",
+    "groupID": 1,
+    "groupName": "group1",
     "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
+    "groupAdmins": [
+      "super"
+    ],
+    "members": [
+      "super"
+    ],
     "valid": true
   },
   {
-    "groupID": "002",
-    "groupName": "supportGroup2",
+    "groupID": 2,
+    "groupName": "group 1",
     "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [
+      ""
+    ],
+    "members": [
+      ""
+    ],
+    "channels": [],
     "valid": true
   },
   {
-    "groupID": "002",
-    "groupName": "supportGroup2",
+    "groupID": 3,
+    "groupName": "group 1",
     "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [
+      ""
+    ],
+    "members": [
+      ""
+    ],
+    "channels": [],
+    "valid": true
+  },
+  {
+    "groupID": 4,
+    "groupName": "group",
+    "createdBy": "super",
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [
+      ""
+    ],
+    "members": [
+      ""
+    ],
+    "channels": [],
+    "valid": true
+  },
+  {
+    "groupID": 5,
+    "groupName": "group 55",
+    "createdBy": "super",
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [
+      ""
+    ],
+    "members": [
+      ""
+    ],
+    "channels": [],
     "valid": true
   }
-  ,
-  {
-    "groupID": "002",
-    "groupName": "supportGroup2",
-    "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
-    "valid": true
-  }
-  ,
-  {
-    "groupID": "002",
-    "groupName": "supportGroup2",
-    "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
-    "valid": true
-  },
-  {
-    "groupID": "002",
-    "groupName": "supportGroup2",
-    "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
-    "valid": true
-  },
-  {
-    "groupID": "002",
-    "groupName": "supportGroup2",
-    "createdBy": "super",
-    "groupAdmins": ["super"],
-    "members": ["super"],
-    "valid": true
-  } 
 ]
