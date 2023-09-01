@@ -8,7 +8,12 @@
             (click)="onAddGroup()">
             Add Group-AdminSuper
         </button>
-        <button *ngIf="!isUser && isAdmin" class="btn btn-success btn-block" (click)="showRequests()">Requests</button>
+        <button *ngIf="!isUser && isAdmin" class="btn btn-success btn-block position-relative" (click)="showRequests()">
+            Requests
+            <span *ngIf="numberOfRequests > 0" class="badge badge-danger position-absolute" style="top: -5px; right: -5px;">{{ numberOfRequests }}</span>
+        </button>
+        
+        
     </div>
   
     <div class="row justify-content-center"> <!-- Center the cards -->

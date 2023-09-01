@@ -41,6 +41,8 @@ export class GroupsComponent implements OnInit {
 
   noRequests: boolean = true;
 
+  numberOfRequests: number = 0;
+
   
   group: Group = new Group(0, " ", " ", [], [], [], [], true);
 
@@ -76,6 +78,10 @@ export class GroupsComponent implements OnInit {
       this.allGroupNames = groupsNames;
       //console.log(this.allGroupNames);
     });
+
+
+    // this.getRequests(this.groups)
+    // // console.log(this.groupsNeedApproval)
   }
 
   onGroupCardClick(group:any ){
@@ -224,6 +230,11 @@ export class GroupsComponent implements OnInit {
         (data: any) => {
             if (data) {
               this.groups = data
+
+              this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+              this.numberOfRequests=this.groupsNeedApproval.length
+              console.log(this.numberOfRequests)
+
               //this.allGroups = data
               //console.log(this.groups)
 
@@ -248,23 +259,29 @@ export class GroupsComponent implements OnInit {
   }
   }
 
+  getRequests(group: any){
+
+      console.log(group)
+
+        //this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+        //this.numberOfRequests=this.groupsNeedApproval.length
+  }
+
 
 
   showRequests(){
     this.getGroups();  // Assuming this method populates the 'this.groups' array
-
-    //console.log(this.groups)
-
-    this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-
-    console.log(this.groupsNeedApproval)
+    // this.getRequests()
 
     $('#approveRequests').modal('show');
 
-    // if(this.groups.length > 0){
-    //   //this.noRequests=false
-    //   this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-    // }
+    if(this.groups.length > 0){
+      //this.noRequests=false
+      this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+    }
+
+    console.log(this.groupsNeedApproval.length)
+    this.numberOfRequests=this.groupsNeedApproval.length
 
     if(this.groupsNeedApproval.length === 0){
       console.log("no approvals")
