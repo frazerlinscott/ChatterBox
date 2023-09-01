@@ -1,7 +1,7 @@
 [
   {
     "groupID": 1,
-    "groupName": "great1",
+    "groupName": "Group1",
     "createdBy": "super",
     "groupAdmins": [
       "super"
@@ -11,13 +11,14 @@
       "user"
     ],
     "channels": [
-      "vfd"
+      "ngfnfgd",
+      "nbfgdndf"
     ],
     "valid": true
   },
   {
     "groupID": 2,
-    "groupName": "great2",
+    "groupName": "Group2 ",
     "createdBy": "super",
     "groupAdmins": [
       "super"
@@ -27,22 +28,41 @@
       "user"
     ],
     "channels": [
-      "vf"
+      "dfbdf",
+      "bdfsbfd"
     ],
     "valid": true
   },
   {
     "groupID": 3,
-    "groupName": "great3",
+    "groupName": "Group 3",
     "createdBy": "super",
     "groupAdmins": [
       "super"
     ],
     "userRequests": [],
     "members": [
-      "user"
+      "userTWO"
     ],
-    "channels": [],
+    "channels": [
+      "bdfxbfg"
+    ],
+    "valid": true
+  },
+  {
+    "groupID": 4,
+    "groupName": "group 4",
+    "createdBy": "super",
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [],
+    "members": [
+      "userTWO"
+    ],
+    "channels": [
+      "bdfbds"
+    ],
     "valid": true
   }
 ]

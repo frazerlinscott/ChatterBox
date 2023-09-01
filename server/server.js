@@ -77,7 +77,7 @@ app.get("/groups", (req, res) => {
 
       //console.log("Groups:", groups)
       const groupsNames = groups.map(g => g.groupName);
-      console.log("Groups:", groupsNames)
+      //console.log("Groups:", groupsNames)
       res.json(groupsNames);
     });
 });

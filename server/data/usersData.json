@@ -7,21 +7,34 @@
     "password": "123",
     "pwdconfirm": "123",
     "role": 3,
-    "group": [
-      1
-    ],
+    "group": [],
     "valid": true
   },
   {
     "username": "user",
-    "birthdate": "2019-06-12",
-    "age": 4,
+    "birthdate": "2023-08-09",
+    "age": 0,
     "email": "email@super.com",
-    "password": "456",
-    "pwdconfirm": "456",
+    "password": "123",
+    "pwdconfirm": "123",
     "role": 1,
     "group": [
-      1
+      1,
+      2
+    ],
+    "valid": true
+  },
+  {
+    "username": "userTWO",
+    "birthdate": "2022-08-17",
+    "age": 1,
+    "email": "1",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 1,
+    "group": [
+      3,
+      4
     ],
     "valid": true
   }

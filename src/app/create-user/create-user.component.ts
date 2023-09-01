@@ -16,7 +16,7 @@ const httpOptions = {
 
 export class CreateUserComponent implements OnInit {
 
-  user: User = new User('', '', 0, '', '', '', 1, [1], true);
+  user: User = new User('', '', 0, '', '', '', 1, [], true);
 
   allUsernames: string[] = [];
   isUniqueUsername: boolean = true;

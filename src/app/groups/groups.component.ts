@@ -236,9 +236,9 @@ export class GroupsComponent implements OnInit {
     );
   }
 
-  updateGroup(){
+  // updateGroup(){
     
-  }
+  // }
 
   GetNewGroupID(){
     if (this.groups && this.groups.length > 0) {
