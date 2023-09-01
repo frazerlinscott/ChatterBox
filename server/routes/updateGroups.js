@@ -4,6 +4,8 @@ const path = require('path');
 module.exports = function(req, res) {
     const updatedGroup = req.body;
 
+    console.log(updatedGroup)
+
     // Assuming the updatedGroup has a groupID property that's unique
     const groupIdToUpdate = updatedGroup.groupID;
     

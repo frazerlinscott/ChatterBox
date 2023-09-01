@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //import { UserDataService } from 'src/app/service/user-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Group } from 'server/routes/groupModel';
+import { ChangeDetectorRef } from '@angular/core';
 
 declare var $: any;
 
@@ -21,6 +22,10 @@ export class GroupsComponent implements OnInit {
   loggedInUser : any;
   users: any;
   groups: any;
+  allGroups: any;
+
+  groupsNeedApproval: any;
+
   selectedGroup: any;
 
   newGroupName: any;
@@ -34,9 +39,12 @@ export class GroupsComponent implements OnInit {
   isUser: boolean = true;
   isAdmin: boolean = true;
 
-  group: Group = new Group(0, " ", " ", [""], [""], [""], [""], true);
+  noRequests: boolean = true;
 
-  constructor(private http: HttpClient) { }
+  
+  group: Group = new Group(0, " ", " ", [], [], [], [], true);
+
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     const storedUser = window.sessionStorage.getItem('current.user');
@@ -47,7 +55,8 @@ export class GroupsComponent implements OnInit {
       // console.log(this.loggedInUser.role)
       // console.log(this.loggedInUser)
 
-      this.loggedInUser.role = 2
+      //this.loggedInUser.role = 2
+
 
       if (this.loggedInUser.role === 1){
         this.isUser = true
@@ -65,7 +74,7 @@ export class GroupsComponent implements OnInit {
 
     this.http.get<string[]>(BACKEND_URL + "/groups").subscribe(groupsNames => {
       this.allGroupNames = groupsNames;
-      console.log(this.allGroupNames);
+      //console.log(this.allGroupNames);
     });
   }
 
@@ -77,8 +86,27 @@ export class GroupsComponent implements OnInit {
     console.log(group)
   }
 
-  onButton1Click(group:any){
-    console.log("Button 1 clicked")
+
+  requestButton(group:any){
+    
+    console.log(this.loggedInUser.username)
+
+    group.userRequests.push(this.loggedInUser.username);
+
+    console.log(group)
+
+    this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+
+          //refesh User list 
+          this.getGroups();
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+    )
   }
 
   onButton2Click(group:any){
@@ -118,8 +146,8 @@ export class GroupsComponent implements OnInit {
       this.group.groupName = this.newGroupName;
       this.group.createdBy = this.loggedInUser.username;
       this.group.groupAdmins = [this.loggedInUser.username];
-      this.group.userRequests = [""];
-      this.group.members = [""];
+      this.group.userRequests = [];
+      this.group.members = [];
       this.group.channels = this.groupChannels;
       this.group.valid = true;
   
@@ -137,34 +165,42 @@ export class GroupsComponent implements OnInit {
             alert('Error updating profile. Please try again.');
         }
       )
-      this.closeModal()
+      this.closeModal("newGroup")
     }else{
       alert("Group already exists");
     }
   }
 
-  closeModal(){
+  closeModal(modalType: string | undefined){
 
-    this.group = {
-      groupID: 0,
-      groupName: "",
-      createdBy: this.loggedInUser.username,
-      groupAdmins: [""],
-      userRequests: [""],
-      members: [""],
-      channels: [""],
-      valid: true
-  };
+    if(modalType == "newGroup"){
 
-  this.newGroupName=''
-
-  this.groupChannels=[]
-
-  console.log(this.group)
-
+      this.group = {
+        groupID: 0,
+        groupName: "",
+        createdBy: this.loggedInUser.username,
+        groupAdmins: [],
+        userRequests: [],
+        members: [],
+        channels: [],
+        valid: true
+    };
   
-    $('#addGroupModal').modal('hide');
-  }
+    this.newGroupName=''
+  
+    this.groupChannels=[]
+  
+    //console.log(this.group)
+  
+    
+      $('#addGroupModal').modal('hide');
+    }
+
+    if(modalType == "requestApproval"){
+      $('#approveRequests').modal('hide');
+  } 
+
+}
   
   getUsers(){
     this.http.post(BACKEND_URL + "/all-users", httpOptions)
@@ -188,6 +224,7 @@ export class GroupsComponent implements OnInit {
         (data: any) => {
             if (data) {
               this.groups = data
+              //this.allGroups = data
               //console.log(this.groups)
 
               //console.log(typeof(this.groups))
@@ -197,6 +234,10 @@ export class GroupsComponent implements OnInit {
         },
         error => {console.error('There was an error:', error);}
     );
+  }
+
+  updateGroup(){
+    
   }
 
   GetNewGroupID(){
@@ -209,6 +250,57 @@ export class GroupsComponent implements OnInit {
 
 
 
+  showRequests(){
+    this.getGroups();  // Assuming this method populates the 'this.groups' array
+
+    //console.log(this.groups)
+
+    this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+
+    console.log(this.groupsNeedApproval)
+
+    $('#approveRequests').modal('show');
+
+    // if(this.groups.length > 0){
+    //   //this.noRequests=false
+    //   this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+    // }
+
+    if(this.groupsNeedApproval.length === 0){
+      console.log("no approvals")
+      //this.noRequests=true
+    }
+
+  
+}
+
+approveRequest(group: any, userRequest: string){
+    //console.log(group);
+    //console.log(userRequest);
+
+    if (group.userRequests.includes(userRequest)) {
+      group.members.push(userRequest);
+      group.userRequests.splice(group.userRequests.indexOf(userRequest), 1);
+  }
+
+
+
+
+  this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+    response => {
+        console.log('User details updated on the server.', response);
+
+        //refesh User list 
+        this.getGroups();
+    },
+    error => {
+        console.error('There was an error updating the user details on the server.', error);
+        alert('Error updating profile. Please try again.');
+    }
+  )
+
+  //console.log(group);
+}
 
 
 
