@@ -99,6 +99,24 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl('/account'); // Assuming '/account' is your account page route
   }
 
+  deleteProfile(){
+
+    this.user.valid = false
+
+    this.http.post(BACKEND_URL+"/update-permission", this.user).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+          //refesh User list 
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+    )
+    this.router.navigateByUrl('login');
+  }
+  
+
   
 
   

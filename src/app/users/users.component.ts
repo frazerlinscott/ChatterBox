@@ -25,16 +25,33 @@ export class UsersComponent implements OnInit {
 
   loggedInUser : any;
 
+  isUser: boolean = true;
+  isAdmin: boolean = true;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
 
+    
+
     const storedUser = window.sessionStorage.getItem('current.user');
     if (storedUser) {
       this.loggedInUser = JSON.parse(storedUser);
-      //console.log(this.loggedInUser.role)
-      this.loggedInUser.role=3
+      console.log(this.loggedInUser.role)
+      // this.loggedInUser.role=3
     }
+
+
+    if (this.loggedInUser.role === 1){
+      this.isUser = true
+      this.isAdmin = false
+    }else{
+      this.isUser = false
+      this.isAdmin = true
+    }
+
+    console.log(this.isUser)
+      console.log(this.isAdmin)
 
     this.getUsers()
   }
