@@ -1,26 +1,22 @@
 [
   {
     "groupID": 1,
-    "groupName": "newestGroup",
+    "groupName": "NewGroup",
     "createdBy": "super",
     "adminRequests": [],
     "groupAdmins": [
-      "super"
+      "super",
+      "User"
     ],
     "userRequests": [],
     "members": [
-      "super"
+      "super",
+      "User"
     ],
     "channels": {
-      "asd": [
-        "super"
-      ],
-      "qwe": [
-        "super"
-      ],
-      "zxc": [
-        "super"
-      ]
+      "gfdnbfg": [],
+      "nhdgnhdg": [],
+      "hndghn": []
     },
     "valid": false
   },

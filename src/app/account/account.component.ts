@@ -110,9 +110,6 @@ ngOnInit(): void {
 }
 //----------------------------------------------------------------
 
-
-
-
 getGroups(){
   this.http.post(BACKEND_URL + "/all-groups", httpOptions)
   .subscribe(

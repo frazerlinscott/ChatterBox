@@ -42,5 +42,18 @@
     "role": 2,
     "group": [],
     "valid": false
+  },
+  {
+    "username": "User",
+    "birthdate": "2010-06-10",
+    "age": 13,
+    "email": "frazerlinscott@me.com",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 2,
+    "group": [
+      1
+    ],
+    "valid": true
   }
 ]
