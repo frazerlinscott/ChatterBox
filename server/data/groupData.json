@@ -1,76 +1,36 @@
 [
   {
     "groupID": 1,
-    "groupName": "Group1",
+    "groupName": "Test Group",
     "createdBy": "super",
+    "adminRequests": [],
     "groupAdmins": [
       "super"
     ],
-    "userRequests": [
-      "user"
-    ],
-    "members": [
-      "user"
-    ],
-    "channels": [
-      "ngfnfgd",
-      "nbfgdndf"
-    ],
+    "userRequests": [],
+    "members": [],
+    "channels": {
+      "Channel 1": [],
+      "Channel 2": [],
+      "Channel 3": []
+    },
     "valid": true
   },
   {
     "groupID": 2,
-    "groupName": "Group2 ",
+    "groupName": "Test Group 2",
     "createdBy": "super",
+    "adminRequests": [],
     "groupAdmins": [
       "super"
     ],
-    "userRequests": [
-      "user"
-    ],
-    "members": [
-      "user"
-    ],
-    "channels": [
-      "dfbdf",
-      "bdfsbfd"
-    ],
-    "valid": true
-  },
-  {
-    "groupID": 3,
-    "groupName": "Group 3",
-    "createdBy": "super",
-    "groupAdmins": [
-      "super"
-    ],
-    "userRequests": [
-      "user"
-    ],
-    "members": [
-      "user"
-    ],
-    "channels": [
-      "bdfxbfg"
-    ],
-    "valid": true
-  },
-  {
-    "groupID": 4,
-    "groupName": "group 4",
-    "createdBy": "super",
-    "groupAdmins": [
-      "super"
-    ],
-    "userRequests": [
-      "user"
-    ],
-    "members": [
-      "userTWO"
-    ],
-    "channels": [
-      "bdfbds"
-    ],
+    "userRequests": [],
+    "members": [],
+    "channels": {
+      "Channel 3 ": [],
+      "Channel 4": [],
+      "Channel 5": []
+    },
     "valid": true
   }
 ]

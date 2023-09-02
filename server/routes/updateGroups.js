@@ -12,6 +12,7 @@ module.exports = function(req, res) {
         }
 
         const currentGroups = JSON.parse(data);
+        
         const groupIndex = currentGroups.findIndex(group => group.groupID === groupIdToUpdate);
 
         if (groupIndex === -1) {
@@ -26,7 +27,7 @@ module.exports = function(req, res) {
                 return res.status(500).json({ success: false, message: 'Internal Server Error.' });
             }
 
-            // Now, handle the user update after the group update is done
+        
             fs.readFile(path.join(__dirname, '..', 'data', 'usersData.json'), 'utf8', (err, userData) => {
                 if (err) {
                     console.error('Error reading the userData.json file:', err);
@@ -40,7 +41,10 @@ module.exports = function(req, res) {
 
                 if (userIndex !== -1) {
                     if (users[userIndex].group) {
-                        users[userIndex].group.push(currentGroupID);
+                        // Only push the currentGroupID if it's not already in the array
+                        if (!users[userIndex].group.includes(currentGroupID)) {
+                            users[userIndex].group.push(currentGroupID);
+                        }
                     } else {
                         users[userIndex].group = [currentGroupID];
                     }

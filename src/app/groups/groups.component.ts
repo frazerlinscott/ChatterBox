@@ -25,6 +25,7 @@ export class GroupsComponent implements OnInit {
   allGroups: any;
 
   groupsNeedApproval: any;
+  groupsAdminNeedApproval:any;
 
   selectedGroup: any;
 
@@ -38,21 +39,32 @@ export class GroupsComponent implements OnInit {
 
   isUser: boolean = true;
   isAdmin: boolean = true;
+  isSuperAdmin: boolean = true;
 
   noRequests: boolean = true;
 
   numberOfRequests: number = 0;
+  numberOfAdminRequests: number = 0;
+
+  isButtonDisabled: boolean = false;
+  buttonDisabledStates: { [groupId: string]: boolean } = {};
+
+  myGroups: any;
+  joinedGroups: any;
+  otherGroups: any;
 
   
-  group: Group = new Group(0, " ", " ", [], [], [], [], true);
+  group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+
     const storedUser = window.sessionStorage.getItem('current.user');
     if (storedUser) {
 
       this.loggedInUser = JSON.parse(storedUser);
+    }
 
       // console.log(this.loggedInUser.role)
       // console.log(this.loggedInUser)
@@ -60,39 +72,116 @@ export class GroupsComponent implements OnInit {
       //this.loggedInUser.role = 2
 
 
-      if (this.loggedInUser.role === 1){
-        this.isUser = true
-        this.isAdmin = false
-      }else{
-        this.isUser = false
-        this.isAdmin = true
-      }
-      // console.log("user:" + this.isUser)
-      // console.log("admin:" + this.isAdmin)
-    }
+  // this.loggedInUser = {
+  //   username: "super",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 3,
+  //   group: [],
+  //   valid: true
+  // }
+
+  // this.loggedInUser = {
+  //   username: "GroupAdmin2",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 2,
+  //   group: [],
+  //   valid: true
+  // }
+
+  // this.loggedInUser = {
+  //   username: "GroupAdmin",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 2,
+  //   group: [],
+  //   valid: true
+  // }
+
+  // this.loggedInUser = {
+  //   username: "user",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 1,
+  //   group: [],
+  //   valid: true
+  // }
+
+  // this.loggedInUser = {
+  //   username: "user2",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 1,
+  //   group: [],
+  //   valid: true
+  // }
+
+
+  // this.loggedInUser = {
+  //   username: "user3",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 1,
+  //   group: [],
+  //   valid: true
+  
+  // }
+
+
+  if (this.loggedInUser.role === 1){
+    this.isUser = true
+    this.isAdmin = false
+    this.isSuperAdmin = false
+  }else if (this.loggedInUser.role === 2){
+    this.isUser = false
+    this.isAdmin = true
+    this.isSuperAdmin = false
+  }else if (this.loggedInUser.role === 3){
+    this.isUser = false
+    this.isAdmin = false
+    this.isSuperAdmin = true
+  }
+
+    
 
     this.getUsers()
     this.getGroups()
 
     this.http.get<string[]>(BACKEND_URL + "/groups").subscribe(groupsNames => {
       this.allGroupNames = groupsNames;
-      //console.log(this.allGroupNames);
+
     });
-
-
-    // this.getRequests(this.groups)
-    // // console.log(this.groupsNeedApproval)
   }
+
+
 
   onGroupCardClick(group:any ){
-    
     this.selectedGroup = group;
-    console.log("card clicked")
-
-    console.log(group)
+    // console.log("card clicked")
+    // console.log(group)
   }
 
 
+//UserRequests 
   requestButton(group:any){
     
     console.log(this.loggedInUser.username)
@@ -113,21 +202,21 @@ export class GroupsComponent implements OnInit {
           alert('Error updating profile. Please try again.');
       }
     )
+    this.buttonDisabledStates[group.groupID] = true;
   }
+
+
 
   onButton2Click(group:any){
     console.log("Button 2 clicked")
-
   }
 
   onAddGroup() {
     console.log("Add Group button clicked");
-
     $('#addGroupModal').modal('show');
   }
 
   onGroupInput() {
-    
     this.isUniqueGroup = !this.allGroupNames.includes(this.newGroupName);
     console.log(this.isUniqueGroup)
   }
@@ -147,6 +236,11 @@ export class GroupsComponent implements OnInit {
 
     //console.log(this.newGroupID)
 
+    let channelsObject: { [channelName: string]: string[] } = {};
+      this.groupChannels.forEach(channel => {
+        channelsObject[channel] = [];
+      });
+
     if (this.isUniqueGroup === true){
       this.group.groupID = this.newGroupID;
       this.group.groupName = this.newGroupName;
@@ -154,7 +248,7 @@ export class GroupsComponent implements OnInit {
       this.group.groupAdmins = [this.loggedInUser.username];
       this.group.userRequests = [];
       this.group.members = [];
-      this.group.channels = this.groupChannels;
+      this.group.channels = channelsObject;
       this.group.valid = true;
   
       //console.log(this.group)
@@ -185,10 +279,11 @@ export class GroupsComponent implements OnInit {
         groupID: 0,
         groupName: "",
         createdBy: this.loggedInUser.username,
+        adminRequests:[],
         groupAdmins: [],
         userRequests: [],
         members: [],
-        channels: [],
+        channels: {},
         valid: true
     };
   
@@ -197,14 +292,16 @@ export class GroupsComponent implements OnInit {
     this.groupChannels=[]
   
     //console.log(this.group)
-  
-    
       $('#addGroupModal').modal('hide');
     }
 
     if(modalType == "requestApproval"){
       $('#approveRequests').modal('hide');
-  } 
+    } 
+
+    if(modalType == "requestAdminApproval"){
+      $('#approveAdminRequests').modal('hide');
+    } 
 
 }
   
@@ -230,10 +327,37 @@ export class GroupsComponent implements OnInit {
         (data: any) => {
             if (data) {
               this.groups = data
+              
+              // Groups created by loggedInUser
+              this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any;}) => group.createdBy === this.loggedInUser.username || group.groupAdmins.includes(this.loggedInUser.username));
 
-              this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-              this.numberOfRequests=this.groupsNeedApproval.length
-              console.log(this.numberOfRequests)
+              // Groups that loggedInUser is a member of but not created by them
+              this.joinedGroups = this.groups.filter((group: { members: string | any[]; createdBy: any; groupAdmins: any; }) => 
+                  group.members.includes(this.loggedInUser.username) && group.createdBy !== this.loggedInUser.username && !group.groupAdmins.includes(this.loggedInUser.username));
+
+              // Groups that loggedInUser has neither created nor joined
+              this.otherGroups = this.groups.filter((group: { createdBy: any; members: string | any[]; }) => 
+                  group.createdBy !== this.loggedInUser.username && !group.members.includes(this.loggedInUser.username));
+
+
+              // console.log(this.loggedInUser)
+              // console.log(this.myGroups)
+              // console.log(this.otherGroups)
+
+
+              //if groupAdmin role filter requests to administered groups -- if superAdmin show all requests
+              if(this.loggedInUser.role == 2){
+                this.groupsNeedApproval = this.groups.filter(
+                  (group: { userRequests: any[]; groupAdmins: string[]; }) => group.userRequests && group.userRequests.length > 0 && group.groupAdmins.includes(this.loggedInUser.username));
+                this.numberOfRequests = this.groupsNeedApproval.length;
+              } else if(this.loggedInUser.role == 3){
+                this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+                this.numberOfRequests=this.groupsNeedApproval.length
+                this.groupsAdminNeedApproval = this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0);
+                this.numberOfAdminRequests=this.groupsAdminNeedApproval.length 
+              }
+
+              //console.log(this.numberOfRequests)
 
               //this.allGroups = data
               //console.log(this.groups)
@@ -259,13 +383,13 @@ export class GroupsComponent implements OnInit {
   }
   }
 
-  getRequests(group: any){
+  // getRequests(group: any){
 
-      console.log(group)
+  //     console.log(group)
 
-        //this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-        //this.numberOfRequests=this.groupsNeedApproval.length
-  }
+  //       //this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+  //       //this.numberOfRequests=this.groupsNeedApproval.length
+  // }
 
 
 
@@ -279,29 +403,52 @@ export class GroupsComponent implements OnInit {
       //this.noRequests=false
       this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
     }
-
-    console.log(this.groupsNeedApproval.length)
-    this.numberOfRequests=this.groupsNeedApproval.length
-
-    if(this.groupsNeedApproval.length === 0){
-      console.log("no approvals")
-      //this.noRequests=true
-    }
-
-  
 }
 
+  requestAdminButton(group:any){
+        
+        //console.log(this.loggedInUser.username)
+
+        group.adminRequests.push(this.loggedInUser.username);
+
+
+        this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+          response => {
+              console.log('User details updated on the server.', response);
+
+              //refesh User list 
+              this.getGroups();
+          },
+          error => {
+              console.error('There was an error updating the user details on the server.', error);
+              alert('Error updating profile. Please try again.');
+          }
+        )
+        this.buttonDisabledStates[group.groupID] = true;
+      }
+
+  showAdminRequests(){
+    this.getGroups();  // Assuming this method populates the 'this.groups' array
+    // this.getRequests()
+
+    $('#approveAdminRequests').modal('show');
+
+    console.log(this.groups)
+
+    // if(this.groups.length > 0){
+    //   //this.noRequests=false
+    //   this.groupsAdminNeedApproval = this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0);
+    // }
+  }
+
 approveRequest(group: any, userRequest: string){
-    //console.log(group);
-    //console.log(userRequest);
+    console.log(group);
+    console.log(userRequest);
 
     if (group.userRequests.includes(userRequest)) {
       group.members.push(userRequest);
       group.userRequests.splice(group.userRequests.indexOf(userRequest), 1);
   }
-
-
-
 
   this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
     response => {
@@ -319,74 +466,29 @@ approveRequest(group: any, userRequest: string){
   //console.log(group);
 }
 
+approveAdminRequest(group: any, adminRequest: string){
+  console.log(group);
+  console.log(adminRequest);
 
+  if (group.adminRequests.includes(adminRequest)) {
+    group.groupAdmins.push(adminRequest);
+    group.adminRequests.splice(group.adminRequests.indexOf(adminRequest), 1);
+  }
+  console.log(group);
 
+  this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+    response => {
+        console.log('User details updated on the server.', response);
 
-
-
-
-
-
-
-
-
-  // getRoleName(roleNumber: number): string {
-  //   switch (roleNumber) {
-  //     case 1:
-  //       return 'User';
-  //     case 2:
-  //       return 'Admin';
-  //     case 3:
-  //       return 'Super Admin';
-  //     default:
-  //       return 'Unknown Role';
-  //   }
-  // }
-
-
-  // openEditModal(user: any) {
-  //   this.selectedUser = user;
-  //   //console.log(this.selectedUser)
-  //   this.selectedRole = user.role;
-  //   $('#editUserRoleModal').modal('show');
-  // }
-
-  // updateUserRole() {
-  //   // Convert to number and update the role
-  //   this.selectedUser.role = Number(this.selectedRole);
-
-  //   console.log(this.selectedUser)
-
-
-  //   //--------------------------------------------------------------
-
-  //   this.http.post(BACKEND_URL+"/update-permission", this.selectedUser).subscribe(
-  //     response => {
-  //         console.log('User details updated on the server.', response);
-  //         //refesh User list 
-  //         this.getUsers();
-  //     },
-  //     error => {
-  //         console.error('There was an error updating the user details on the server.', error);
-  //         alert('Error updating profile. Please try again.');
-  //     }
-  // )
-    //alert('Profile updated!');
-
-  //-------------------------------------------------------------
-    
-  //   // Close the modal
-  //   this.closeModal()
- 
-  // }
-
-
-
-  // closeModal(){
-  //   $('#editUserRoleModal').modal('hide');
-  // }
-
+        //refesh User list 
+        this.getGroups();
+    },
+    error => {
+        console.error('There was an error updating the user details on the server.', error);
+        alert('Error updating profile. Please try again.');
+    }
+  )
+}
 
 
 }
-

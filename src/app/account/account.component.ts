@@ -30,6 +30,10 @@ export class AccountComponent implements OnInit {
   currentUser: any; 
   currentUserGroups: any;
 
+  isUser: boolean = true;
+  isAdmin: boolean = true;
+  isSuperAdmin: boolean = true;
+
   constructor(private http: HttpClient, private router: Router) { 
     this.username = sessionStorage.getItem('username') ?? '';
     this.birthdate = sessionStorage.getItem('userbirthdate') ?? '';
@@ -40,13 +44,73 @@ ngOnInit(): void {
   this.getUsers()
   this.getGroups()
 
-  const storedUser = window.sessionStorage.getItem('current.user');
-  if (storedUser) {
+  
+//----------------------------------------------------------------
+//Actual Code
+  // const storedUser = window.sessionStorage.getItem('current.user');
+  // if (storedUser) {
 
-    this.loggedInUser = JSON.parse(storedUser);
-    //.log(this.loggedInUser)
+  //   this.loggedInUser = JSON.parse(storedUser);
+  //   //.log(this.loggedInUser)
+  // }
+//----------------------------------------------------------------
+
+//----------------------------------------------------------------
+//Testing Code
+  this.loggedInUser = {
+    username: "super",
+    birthdate: "2023-05-11",
+    age: 0,
+    email: "superEmail",
+    password: "123",
+    pwdconfirm: "123",
+    role: 3,
+    group: [],
+    valid: true
+  }
+
+  // this.loggedInUser = {
+  //   username: "admin",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 2,
+  //   group: [],
+  //   valid: true
+  // }
+
+  // this.loggedInUser = {
+  //   username: "user",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 1,
+  //   group: [],
+  //   valid: true
+  // }
+
+  if (this.loggedInUser.role === 1){
+    this.isUser = true
+    this.isAdmin = false
+    this.isSuperAdmin = false
+  }else if (this.loggedInUser.role === 2){
+    this.isUser = false
+    this.isAdmin = true
+    this.isSuperAdmin = true
+  }else if (this.loggedInUser.role === 3){
+    this.isUser = false
+    this.isAdmin = false
+    this.isSuperAdmin = true
   }
 }
+//----------------------------------------------------------------
+
+
+
 
 getGroups(){
   this.http.post(BACKEND_URL + "/all-groups", httpOptions)

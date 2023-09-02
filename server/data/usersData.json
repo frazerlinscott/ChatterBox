@@ -1,1 +1,120 @@
-[]
+[
+  {
+    "username": "super",
+    "birthdate": "2023-05-11",
+    "age": 0,
+    "email": "superEmail",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 3,
+    "group": [],
+    "valid": true
+  },
+  {
+    "username": "User1",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 1,
+    "group": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "valid": true
+  },
+  {
+    "username": "User2",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 1,
+    "group": [
+      3,
+      2,
+      1,
+      4,
+      5,
+      6
+    ],
+    "valid": true
+  },
+  {
+    "username": "User3",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 1,
+    "group": [],
+    "valid": true
+  },
+  {
+    "username": "User4",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 1,
+    "group": [],
+    "valid": true
+  },
+  {
+    "username": "GroupAdmin",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 2,
+    "group": [
+      1,
+      2,
+      9,
+      8,
+      10,
+      11
+    ],
+    "valid": true
+  },
+  {
+    "username": "GroupAdmin3",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 2,
+    "group": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "valid": true
+  },
+  {
+    "username": "GroupAdmin4",
+    "birthdate": "2023-09-13",
+    "age": -1,
+    "email": "admin",
+    "password": "123",
+    "pwdconfirm": "123",
+    "role": 2,
+    "group": [],
+    "valid": true
+  }
+]

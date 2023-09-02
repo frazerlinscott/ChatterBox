@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit {
 
   isUser: boolean = true;
   isAdmin: boolean = true;
+  isSuperAdmin: boolean = true;
 
   constructor(private http: HttpClient) { }
 
@@ -34,24 +35,64 @@ export class UsersComponent implements OnInit {
 
     
 
-    const storedUser = window.sessionStorage.getItem('current.user');
-    if (storedUser) {
-      this.loggedInUser = JSON.parse(storedUser);
-      console.log(this.loggedInUser.role)
-      // this.loggedInUser.role=3
+    // const storedUser = window.sessionStorage.getItem('current.user');
+    // if (storedUser) {
+    //   this.loggedInUser = JSON.parse(storedUser);
+    //   console.log(this.loggedInUser.role)
+    //   // this.loggedInUser.role=3
+    // }
+
+
+    this.loggedInUser = {
+      username: "super",
+      birthdate: "2023-05-11",
+      age: 0,
+      email: "superEmail",
+      password: "123",
+      pwdconfirm: "123",
+      role: 3,
+      group: [],
+      valid: true
     }
-
-
+  
+    // this.loggedInUser = {
+    //   username: "admin",
+    //   birthdate: "2023-05-11",
+    //   age: 0,
+    //   email: "superEmail",
+    //   password: "123",
+    //   pwdconfirm: "123",
+    //   role: 2,
+    //   group: [],
+    //   valid: true
+    // }
+  
+    // this.loggedInUser = {
+    //   username: "user",
+    //   birthdate: "2023-05-11",
+    //   age: 0,
+    //   email: "superEmail",
+    //   password: "123",
+    //   pwdconfirm: "123",
+    //   role: 1,
+    //   group: [],
+    //   valid: true
+    // }
+  
     if (this.loggedInUser.role === 1){
       this.isUser = true
       this.isAdmin = false
-    }else{
+      this.isSuperAdmin = false
+    }else if (this.loggedInUser.role === 2){
       this.isUser = false
       this.isAdmin = true
+      this.isSuperAdmin = true
+    }else if (this.loggedInUser.role === 3){
+      this.isUser = false
+      this.isAdmin = false
+      this.isSuperAdmin = true
     }
-
-    console.log(this.isUser)
-      console.log(this.isAdmin)
+  
 
     this.getUsers()
   }
