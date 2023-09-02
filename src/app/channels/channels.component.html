@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2>My Groups</h2>
+    <div class="row">
+        <div *ngFor="let channel of myChannels" class="col-12 mb-3">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <span>{{channel}}</span>
+                    <div>
+                        <!-- <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button> -->
+                        <button class="btn btn-secondary" (click)="removeUserFromChannel(channel)">Leave Channel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h2>Join Groups</h2>
+    <div class="row">
+        <div *ngFor="let channel of toJoinChannels" class="col-12 mb-3">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <span>{{channel}}</span>
+                    <div>
+                        <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button>
+                        <button class="btn btn-secondary">Button 2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

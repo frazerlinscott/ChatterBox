@@ -45,7 +45,7 @@
 </select>
       </div>
       <div class="modal-footer">
-        <button *ngIf="!isUser && isAdmin" type="button" class="btn btn-red" (click)="deleteUser()">Delete User</button>
+        <button *ngIf="isSuperAdmin" type="button" class="btn btn-red" (click)="deleteUser()">Delete User</button>
         <button type="button" class="btn btn-primary" (click)="updateUserRole()">Save changes</button>
       </div>
     </div>

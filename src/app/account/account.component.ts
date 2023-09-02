@@ -29,6 +29,7 @@ export class AccountComponent implements OnInit {
   users: any;
   currentUser: any; 
   currentUserGroups: any;
+  selectedGroup: any;
 
   isUser: boolean = true;
   isAdmin: boolean = true;
@@ -47,27 +48,27 @@ ngOnInit(): void {
   
 //----------------------------------------------------------------
 //Actual Code
-  // const storedUser = window.sessionStorage.getItem('current.user');
-  // if (storedUser) {
+  const storedUser = window.sessionStorage.getItem('current.user');
+  if (storedUser) {
 
-  //   this.loggedInUser = JSON.parse(storedUser);
-  //   //.log(this.loggedInUser)
-  // }
+    this.loggedInUser = JSON.parse(storedUser);
+    //.log(this.loggedInUser)
+  }
 //----------------------------------------------------------------
 
 //----------------------------------------------------------------
 //Testing Code
-  this.loggedInUser = {
-    username: "super",
-    birthdate: "2023-05-11",
-    age: 0,
-    email: "superEmail",
-    password: "123",
-    pwdconfirm: "123",
-    role: 3,
-    group: [],
-    valid: true
-  }
+  // this.loggedInUser = {
+  //   username: "super",
+  //   birthdate: "2023-05-11",
+  //   age: 0,
+  //   email: "superEmail",
+  //   password: "123",
+  //   pwdconfirm: "123",
+  //   role: 3,
+  //   group: [],
+  //   valid: true
+  // }
 
   // this.loggedInUser = {
   //   username: "admin",
@@ -118,6 +119,7 @@ getGroups(){
       (data: any) => {
           if (data) {
             this.allGroups = data
+            this.allGroups = data.filter((group: { valid: boolean; }) => group.valid === true);
             this.filterGroups(this.allGroups)
           } else {
               alert("no Data Soz");
@@ -144,13 +146,8 @@ getUsers(){
 }
 
 filterGroups(group: any){
-
-  
-
   const userGroupIds = this.currentUser.group; // Array of group IDs associated with the current user
-
   this.currentUserGroups = group.filter((g: { groupID: any; }) => userGroupIds.includes(g.groupID));
-
   // console.log('Matched Groups:', matchedGroups);
 
 
@@ -185,5 +182,14 @@ filterUser(users: any[]) {
   
     // Redirect to groups page
     this.router.navigateByUrl('/groups');
+  }
+
+  onGroupCardClick(group:any ){
+    this.selectedGroup = group;
+    console.log("card clicked")
+    //.log(group)
+    //this.router.navigate(['/channels', group]);
+
+    this.router.navigate(['/channels'], { queryParams: { yourKey: JSON.stringify(group) }})
   }
 }

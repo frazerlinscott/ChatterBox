@@ -1,0 +1,27 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

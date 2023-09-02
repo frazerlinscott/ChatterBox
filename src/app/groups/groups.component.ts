@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 //import { UserDataService } from 'src/app/service/user-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Group } from 'server/routes/groupModel';
@@ -56,7 +57,7 @@ export class GroupsComponent implements OnInit {
   
   group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -176,8 +177,11 @@ export class GroupsComponent implements OnInit {
 
   onGroupCardClick(group:any ){
     this.selectedGroup = group;
-    // console.log("card clicked")
-    // console.log(group)
+    console.log("card clicked")
+    //.log(group)
+    //this.router.navigate(['/channels', group]);
+
+    this.router.navigate(['/channels'], { queryParams: { yourKey: JSON.stringify(group) }})
   }
 
 
@@ -247,7 +251,7 @@ export class GroupsComponent implements OnInit {
       this.group.createdBy = this.loggedInUser.username;
       this.group.groupAdmins = [this.loggedInUser.username];
       this.group.userRequests = [];
-      this.group.members = [];
+      this.group.members = [this.loggedInUser.username];
       this.group.channels = channelsObject;
       this.group.valid = true;
   
@@ -326,7 +330,9 @@ export class GroupsComponent implements OnInit {
     .subscribe(
         (data: any) => {
             if (data) {
-              this.groups = data
+
+
+              this.groups = data.filter((group: { valid: boolean; }) => group.valid === true);
               
               // Groups created by loggedInUser
               this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any;}) => group.createdBy === this.loggedInUser.username || group.groupAdmins.includes(this.loggedInUser.username));
@@ -426,6 +432,27 @@ export class GroupsComponent implements OnInit {
         )
         this.buttonDisabledStates[group.groupID] = true;
       }
+
+      
+  deleteGroup(group:any){
+
+    console.log(group)
+
+    group.valid = false
+
+    this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+
+          //refesh User list 
+          this.getGroups();
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+    )
+  }
 
   showAdminRequests(){
     this.getGroups();  // Assuming this method populates the 'this.groups' array

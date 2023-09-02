@@ -86,7 +86,7 @@ export class UsersComponent implements OnInit {
     }else if (this.loggedInUser.role === 2){
       this.isUser = false
       this.isAdmin = true
-      this.isSuperAdmin = true
+      this.isSuperAdmin = false
     }else if (this.loggedInUser.role === 3){
       this.isUser = false
       this.isAdmin = false
@@ -150,7 +150,8 @@ export class UsersComponent implements OnInit {
 
   deleteUser(){
     this.selectedUser.valid = false
-    console.log(this.selectedUser)
+
+    //console.log(this.selectedUser)
 
     this.http.post(BACKEND_URL+"/update-permission", this.selectedUser).subscribe(
       response => {
@@ -179,7 +180,9 @@ export class UsersComponent implements OnInit {
             if (data) {
 
               //console.log(data)
-              this.users = data
+              //this.users = data
+
+              this.users = data.filter((user: { valid: boolean; }) => user.valid === true);
 
 
             } else {

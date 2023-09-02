@@ -48,7 +48,7 @@
             <h3>My Groups</h3>
             <div class="row justify-content-center">
                 <div class="col-md-3 mx-2 my-2" *ngFor="let group of joinedGroups">
-                    <div class="card square-card">
+                    <div class="card square-card"(click)="onGroupCardClick(group)">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
                             <div *ngIf="!isUser"class="mt-auto">
@@ -69,9 +69,12 @@
             <h3>Administered Groups</h3>
             <div class="row justify-content-center">
                 <div class="col-md-3 mx-2 my-2" *ngFor="let group of myGroups">
-                    <div class="card square-card">
+                    <div class="card square-card"(click)="onGroupCardClick(group)">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
+                            <button
+                                class="btn btn-sm btn-primary" 
+                                (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
                             <div class="mt-auto">
                             </div>
                         </div>

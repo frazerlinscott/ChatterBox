@@ -7,6 +7,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 
 import { UsersComponent } from './users/users.component';
 import { GroupsComponent } from './groups/groups.component';
+import { ChannelsComponent } from './channels/channels.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,8 @@ const routes: Routes = [
   { path: 'create-user', component: CreateUserComponent },
   { path: 'users', component: UsersComponent },
   { path: 'groups', component: GroupsComponent },
+  { path: 'channels', component: ChannelsComponent },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

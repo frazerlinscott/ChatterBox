@@ -4,9 +4,9 @@ const path = require('path');
 module.exports = function(req, res) {
     const newPermission = req.body;
 
-    // console.log(newPermission)
-    // console.log(newPermission.username)
-    // console.log(newPermission.role)
+    console.log(newPermission)
+    console.log(newPermission.username)
+    console.log(newPermission.role)
 
 
         //Read the current users data
@@ -17,9 +17,11 @@ module.exports = function(req, res) {
             }
         
             const users = JSON.parse(data);
+            console.log(users)
         
             // Find the user that needs to be updated
             const userIndex = users.findIndex(u => u.username === newPermission.username);
+
         
             if (userIndex === -1) {
                 console.log("User not found");
@@ -28,15 +30,12 @@ module.exports = function(req, res) {
 
             if (newPermission.valid === false) {
                 console.log("DELETE USER");
-                users.splice(userIndex, 1); 
+                users[userIndex].valid = false
             } else {
 
                 users[userIndex].role = newPermission.role;
             }
             
-            //console.log("User Permission successfully");
-        
-            // Write back to the file
             fs.writeFile(path.join(__dirname, '..', 'data', 'usersData.json'), JSON.stringify(users, null, 2), 'utf8', (err) => {
                 if (err) {
                     console.error('Error writing to the usersData.json file:', err);
