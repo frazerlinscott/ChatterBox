@@ -8,6 +8,7 @@ const httpOptions = {
 
 const BACKEND_URL = "http://localhost:3000";
 
+declare var $: any;
 
 @Component({
   selector: 'app-channels',
@@ -31,6 +32,12 @@ export class ChannelsComponent implements OnInit {
   loggedInUser:any; 
   groups: any;
 
+  newChannelName: any;
+
+  channelsUserCreated:any; 
+
+  isAdmin = false
+
   constructor(private http: HttpClient, private route: ActivatedRoute) { 
 }
 
@@ -42,7 +49,12 @@ ngOnInit(): void {
     this.loggedInUser = JSON.parse(storedUser);
   }
 
-  this.loggedInUser.role = 1
+  if (this.loggedInUser.role === 3){
+    this.isAdmin = true;
+    console.log(this.isAdmin)
+  }
+
+  console.log(this.loggedInUser.role)
 
   this.route.queryParams.subscribe(params => {
     let currentGroupString = params['yourKey'];
@@ -127,6 +139,69 @@ addUserToChannel(targetChannel: any) {
     );
 }
 
+addChannel(){
+  
+  $('#addChannelModal').modal('show');
+  console.log(this.currentGroup)
+  console.log(this.newChannelName)
+
+
+  if (this.newChannelName) {
+    this.currentGroup.channels[this.newChannelName] = [];
+  } else {
+    console.error('newChannelName is undefined!');
+  }
+
+  console.log(this.currentGroup.channels)
+  
+
+
+  this.http.post(BACKEND_URL+"/update-groups", this.currentGroup).subscribe(
+    response => {
+        console.log(' details updated on the server.', response);
+
+        this.getGroups();
+        
+    },
+    error => {
+        console.error('There was an error updating the  details on the server.', error);
+        alert('Error updating profile. Please try again.');
+    }
+  )
+
+
+  this.closeModal("");
+
+}
+
+closeModal(modalType: string | undefined){
+    $('#addChannelModal').modal('hide');
+}
+
+deleteChannel(targetChannel: any) {
+  console.log(targetChannel);
+
+  if (this.currentGroup.channels && this.currentGroup.channels.hasOwnProperty(targetChannel)) {
+    delete this.currentGroup.channels[targetChannel];
+  } else {
+    console.warn('Channel not found in current group.');
+  }
+  console.log(this.currentGroup);
+
+  this.http.post(BACKEND_URL+"/update-groups", this.currentGroup).subscribe(
+    response => {
+        console.log(' details updated on the server.', response);
+
+        this.getGroups();
+        
+    },
+    error => {
+        console.error('There was an error updating the  details on the server.', error);
+        alert('Error updating profile. Please try again.');
+    }
+  )
+}
+
 
 
 getGroups(){
@@ -141,6 +216,17 @@ getGroups(){
                 //console.log("Matched")
                 console.log(this.currentGroup)
 
+                if (this.currentGroup.groupAdmins.includes(this.loggedInUser.username)) {
+                  this.isAdmin = true;
+                } else if (this.loggedInUser.role==3){
+                this.isAdmin = true;
+                }else{
+                  this.isAdmin = false;
+                }
+                
+
+
+
                 this.myChannels = [];
                 this.toJoinChannels = [];
 
@@ -153,8 +239,9 @@ getGroups(){
                       this.toJoinChannels.push(channel);
                   }
               }
-              console.log("My Channels:", this.myChannels);
-              console.log("Channels to Join:", this.toJoinChannels);
+
+              this.channelsUserCreated
+
 
                 // this.myChannels = 
 

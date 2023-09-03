@@ -1,28 +1,22 @@
 [
   {
     "groupID": 1,
-    "groupName": "NewGroup",
-    "createdBy": "super",
+    "groupName": "group 1",
+    "createdBy": "Admin1",
     "adminRequests": [],
     "groupAdmins": [
-      "super",
-      "User"
+      "Admin1"
     ],
     "userRequests": [],
     "members": [
-      "super",
-      "User"
+      "Admin1"
     ],
-    "channels": {
-      "gfdnbfg": [],
-      "nhdgnhdg": [],
-      "hndghn": []
-    },
-    "valid": false
+    "channels": {},
+    "valid": true
   },
   {
     "groupID": 2,
-    "groupName": "Test Group 2",
+    "groupName": "hgfdhn",
     "createdBy": "super",
     "adminRequests": [],
     "groupAdmins": [
@@ -30,36 +24,11 @@
     ],
     "userRequests": [],
     "members": [
-      "User2",
-      "User1",
       "super"
     ],
     "channels": {
-      "Channel 3 ": [
-        "super"
-      ],
-      "Channel 4": [
-        "super"
-      ],
-      "Channel 5": [
-        "super"
-      ]
+      "fdsg": []
     },
-    "valid": false
-  },
-  {
-    "groupID": 3,
-    "groupName": "Admin1",
-    "createdBy": "super",
-    "adminRequests": [],
-    "groupAdmins": [
-      "super"
-    ],
-    "userRequests": [],
-    "members": [
-      "super"
-    ],
-    "channels": {},
-    "valid": false
+    "valid": true
   }
 ]

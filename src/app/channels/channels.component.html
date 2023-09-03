@@ -1,5 +1,7 @@
 <div class="container mt-4">
     <h2>My Groups</h2>
+    <button *ngIf= "isAdmin" class="btn btn-secondary" (click)="addChannel()">Add Channel</button>
+    <!-- <button class="btn btn-secondary" (click)="addChannel()">Delete Channels</button> -->
     <div class="row">
         <div *ngFor="let channel of myChannels" class="col-12 mb-3">
             <div class="card">
@@ -24,10 +26,29 @@
                     <span>{{channel}}</span>
                     <div>
                         <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button>
-                        <button class="btn btn-secondary">Button 2</button>
+                        <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" (click)="deleteChannel(channel)">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="addChannelModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addGroupLabel">Add Group</h5>
+          <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="form-group">
+            <label for="channelName">Channel Name:</label>
+            <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName">
+            <button type="button" class="btn btn-primary mt-2" (click)="addChannel()">Add Channel</button>
+          </div>
+        </div>
+      </div>
+    </div>
