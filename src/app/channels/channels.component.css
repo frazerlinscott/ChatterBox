@@ -4,7 +4,6 @@ body {
 
 .container {
     max-height: 80vh;
-    overflow-y: scroll;
 }
 
 .card {
@@ -25,3 +24,16 @@ button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+
+.custom-modal-margin {
+    margin-top: 20x;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+  }
+
+  body {
+    background-color: #f5f5f5;  /* This is a light gray color. Replace with your desired color or gradient */
+    padding-top: 5px;
+  }

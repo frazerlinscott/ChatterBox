@@ -58,7 +58,8 @@ app.get("/usernames", (req, res) => {
       const users = JSON.parse(data);
       //console.log("Parsed users:", users);  // Check the parsed data
 
-      const usernames = users.map(u => u.username);
+      //const usernames = users.map(u => u.username);
+      const usernames = users.filter(u => u.valid).map(u => u.username);
       res.json(usernames);
     });
 });
@@ -75,9 +76,9 @@ app.get("/groups", (req, res) => {
 
       const groups = JSON.parse(data);
 
-      //console.log("Groups:", groups)
-      const groupsNames = groups.map(g => g.groupName);
-      //console.log("Groups:", groupsNames)
-      res.json(groupsNames);
+        // Filter groups where g.valid is true and then map to get their group names
+        const groupsNames = groups.filter(g => g.valid).map(g => g.groupName);
+
+        res.json(groupsNames);
     });
 });

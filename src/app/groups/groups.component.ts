@@ -54,6 +54,10 @@ export class GroupsComponent implements OnInit {
   joinedGroups: any;
   otherGroups: any;
 
+  userNotinGroup: any;
+  usersInGroup: any;
+
+  usernames: any;
   
   group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
@@ -65,87 +69,8 @@ export class GroupsComponent implements OnInit {
     if (storedUser) {
 
       this.loggedInUser = JSON.parse(storedUser);
+      console.log(this.loggedInUser.username)
     }
-
-      // console.log(this.loggedInUser.role)
-      // console.log(this.loggedInUser)
-
-      //this.loggedInUser.role = 2
-
-
-  // this.loggedInUser = {
-  //   username: "super",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 3,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "GroupAdmin2",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 2,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "GroupAdmin",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 2,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "user",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 1,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "user2",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 1,
-  //   group: [],
-  //   valid: true
-  // }
-
-
-  // this.loggedInUser = {
-  //   username: "user3",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 1,
-  //   group: [],
-  //   valid: true
-  
-  // }
 
 
   if (this.loggedInUser.role === 1){
@@ -163,17 +88,15 @@ export class GroupsComponent implements OnInit {
   }
 
     
-
-    this.getUsers()
     this.getGroups()
+    this.getUsers()
+    
 
     this.http.get<string[]>(BACKEND_URL + "/groups").subscribe(groupsNames => {
       this.allGroupNames = groupsNames;
 
     });
   }
-
-
 
   onGroupCardClick(group:any ){
     this.selectedGroup = group;
@@ -184,8 +107,6 @@ export class GroupsComponent implements OnInit {
     this.router.navigate(['/channels'], { queryParams: { yourKey: JSON.stringify(group) }})
   }
 
-
-//UserRequests 
   requestButton(group:any){
     
     console.log(this.loggedInUser.username)
@@ -209,10 +130,62 @@ export class GroupsComponent implements OnInit {
     this.buttonDisabledStates[group.groupID] = true;
   }
 
+  editGroupUsers(group:any){
+    this.selectedGroup = group;
+    console.log(group)
+    console.log(this.users)
+    console.log(this.groups)
 
+    this.userNotinGroup
+    this.usersInGroup
+    // Get all usernames
+    // Filter usernames that are in group.members
+    this.usersInGroup = this.usernames.filter((username: any) => group.members.includes(username));
+    // Filter usernames that are not in group.members
+    this.userNotinGroup = this.usernames.filter((username: any) => !group.members.includes(username));
+    $('#editGroupUsers').modal('show');
+  }
 
-  onButton2Click(group:any){
-    console.log("Button 2 clicked")
+  addUserFromGroup(group:any, username:any){
+    console.log("add " + username + " from" + group)
+    console.log(group)
+
+    group.members.push(username);
+
+    this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+
+          //refesh User list 
+          this.getGroups();
+          this.getUsers();
+          this.editGroupUsers(group)
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+    )
+  }
+
+  removeUserFromGroup(group:any, username:any){
+    const index = group.members.indexOf(username);
+    group.members.splice(index, 1)
+
+    this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+      response => {
+          console.log('User details updated on the server.', response);
+
+          //refesh User list 
+          this.getGroups();
+          this.getUsers();
+          this.editGroupUsers(group)
+      },
+      error => {
+          console.error('There was an error updating the user details on the server.', error);
+          alert('Error updating profile. Please try again.');
+      }
+    )
   }
 
   onAddGroup() {
@@ -230,6 +203,30 @@ export class GroupsComponent implements OnInit {
       this.groupChannels.push(this.newChannelName);
       this.newChannelName = '';
     }
+  }
+
+  leaveGroup(group:any){
+    console.log(group)
+    console.log(this.loggedInUser.username)
+  
+      // Remove user from group.members
+      group.members = group.members.filter((member: any) => member !== this.loggedInUser.username);
+  
+      // Loop through each channel in group.channels and remove the user
+      for (const channelName in group.channels) {
+          group.channels[channelName] = group.channels[channelName].filter((member: any) => member !== this.loggedInUser.username);
+      }
+      this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
+        response => {
+  
+            //refesh User list 
+            this.getGroups();
+        },
+        error => {
+            console.error('There was an error updating the user details on the server.', error);
+            alert('Error updating profile. Please try again.');
+        }
+      )
   }
 
   saveGroup(){
@@ -307,8 +304,12 @@ export class GroupsComponent implements OnInit {
       $('#approveAdminRequests').modal('hide');
     } 
 
-}
-  
+    if(modalType == "editUsers"){
+      $('#editGroupUsers').modal('hide');
+    } 
+
+  }
+
   getUsers(){
     this.http.post(BACKEND_URL + "/all-users", httpOptions)
     .subscribe(
@@ -316,6 +317,9 @@ export class GroupsComponent implements OnInit {
             if (data) {
               this.users = data
               //console.log(this.users)
+              this.usernames = this.users.filter((u: { valid: any; }) => u.valid).map((u: { username: any; }) => u.username);
+              console.log(this.usernames);
+
             } else {
                 alert("no Data Soz");
             }
@@ -323,7 +327,6 @@ export class GroupsComponent implements OnInit {
         error => {console.error('There was an error:', error);}
     );
   }
-
 
   getGroups(){
     this.http.post(BACKEND_URL + "/all-groups", httpOptions)
@@ -377,10 +380,6 @@ export class GroupsComponent implements OnInit {
     );
   }
 
-  // updateGroup(){
-    
-  // }
-
   GetNewGroupID(){
     if (this.groups && this.groups.length > 0) {
       this.newGroupID = this.groups[this.groups.length - 1].groupID + 1;
@@ -388,16 +387,6 @@ export class GroupsComponent implements OnInit {
       this.newGroupID = 1;
   }
   }
-
-  // getRequests(group: any){
-
-  //     console.log(group)
-
-  //       //this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-  //       //this.numberOfRequests=this.groupsNeedApproval.length
-  // }
-
-
 
   showRequests(){
     this.getGroups();  // Assuming this method populates the 'this.groups' array
@@ -409,7 +398,7 @@ export class GroupsComponent implements OnInit {
       //this.noRequests=false
       this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
     }
-}
+  }
 
   requestAdminButton(group:any){
         
@@ -431,9 +420,8 @@ export class GroupsComponent implements OnInit {
           }
         )
         this.buttonDisabledStates[group.groupID] = true;
-      }
+  }
 
-      
   deleteGroup(group:any){
 
     console.log(group)
@@ -468,7 +456,7 @@ export class GroupsComponent implements OnInit {
     // }
   }
 
-approveRequest(group: any, userRequest: string){
+  approveRequest(group: any, userRequest: string){
     console.log(group);
     console.log(userRequest);
 
@@ -491,9 +479,9 @@ approveRequest(group: any, userRequest: string){
   )
 
   //console.log(group);
-}
+  }
 
-approveAdminRequest(group: any, adminRequest: string){
+  approveAdminRequest(group: any, adminRequest: string){
   console.log(group);
   console.log(adminRequest);
 
@@ -515,7 +503,7 @@ approveAdminRequest(group: any, adminRequest: string){
         alert('Error updating profile. Please try again.');
     }
   )
-}
+  }
 
 
 }

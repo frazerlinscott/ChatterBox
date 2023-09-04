@@ -1,54 +1,98 @@
-<div class="container mt-4">
-    <h2>My Groups</h2>
-    <button *ngIf= "isAdmin" class="btn btn-secondary" (click)="addChannel()">Add Channel</button>
-    <!-- <button class="btn btn-secondary" (click)="addChannel()">Delete Channels</button> -->
-    <div class="row">
-        <div *ngFor="let channel of myChannels" class="col-12 mb-3">
-            <div class="card">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <span>{{channel}}</span>
-                    <div>
-                        <!-- <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button> -->
-                        <button class="btn btn-secondary" (click)="removeUserFromChannel(channel)">Leave Channel</button>
-                    </div>
+<body>
+
+
+<div class="container mt-4 text-center">
+    <div class="mb-4">
+        <!-- Display username at the top -->
+        <h3>{{loggedInUser.username}} Channels for group: </h3>
+</div>
+
+    <button *ngIf= "isAdmin" class="btn btn-success custom-btn position-relative" (click)="addChannel('button')">Add Channels</button>
+   
+
+ <div class="container mt-4 mx-4 my-4 card">
+
+<h2 class="my-4">My Channels</h2>
+<!-- <button class="btn btn-secondary" (click)="addChannel()">Delete Channels</button> -->
+<div class="row  mx-2 my-4">
+    <div *ngFor="let channel of myChannels">
+        <div class="card">
+            <div class="card-body align-items-center">
+                <span>{{channel}}</span>
+                <div>
+                    <!-- <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button> -->
+                    <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" style="margin-left: 10px;"(click)="membersChannel(channel)">Members</button>
+                    <button class="btn btn-danger" (click)="removeUserFromChannel(channel)">Leave Channel</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<div class="container mt-4">
-    <h2>Join Groups</h2>
-    <div class="row">
+
+<div class="container mt-5 mx-4 my-4 card ">
+    <h2 class="my-4">Join Channels</h2>
+    <div class="row mx-4 my-4">
         <div *ngFor="let channel of toJoinChannels" class="col-12 mb-3">
             <div class="card">
-                <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="card-body align-items-center">
                     <span>{{channel}}</span>
                     <div>
                         <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button>
-                        <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" (click)="deleteChannel(channel)">Delete</button>
+                        <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" style="margin-left: 10px;"(click)="membersChannel(channel)">Members</button>
+                        <button  *ngIf= "isAdmin" class="btn btn-danger mr-2" style="margin-left: 10px;"(click)="deleteChannel(channel)">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="modal fade" id="addChannelModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addGroupLabel">Add Group</h5>
-          <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-          <div class="form-group">
-            <label for="channelName">Channel Name:</label>
-            <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName">
-            <button type="button" class="btn btn-primary mt-2" (click)="addChannel()">Add Channel</button>
+
+    <div class="modal fade" id="addChannelModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addGroupLabel">Add Channel</h5>
+              <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="channelName">Channel Name:</label>
+                <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName">
+                <button type="button" class="btn btn-primary mt-2" (click)="addChannel('save')">Add Channel</button>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+
+
+        <div class="modal fade" id="editmemberUsers" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUser">Edit Users</h5>
+                        <button (click)="closeModal('editUsers')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+        
+        
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            <!-- Iterate over each username in userNotInGroup -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of channelMembers">
+                                {{ username }} <!-- Displaying username -->
+                                <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="adminRemoveMember(username)" >Remove User</button>
+                            </li>
+        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     

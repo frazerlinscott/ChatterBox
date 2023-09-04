@@ -8,52 +8,15 @@
     "pwdconfirm": "123",
     "role": 3,
     "group": [
-      3,
-      2,
-      1
-    ],
-    "valid": false
-  },
-  {
-    "username": "user1",
-    "birthdate": "2023-09-14",
-    "age": -1,
-    "email": "123",
-    "password": "123",
-    "pwdconfirm": "123",
-    "role": 1,
-    "group": [
       1
     ],
     "valid": true
   },
   {
-    "username": "user2",
-    "birthdate": "2023-09-20",
-    "age": -1,
-    "email": "123456",
-    "password": "123",
-    "pwdconfirm": "123",
-    "role": 1,
-    "group": [],
-    "valid": true
-  },
-  {
-    "username": "user3",
-    "birthdate": "2023-09-19",
-    "age": -1,
-    "email": "123456798",
-    "password": "123",
-    "pwdconfirm": "123",
-    "role": 1,
-    "group": [],
-    "valid": true
-  },
-  {
-    "username": "Admin1",
-    "birthdate": "2023-09-20",
-    "age": -1,
-    "email": "admin",
+    "username": "admin",
+    "birthdate": "2023-05-11",
+    "age": 0,
+    "email": "superEmail",
     "password": "123",
     "pwdconfirm": "123",
     "role": 2,
@@ -63,14 +26,16 @@
     "valid": true
   },
   {
-    "username": "Admin2",
-    "birthdate": "2023-09-12",
-    "age": -1,
-    "email": "Admin2",
+    "username": "user",
+    "birthdate": "2023-05-11",
+    "age": 0,
+    "email": "superEmail",
     "password": "123",
     "pwdconfirm": "123",
-    "role": 2,
-    "group": [],
+    "role": 1,
+    "group": [
+      1
+    ],
     "valid": true
   }
 ]

@@ -2,32 +2,22 @@
   {
     "groupID": 1,
     "groupName": "group 1",
-    "createdBy": "Admin1",
-    "adminRequests": [],
-    "groupAdmins": [
-      "Admin1"
-    ],
-    "userRequests": [],
-    "members": [
-      "Admin1"
-    ],
-    "channels": {},
-    "valid": true
-  },
-  {
-    "groupID": 2,
-    "groupName": "hgfdhn",
     "createdBy": "super",
     "adminRequests": [],
     "groupAdmins": [
-      "super"
+      "super",
+      "admin"
     ],
     "userRequests": [],
     "members": [
+      "user",
+      "admin",
       "super"
     ],
     "channels": {
-      "fdsg": []
+      "fgnddfgd": [],
+      "gfbdfg": [],
+      " ytjyh": []
     },
     "valid": true
   }

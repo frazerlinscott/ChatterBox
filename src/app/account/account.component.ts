@@ -101,7 +101,7 @@ ngOnInit(): void {
   }else if (this.loggedInUser.role === 2){
     this.isUser = false
     this.isAdmin = true
-    this.isSuperAdmin = true
+    this.isSuperAdmin = false
   }else if (this.loggedInUser.role === 3){
     this.isUser = false
     this.isAdmin = false
@@ -143,11 +143,9 @@ getUsers(){
 }
 
 filterGroups(group: any){
-  const userGroupIds = this.currentUser.group; // Array of group IDs associated with the current user
-  this.currentUserGroups = group.filter((g: { groupID: any; }) => userGroupIds.includes(g.groupID));
-  // console.log('Matched Groups:', matchedGroups);
-
-
+  console.log(group)
+  console.log(this.loggedInUser.username)
+  this.currentUserGroups = group.filter((g: { members: string | any[]; }) => g.members.includes(this.loggedInUser.username));
 }
 
 filterUser(users: any[]) {

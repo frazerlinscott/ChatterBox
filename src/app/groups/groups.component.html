@@ -1,41 +1,59 @@
-<div class="container my-5"> <!-- Container for center alignment and margin -->
+<body>
 
-    <!-- Add Group Button at the top, spanning across the cards div -->
-    <label>{{loggedInUser.username}}</label>
+
+<div class="container my-5 text-center"> <!-- Container for center alignment and margin -->
+
+<div>
+        <!-- Display username at the top -->
+        <h3  class="mx-5 my-4">{{loggedInUser.username}} Groups</h3>
+</div>
+
+    
     <div class="mb-4">
+        <!-- Add Group-AdminSuper Button -->
         <button 
+        style="width: 200px; margin-right: 20px;" 
             *ngIf="!isUser && isAdmin || isSuperAdmin" 
-            class="btn btn-success btn-block" 
+            class="btn btn-success custom-btn" 
             (click)="onAddGroup()">
-            Add Group-AdminSuper
+            Add Group
         </button>
-        <button *ngIf="!isUser && isAdmin || isSuperAdmin" class="btn btn-success btn-block position-relative" (click)="showRequests()">
-            Requests
-            <span *ngIf="numberOfRequests > 0" class="badge badge-danger position-absolute" style="top: -5px; right: -5px;">{{ numberOfRequests }}</span>
-        </button>
-
-
-        <button *ngIf= "isSuperAdmin" class="btn btn-success btn-block position-relative" (click)="showAdminRequests()">
-            Admin Requests
-            <span *ngIf="numberOfAdminRequests > 0" class="badge badge-danger position-absolute" style="top: -5px; right: -5px;">{{ numberOfAdminRequests }}</span>
-        </button>        
         
+        <!-- Requests Button -->
+        <button *ngIf="!isUser && isAdmin || isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px;" (click)="showRequests()">
+            User Requests
+            <span *ngIf="numberOfRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfRequests }}</span>
+        </button>
+
+        <!-- Admin Requests Button -->
+        <button *ngIf="isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px; margin-left: 20px;" (click)="showAdminRequests()">
+            Admin Requests
+            <span *ngIf="numberOfAdminRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfAdminRequests }}</span>
+        </button>
     </div>
+</div>
+
   
         <!-- Other Groups -->
-        <div class="container mt-4">
-            <h3>Other Groups</h3>
-            <div class="row justify-content-center">
-                <div class="col-md-3 mx-2 my-2" *ngFor="let group of otherGroups">
-                    <div class="card square-card" (click)="onGroupCardClick(group)">
+        <div class="container mt-4 section-card">
+            <h3>Groups</h3>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-3 mx-2 my-2 row justify-content-center " *ngFor="let group of otherGroups">
+                    <div class="card square-card">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
-                            <div class="mt-auto">
+                            <div class="d-flex flex-column mt-auto">
                                 <button *ngIf="isUser || isAdmin && !isSuperAdmin" 
                                 [disabled]="buttonDisabledStates[group.groupID]" 
-                                class="btn btn-sm btn-primary" 
+                                class="btn btn-primary mx-auto mb-2" 
                                 (click)="requestButton(group); $event.stopPropagation()">Request Entry</button>
-                                <button class="btn btn-sm btn-secondary" (click)="onButton2Click(group); $event.stopPropagation()">Button 2</button>
+                                <button 
+                                *ngIf="!isUser && !isAdmin && isSuperAdmin"
+                                class="btn btn-sm btn-primary" (click)="editGroupUsers(group); $event.stopPropagation()">Add Users</button>
+                                <button
+                                *ngIf="isSuperAdmin"
+                                class="btn btn-sm btn-danger" 
+                                (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
                             </div>
                         </div>
                     </div>
@@ -44,38 +62,50 @@
         </div>
 
         <!-- My Groups -->
-        <div class="container mt-4">
+        <div *ngIf="!isSuperAdmin" class="container mt-4 section-card">
             <h3>My Groups</h3>
             <div class="row justify-content-center">
-                <div class="col-md-3 mx-2 my-2" *ngFor="let group of joinedGroups">
-                    <div class="card square-card"(click)="onGroupCardClick(group)">
+                <div class="md-3 mx-2 my-2 row justify-content-center"  style="margin: 10px;" *ngFor="let group of joinedGroups">
+                    <div class="card square-card" (click)="onGroupCardClick(group)">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
-                            <div *ngIf="!isUser"class="mt-auto">
+                            <h5 class="card-title mt-auto text-center">{{ group.groupName }}</h5>
+                            <div class="text-center d-flex flex-column" *ngIf="!isUser">
                                 <button *ngIf="isUser || isAdmin && !isSuperAdmin" 
-                                [disabled]="buttonDisabledStates[group.groupID]" 
-                                class="btn btn-sm btn-primary" 
-                                (click)="requestAdminButton(group); $event.stopPropagation()">Request Admin</button>
-                            <div class="mt-auto">
+                                        [disabled]="buttonDisabledStates[group.groupID]" 
+                                        class="btn btn-primary mx-auto mb-2" 
+                                        (click)="requestAdminButton(group); $event.stopPropagation()">
+                                        Request Admin
+                                </button>
                             </div>
+                            <button *ngIf="isUser || isAdmin"
+                                    class="btn btn-danger btn-sm mx-auto" 
+                                    (click)="leaveGroup(group); $event.stopPropagation()">
+                                    Leave Group
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+
                 <!-- Administered Groups -->
-        <div *ngIf="!isUser" class="container mt-4">
+        <div *ngIf="!isUser" class="container mt-4 section-card">
             <h3>Administered Groups</h3>
             <div class="row justify-content-center">
-                <div class="col-md-3 mx-2 my-2" *ngFor="let group of myGroups">
-                    <div class="card square-card"(click)="onGroupCardClick(group)">
+                <div class="col-md-5 mx-2 my-2 row justify-content-center"  *ngFor="let group of myGroups">
+                    <div class="card square-card mt-auto" (click)="onGroupCardClick(group)">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
+                            <button class="card text-center d-flex align-items-center justify-content-center"
+                                *ngIf="!isUser && isAdmin || isSuperAdmin"
+                                class="btn btn-sm btn-primary" (click)="editGroupUsers(group); $event.stopPropagation()">Add Users</button>
                             <button
-                                class="btn btn-sm btn-primary" 
+                                *ngIf="group.createdBy==loggedInUser.username || isSuperAdmin"
+                                class="btn btn-sm btn-danger" 
                                 (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
-                            <div class="mt-auto">
+                                
+                                <div class="mt-auto">
                             </div>
                         </div>
                     </div>
@@ -149,7 +179,7 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let userRequest of group.userRequests">
                                 {{ userRequest }}
                                 <!-- Approve Button for each user request -->
-                                <button class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)">Approve</button>
+                                <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)">Approve</button>
                             </li>
                         </ul>
                     </li>
@@ -180,7 +210,7 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let adminRequest of group.adminRequests">
                                 {{ adminRequest }}
                                 <!-- Approve Button for each user request -->
-                                <button class="btn btn-success btn-sm" (click)="approveAdminRequest(group, adminRequest)">Approve</button>
+                                <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveAdminRequest(group, adminRequest)">Approve</button>
                             </li>
                         </ul>
                     </li>
@@ -190,5 +220,35 @@
     </div>
 </div>
 
+<div class="modal fade" id="editGroupUsers" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUser">Edit Users</h5>
+                <button (click)="closeModal('editUsers')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <ul class="list-group">
+                    <!-- Iterate over each username in userNotInGroup -->
+                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of userNotinGroup">
+                        {{ username }} <!-- Displaying username -->
+                        <button class="btn btn-success btn-sm" style="width: 80px; margin-left: 10px;" (click)="addUserFromGroup(selectedGroup, username)">Add User</button>
+                    </li>
+                    
+                    <!-- Iterate over each username in usersInGroup -->
+                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of usersInGroup">
+                        {{ username }} <!-- Displaying username -->
+                        <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="removeUserFromGroup(selectedGroup, username)">Remove User</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 
   
