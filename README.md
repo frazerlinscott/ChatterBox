@@ -1,8 +1,6 @@
 # Project README
 
-## Getting Started with Your Project
 
-This README file provides a quick guide on how to get started with your project, covering the essential commands for Angular, npm, and Git.
 
 ### Angular (Node)
 
@@ -41,7 +39,7 @@ The repository consists of a main branch and several feature-specific branches. 
 1. **Branch Creation**: Whenever a new feature or functionality is to be added, a new branch is created from the main branch.
 2. **Development**: All the development activities, be it coding, initial testing, or UI enhancements, happen within these feature branches.
 3. **Multiple Commits**: Multiple commits to the current branch are made until branch is fully functional. 
-4. **Merging**: Once the feature is tested and deemed stable, the feature branch is merged into the main branch. This is typically done through a pull request (PR) to ensure that the new code gets reviewed before merging.
+4. **Merging**: Once the feature is tested and deemed stable, the feature branch is merged into the main branch.
 5. **Repeat Step 1 - 4**: I repeated these steps until the system is fully functional. 
 
 ## Data Structures 
@@ -49,11 +47,11 @@ The repository consists of a main branch and several feature-specific branches. 
 ### LoginComponent Class:
 
 #### Properties:
-- `userpwd`: An object with two properties: `username` and `pwd`. These properties presumably represent the input values of a login form.
+- `userpwd`: An object with two properties: `username` and `pwd`. These properties represent the input values of a login form.
 
 #### Methods:
 - `loginfunc()`: This function is triggered to log in a user. It makes a POST HTTP request to the "/login" endpoint of the backend, passing in the user's credentials. After the request, the response is processed, and based on the response, the function either saves user data to the session storage and redirects to the 'account' page or shows an alert if the login attempt is unsuccessful.
-- `creatfunc()`: This function is for navigating to the 'create-user' route, presumably to allow a user to create an account.
+- `creatfunc()`: This function is for navigating to the 'create-user' route, to allow a user to create an account.
 
 ## Create User Component Class:
 
@@ -131,7 +129,7 @@ The repository consists of a main branch and several feature-specific branches. 
 ### Properties:
 
 #### Objects and Arrays:
-- **user**: This object holds details about the current user, probably the one logged in.
+- **user**: This object holds details about the current user. 
 - **allUsernames**: An array containing all usernames fetched from the backend, used to ensure a username is unique when updating.
 
 #### Booleans:
@@ -241,10 +239,6 @@ The repository consists of a main branch and several feature-specific branches. 
   - Identifies `currentGroup` that matches `groupID` of `passedGroupObject`.
   - Segregates channels into `myChannels` and `toJoinChannels`.
 
-Certainly! Here's the provided information formatted using Markdown:
-
----
-
 ## Server Side Routes
 
 ### Route: getUsers.js
@@ -342,10 +336,6 @@ Certainly! Here's the provided information formatted using Markdown:
 - `Package.json` - contains meta information like package name, version, dependencies, scripts.
 - `userData.json` - contains objects of User Data including; username, birthdate, age, email, password, role, group, valid.
 - `groupData.json` – contains objects of Group Data including groupID, GroupName, createdBy, adminRequests, groupAdmins, userRequests, members, channels, valid. 
-
-
-
-
 
 # Server Changes:
 
@@ -479,9 +469,6 @@ Certainly! Here's the provided information formatted using Markdown:
   - Button
 
 
-Sure, here's the markdown for your provided content:
-
-```markdown
 # Angular architecture
 
 ## Components
