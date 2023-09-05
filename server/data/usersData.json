@@ -15,34 +15,21 @@
     "valid": true
   },
   {
-    "username": "admin",
-    "birthdate": "2023-05-11",
+    "username": "frazer",
+    "birthdate": "2023-04-13",
     "age": 0,
-    "email": "superEmail",
-    "password": "123",
-    "pwdconfirm": "123",
-    "role": 2,
-    "group": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6
-    ],
-    "valid": true
-  },
-  {
-    "username": "user",
-    "birthdate": "2023-05-11",
-    "age": 0,
-    "email": "superEmail",
+    "email": "frazer",
     "password": "123",
     "pwdconfirm": "123",
     "role": 1,
+<<<<<<< Updated upstream
     "group": [
       1
     ],
     "valid": false
+=======
+    "group": [],
+    "valid": true
+>>>>>>> Stashed changes
   }
 ]

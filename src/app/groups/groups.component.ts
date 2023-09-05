@@ -109,11 +109,11 @@ export class GroupsComponent implements OnInit {
 
   requestButton(group:any){
     
-    console.log(this.loggedInUser.username)
+    //console.log(this.loggedInUser.username)
 
     group.userRequests.push(this.loggedInUser.username);
 
-    console.log(group)
+    //console.log(group)
 
     this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
       response => {
@@ -230,12 +230,12 @@ export class GroupsComponent implements OnInit {
   }
 
   saveGroup(){
-    //console.log(this.newGroupName)
-   // console.log(this.groupChannels)
+    console.log(this.newGroupName)
+    console.log(this.groupChannels)
 
     this.GetNewGroupID()
 
-    //console.log(this.newGroupID)
+    console.log(this.newGroupID)
 
     let channelsObject: { [channelName: string]: string[] } = {};
       this.groupChannels.forEach(channel => {
@@ -252,7 +252,7 @@ export class GroupsComponent implements OnInit {
       this.group.channels = channelsObject;
       this.group.valid = true;
   
-      //console.log(this.group)
+      console.log(this.group)
   
       this.http.post(BACKEND_URL+"/update-groups", this.group).subscribe(
         response => {
@@ -318,7 +318,7 @@ export class GroupsComponent implements OnInit {
               this.users = data
               //console.log(this.users)
               this.usernames = this.users.filter((u: { valid: any; }) => u.valid).map((u: { username: any; }) => u.username);
-              console.log(this.usernames);
+              //console.log(this.usernames);
 
             } else {
                 alert("no Data Soz");
@@ -334,9 +334,11 @@ export class GroupsComponent implements OnInit {
         (data: any) => {
             if (data) {
 
+            console.log(this.groups)
+
 
               this.groups = data.filter((group: { valid: boolean; }) => group.valid === true);
-              
+              console.log(this.groups)
               // Groups created by loggedInUser
               this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any;}) => group.createdBy === this.loggedInUser.username || group.groupAdmins.includes(this.loggedInUser.username));
 

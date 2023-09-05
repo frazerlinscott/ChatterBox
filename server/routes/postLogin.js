@@ -56,7 +56,7 @@ module.exports = function(req, res) {
         const users = JSON.parse(data);
 
         // Check if a user with the given username and password exists
-        const foundUser = users.find(u => u.username === username && u.password === pwd);
+        const foundUser = users.find(u => u.username === username && u.password === pwd && u.valid === true);
 
         if (foundUser) {
             res.json({ ok: true, user: foundUser });
