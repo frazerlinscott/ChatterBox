@@ -8,9 +8,9 @@ Angular is a popular front-end framework that utilizes Node.js for development. 
 
 1. **Install Node.js and npm**: Before you can work with Angular, make sure you have Node.js and npm installed on your system. You can download them from the official Node.js website: [Node.js Downloads](https://nodejs.org/en/download/).
 
-Node Express
-Jquery
-Bootstrap
+- **Node Express**
+- **Jquery**
+- **Bootstrap**
 
 2. **Install Angular CLI**: The Angular Command Line Interface (CLI) is a powerful tool for creating, building, testing, and deploying Angular applications. Install it globally using npm with the following command:
    
