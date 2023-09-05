@@ -1,10 +1,18 @@
 <body>
 
+    <div class="container mt-4 text-center">
+        <div class="mb-4">
+            
+            <h5>User: {{loggedInUser.username}}</h5>
+            
+    </div>
+
 
 <div class="container mt-4 text-center">
     <div class="mb-4">
-        <!-- Display username at the top -->
-        <h3>{{loggedInUser.username}} Channels for group: </h3>
+        
+        <h1>{{currentGroupString}}</h1>
+        
 </div>
 
     <button *ngIf= "isAdmin" class="btn btn-success custom-btn position-relative" (click)="addChannel('button')">Add Channels</button>
@@ -85,7 +93,7 @@
                         <ul class="list-group">
                             <!-- Iterate over each username in userNotInGroup -->
                             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of channelMembers">
-                                {{ username }} <!-- Displaying username -->
+                                {{ username }}
                                 <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="adminRemoveMember(username)" >Remove User</button>
                             </li>
         

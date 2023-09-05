@@ -56,44 +56,6 @@ ngOnInit(): void {
   }
 //----------------------------------------------------------------
 
-//----------------------------------------------------------------
-//Testing Code
-  // this.loggedInUser = {
-  //   username: "super",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 3,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "admin",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 2,
-  //   group: [],
-  //   valid: true
-  // }
-
-  // this.loggedInUser = {
-  //   username: "user",
-  //   birthdate: "2023-05-11",
-  //   age: 0,
-  //   email: "superEmail",
-  //   password: "123",
-  //   pwdconfirm: "123",
-  //   role: 1,
-  //   group: [],
-  //   valid: true
-  // }
-
   if (this.loggedInUser.role === 1){
     this.isUser = true
     this.isAdmin = false

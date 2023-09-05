@@ -10,15 +10,106 @@
     ],
     "userRequests": [],
     "members": [
-      "user",
+      "super",
       "admin",
-      "super"
+      "user"
     ],
     "channels": {
-      "fgnddfgd": [],
-      "gfbdfg": [],
-      " ytjyh": []
+      "channel1 ": []
     },
+    "valid": true
+  },
+  {
+    "groupID": 2,
+    "groupName": "dfvbndf",
+    "createdBy": "admin",
+    "adminRequests": [],
+    "groupAdmins": [
+      "admin"
+    ],
+    "userRequests": [],
+    "members": [
+      "admin"
+    ],
+    "channels": {
+      "1": []
+    },
+    "valid": true
+  },
+  {
+    "groupID": 3,
+    "groupName": "vfvd",
+    "createdBy": "super",
+    "adminRequests": [],
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [],
+    "members": [
+      "super",
+      "admin"
+    ],
+    "channels": {},
+    "valid": true
+  },
+  {
+    "groupID": 4,
+    "groupName": "bdfb",
+    "createdBy": "admin",
+    "adminRequests": [],
+    "groupAdmins": [
+      "admin"
+    ],
+    "userRequests": [],
+    "members": [
+      "admin"
+    ],
+    "channels": {},
+    "valid": true
+  },
+  {
+    "groupID": 5,
+    "groupName": "fdbfg",
+    "createdBy": "admin",
+    "adminRequests": [],
+    "groupAdmins": [
+      "admin"
+    ],
+    "userRequests": [],
+    "members": [
+      "admin"
+    ],
+    "channels": {},
+    "valid": true
+  },
+  {
+    "groupID": 6,
+    "groupName": "bdfbdf",
+    "createdBy": "admin",
+    "adminRequests": [],
+    "groupAdmins": [
+      "admin"
+    ],
+    "userRequests": [],
+    "members": [
+      "admin"
+    ],
+    "channels": {},
+    "valid": true
+  },
+  {
+    "groupID": 7,
+    "groupName": "gfdb",
+    "createdBy": "super",
+    "adminRequests": [],
+    "groupAdmins": [
+      "super"
+    ],
+    "userRequests": [],
+    "members": [
+      "super"
+    ],
+    "channels": {},
     "valid": true
   }
 ]

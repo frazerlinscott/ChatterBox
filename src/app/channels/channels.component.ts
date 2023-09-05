@@ -42,6 +42,7 @@ export class ChannelsComponent implements OnInit {
   usernames:any;
   users: any;
   currentChannel:any;
+  currentGroupString:any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { 
 }
@@ -68,6 +69,8 @@ ngOnInit(): void {
     try {
         this.passedGroupObject = JSON.parse(currentGroupString);
         console.log(this.passedGroupObject);
+        this.currentGroupString=this.passedGroupObject.groupName
+
     } catch (e) {
         console.error('Error parsing the object', e);
     }
@@ -219,6 +222,7 @@ membersChannel(channel: any){
   console.log(channel) 
   console.log(this.usernames);
   console.log(this.currentGroup)
+
 
   this.currentChannel=channel;
 

@@ -1,61 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Dashboard</title>
-</head>
-
+    
 <body>
 
     <div class="container-fluid mt-4">
         <div class="row">
-            <div class="mb-4">
-                <!-- Display username at the top -->
-        </div>
-        
 
             <!-- Sidebar Navigation -->
-            <div class="col-3 bg-light border-right vh-100">
+            <div class="col-3 sidebar vh-100">
                 <div class="d-flex flex-column align-items-center pt-5">
                     <!-- Profile Image -->
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
-                    <h3> {{loggedInUser.username}}</h3>
+                    <h3 class="display-4"> {{loggedInUser.username}}</h3>
                     <!-- Edit Profile Button -->
-                    <a routerLink="/profile" class="btn btn-info mb-2">Edit Profile</a>
-
+                    <a routerLink="/profile" class="btn btn-info mb-2" style="width: 120px">Edit Profile</a>
                     <!-- Groups Button -->
-                    <button *ngIf="isSuperAdmin" (click)="openUsers()"class="btn btn-secondary mb-2">Users</button>
-
-                    <button (click)="openGroups()" class="btn btn-secondary mb-2">Groups</button>
-                    
+                    <button *ngIf="isSuperAdmin" (click)="openUsers()"class="btn btn-success mb-2" style="width: 120px">Users</button>
+                    <button (click)="openGroups()" class="btn btn-success mb-2" style="width: 120px">Groups</button>
                     <!-- Logout Button -->
-                    <button (click)="logout()" class="btn btn-danger">Logout</button>
+                    <button (click)="logout()" class="btn btn-danger"style="width: 120px">Logout</button>
                 </div>
             </div>
 
-            <!-- Group Cards -->
+            <!-- Group Cards for User/Admin -->
             <div *ngIf="isUser || isAdmin " class="col-9">
-                <div class="row justify-content-center"> <!-- Center the cards -->
-                    <div class="col-md-3 mx-2 my-2" *ngFor="let group of currentUserGroups"> <!-- Spacing between cards -->
-                        <div class="card square-card" (click)="onGroupCardClick(group)">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
+                <div class="row justify-content-center">
+                    <h2 class="display-4 mb-4 w-100 text-center">Your Groups</h2>
+                    <div class="col-md-3 mx-2 my-2" *ngFor="let group of currentUserGroups">
+                        <div  class="fill" class="card text-white mb-3" style="max-width: 18rem;" (click)="onGroupCardClick(group)">
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h5 class="card-title text-center">{{ group.groupName }}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Group Cards -->
+            <!-- Group Cards for SuperAdmin -->
             <div *ngIf="isSuperAdmin" class="col-9">
-                <div class="row justify-content-center"> <!-- Center the cards -->
-                    <div class="col-md-3 mx-2 my-2" *ngFor="let group of allGroups"> <!-- Spacing between cards -->
-                        <div class="card square-card" (click)="onGroupCardClick(group)">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title mt-auto">{{ group.groupName }}</h5>
+                <div class="row justify-content-center">
+                    <h2 class="display-4  mb-4 w-100 text-center text-black">All Groups</h2>
+                    <div class="col-md-3 mx-2 my-2" *ngFor="let group of allGroups">
+                        <div class="fill" class="card text-white mb-3" style="max-width: 18rem;"(click)="onGroupCardClick(group)">
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h5 class="card-title text-center">{{ group.groupName }}</h5>
                             </div>
                         </div>
                     </div>
@@ -63,7 +51,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
