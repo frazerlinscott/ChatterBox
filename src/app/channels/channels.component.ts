@@ -217,6 +217,7 @@ deleteChannel(targetChannel: any) {
 }
 
 membersChannel(channel: any){
+
   this.getGroups();
 
   console.log(channel) 
@@ -232,6 +233,8 @@ membersChannel(channel: any){
 
 // Filtering this.usernames based on the list of members from the current channel
     this.channelMembers = this.usernames.filter((username: any) => membersOfCurrentChannel.includes(username));
+
+    console.log(this.channelMembers)
 
     console.log(this.channelMembers);
     $('#editmemberUsers').modal('show');
@@ -279,7 +282,7 @@ adminRemoveMember(username: any){
 
 
 getUsers(){
-  this.http.post(BACKEND_URL + "/all-users", httpOptions)
+  this.http.get(BACKEND_URL + "/all-users", httpOptions)
   .subscribe(
       (data: any) => {
           if (data) {
@@ -296,7 +299,7 @@ getUsers(){
 }
 
 getGroups(){
-  this.http.post(BACKEND_URL + "/all-groups", httpOptions)
+  this.http.get(BACKEND_URL + "/all-groups", httpOptions)
   .subscribe(
       (data: any) => {
           if (data) {

@@ -180,29 +180,17 @@ The repository consists of a main branch and several feature-specific branches. 
   - Fetches the list of all group names.
   
 - **onGroupCardClick()**: Navigates to a 'channels' route.
-
 - **requestButton()**: Sends a join request.
-
 - **onAddGroup()**: Opens a modal to add a group.
-
 - **onGroupInput()**: Checks if the entered group name is unique.
-
 - **saveGroup()**: Saves the new group.
-
 - **closeModal()**: Closes a modal.
-
 - **getUsers(), getGroups()**: Fetches data from a backend service.
-
 - **GetNewGroupID()**: Creates the next available group ID.
-
 - **showRequests()**: Shows a modal with join requests.
-
 - **requestAdminButton()**: Sends a request to become an admin.
-
 - **deleteGroup()**: Marks a group as invalid.
-
 - **showAdminRequests()**: Shows a modal with admin requests.
-
 - **approveRequest()**: Approves a user's join request.
 ## Channels Component Class:
 
@@ -242,7 +230,7 @@ The repository consists of a main branch and several feature-specific branches. 
 ## Server Side Routes
 
 ### Route: getUsers.js
-- **HTTP Method:** POST
+- **HTTP Method:** GET
 - **Parameters:**
   - `username`: A string representing the username.
   - `pwd`: A string representing the password.
@@ -252,6 +240,7 @@ The repository consists of a main branch and several feature-specific branches. 
   - **Error:** An object with `ok` set to false and an associated error message: `'Internal Server Error'`.
 
 ### Route: getGroups.js
+- **HTTP Method:** GET
 - **Parameters:**
   - `username`: A string representing the username.
   - `pwd`: A string representing the password.
@@ -390,7 +379,7 @@ The repository consists of a main branch and several feature-specific branches. 
 ## Account Component: 
 
 ### getGroups()
-- POST – `all-groups`
+- GET – `all-groups`
 - Function gets all groups and filters them to only display the groups the user is a member of. Function also filters out off the `groups.vaild=false` because these are deleted groups. 
 - **Frontend:** 
   - Clickable Cards and group names of the groups that have not been deleted and the logged in user is a member of. 
@@ -418,7 +407,7 @@ The repository consists of a main branch and several feature-specific branches. 
   - Add Group Button 
 
 ### getGroups()
-- POST  - `all-groups`
+- GET  - `all-groups`
 - Function will get all groups and filter them to:
   - `myGroups` = Groups loggedInUser is a groupAdmin for
   - `joinedGroups` =  Groups loggedInUser is a member of 
@@ -451,19 +440,19 @@ The repository consists of a main branch and several feature-specific branches. 
 ## Channel Component
 
 ### getGroups()
-- POST  - `all-groups`
+- GET  - `all-groups`
 - Function will get all groups and filter them to show all `group.channels` and split them:
   - `myChannels` = Channel loggedInUser is a member of
   - `toJoinChannels` =  Groups loggedInUser is not a member of.  
 
 ### removeUserFromChannel()
-- POST  - `all-groups`
+- POST  - `update-groups`
 - Removes loggedInUser from `selectedGroup.channel` and updated database. 
 - **Frontend:** 
   - Button
 
 ### addUserFromChannel()
-- POST  - `all-groups`
+- POST  - `update-groups`
 - Adds loggedInUser to `selectedGroup.channel` and updated database. 
 - **Frontend:** 
   - Button

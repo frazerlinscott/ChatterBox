@@ -73,7 +73,7 @@ ngOnInit(): void {
 //----------------------------------------------------------------
 
 getGroups(){
-  this.http.post(BACKEND_URL + "/all-groups", httpOptions)
+  this.http.get(BACKEND_URL + "/all-groups", httpOptions)
   .subscribe(
       (data: any) => {
           if (data) {
@@ -89,7 +89,7 @@ getGroups(){
 }
 
 getUsers(){
-  this.http.post(BACKEND_URL + "/all-users", httpOptions)
+  this.http.get(BACKEND_URL + "/all-users", httpOptions)
   .subscribe(
       (data: any) => {
           if (data) {

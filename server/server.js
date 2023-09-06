@@ -36,14 +36,13 @@ app.post('/update-user', updateUser);
 
 app.post('/create-user', postCreateUser);
 
-app.post('/all-users', AllUserData);
+app.get('/all-users', AllUserData);
 
 app.post('/update-permission', newPermission);
 
-app.post('/all-groups', getGroups);
+app.get('/all-groups', getGroups);
 
 app.post('/update-groups', updateGroups);
-
 
 app.get("/usernames", (req, res) => {
     console.log("Inside /usernames route handler");  // Check if the route is triggered

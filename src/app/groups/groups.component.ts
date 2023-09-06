@@ -61,7 +61,7 @@ export class GroupsComponent implements OnInit {
   
   group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -260,6 +260,7 @@ export class GroupsComponent implements OnInit {
   
             //refesh User list 
             this.getGroups();
+            this.cdr.detectChanges();
         },
         error => {
             console.error('There was an error updating the user details on the server.', error);
@@ -270,6 +271,7 @@ export class GroupsComponent implements OnInit {
     }else{
       alert("Group already exists");
     }
+    //location.reload();
   }
 
   closeModal(modalType: string | undefined){
@@ -311,7 +313,7 @@ export class GroupsComponent implements OnInit {
   }
 
   getUsers(){
-    this.http.post(BACKEND_URL + "/all-users", httpOptions)
+    this.http.get(BACKEND_URL + "/all-users", httpOptions)
     .subscribe(
         (data: any) => {
             if (data) {
@@ -329,7 +331,7 @@ export class GroupsComponent implements OnInit {
   }
 
   getGroups(){
-    this.http.post(BACKEND_URL + "/all-groups", httpOptions)
+    this.http.get(BACKEND_URL + "/all-groups", httpOptions)
     .subscribe(
         (data: any) => {
             if (data) {

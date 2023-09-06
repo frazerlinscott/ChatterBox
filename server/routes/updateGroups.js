@@ -14,8 +14,8 @@ module.exports = function(req, res) {
         }
 
         const currentGroups = JSON.parse(data);
+        console.log('current groups: ' + currentGroups)
 
-        
         const groupIndex = currentGroups.findIndex(group => group.groupID === groupIdToUpdate);
 
         if (groupIndex === -1) {
@@ -30,39 +30,8 @@ module.exports = function(req, res) {
                 return res.status(500).json({ success: false, message: 'Internal Server Error.' });
             }
 
-        
-            // fs.readFile(path.join(__dirname, '..', 'data', 'usersData.json'), 'utf8', (err, userData) => {
-            //     if (err) {
-            //         console.error('Error reading the userData.json file:', err);
-            //         return res.status(500).json({ success: false, message: 'Internal Server Error.' });
-            //     }
-
-            //     const users = JSON.parse(userData);
-            //     const currentGroupID = updatedGroup.groupID;
-            //     const addedUser = updatedGroup.members[updatedGroup.members.length - 1];
-            //     const userIndex = users.findIndex(u => u.username === addedUser);
-
-            //     if (userIndex !== -1) {
-            //         if (users[userIndex].group) {
-            //             // Only push the currentGroupID if it's not already in the array
-            //             if (!users[userIndex].group.includes(currentGroupID)) {
-            //                 users[userIndex].group.push(currentGroupID);
-            //             }
-            //         } else {
-            //             users[userIndex].group = [currentGroupID];
-            //         }
-            //     }
-
-            //     fs.writeFile(path.join(__dirname, '..', 'data', 'usersData.json'), JSON.stringify(users, null, 2), 'utf8', (err) => {
-            //         if (err) {
-            //             console.error('Error writing to the usersData.json file:', err);
-            //             return res.status(500).json({ success: false, message: 'Internal Server Error.' });
-            //         }
-
-            //         // Finally, send the response after both updates are done
-            //         res.json({ success: true, message: 'Group and User details updated successfully.' });
-            //     });
-            // });
+            // Send a success response once file is written
+            res.status(200).json({ success: true, message: 'Group updated successfully.' });
         });
     });
 };
