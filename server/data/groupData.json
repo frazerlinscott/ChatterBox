@@ -7,11 +7,12 @@
     "groupAdmins": [
       "super"
     ],
-    "userRequests": [],
+    "userRequests": [
+      "user"
+    ],
     "members": [
       "super",
       "admin",
-      "user",
       "admin2",
       "user2"
     ],
