@@ -2,16 +2,16 @@
 <body>
 
 
-<div class="container my-5 text-center"> <!-- Container for center alignment and margin -->
+<div class="container my-5 text-center">
 
 <div>
-        <!-- Display username at the top -->
+        
         <h3  class="mx-5 my-4">{{loggedInUser.username}} Groups</h3>
 </div>
 
     
     <div class="mb-4">
-        <!-- Add Group-AdminSuper Button -->
+        
         <button 
         style="width: 200px; margin-right: 20px;" 
             *ngIf="!isUser && isAdmin || isSuperAdmin" 
@@ -20,13 +20,13 @@
             Add Group
         </button>
         
-        <!-- Requests Button -->
+     
         <button *ngIf="!isUser && isAdmin || isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px;" (click)="showRequests()">
             User Requests
             <span *ngIf="numberOfRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfRequests }}</span>
         </button>
 
-        <!-- Admin Requests Button -->
+     
         <button *ngIf="isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px; margin-left: 20px;" (click)="showAdminRequests()">
             Admin Requests
             <span *ngIf="numberOfAdminRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfAdminRequests }}</span>
@@ -90,7 +90,7 @@
         </div>
 
 
-                <!-- Administered Groups -->
+        <!-- Administered Groups -->
         <div *ngIf="!isUser" class="container mt-4 section-card">
             <h3>Administered Groups</h3>
             <div class="row justify-content-center">
@@ -174,14 +174,12 @@
 
             <div class="modal-body">
                 <ul class="list-group">
-                    <!-- Iterate over each group -->
                     <li class="list-group-item" *ngFor="let group of groupsNeedApproval">
-                        {{ group.groupName }} <!-- Displaying group name -->
+                        {{ group.groupName }}
                         <ul class="list-group mt-2">
-                            <!-- For each group, iterate over its userRequests -->
                             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let userRequest of group.userRequests">
                                 {{ userRequest }}
-                                <!-- Approve Button for each user request -->
+
                                 <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)">Approve</button>
                             </li>
                         </ul>
@@ -205,14 +203,12 @@
 
             <div class="modal-body">
                 <ul class="list-group">
-                    <!-- Iterate over each group -->
+  
                     <li class="list-group-item" *ngFor="let group of groupsAdminNeedApproval">
-                        {{ group.groupName }} <!-- Displaying group name -->
+                        {{ group.groupName }} 
                         <ul class="list-group mt-2">
-                            <!-- For each group, iterate over its userRequests -->
                             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let adminRequest of group.adminRequests">
                                 {{ adminRequest }}
-                                <!-- Approve Button for each user request -->
                                 <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveAdminRequest(group, adminRequest)">Approve</button>
                             </li>
                         </ul>
@@ -235,15 +231,12 @@
 
             <div class="modal-body">
                 <ul class="list-group">
-                    <!-- Iterate over each username in userNotInGroup -->
                     <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of userNotinGroup">
-                        {{ username }} <!-- Displaying username -->
+                        {{ username }}
                         <button class="btn btn-success btn-sm" style="width: 80px; margin-left: 10px;" (click)="addUserFromGroup(selectedGroup, username)">Add User</button>
                     </li>
-                    
-                    <!-- Iterate over each username in usersInGroup -->
                     <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of usersInGroup">
-                        {{ username }} <!-- Displaying username -->
+                        {{ username }}
                         <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="removeUserFromGroup(selectedGroup, username)">Remove User</button>
                     </li>
                 </ul>

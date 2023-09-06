@@ -393,7 +393,7 @@ export class GroupsComponent implements OnInit {
   }
 
   showRequests(){
-    this.getGroups();  // Assuming this method populates the 'this.groups' array
+    this.getGroups();  
     // this.getRequests()
 
     $('#approveRequests').modal('show');
@@ -447,17 +447,11 @@ export class GroupsComponent implements OnInit {
   }
 
   showAdminRequests(){
-    this.getGroups();  // Assuming this method populates the 'this.groups' array
-    // this.getRequests()
+    this.getGroups();  
 
     $('#approveAdminRequests').modal('show');
 
     console.log(this.groups)
-
-    // if(this.groups.length > 0){
-    //   //this.noRequests=false
-    //   this.groupsAdminNeedApproval = this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0);
-    // }
   }
 
   approveRequest(group: any, userRequest: string){
@@ -482,7 +476,6 @@ export class GroupsComponent implements OnInit {
     }
   )
 
-  //console.log(group);
   }
 
   approveAdminRequest(group: any, adminRequest: string){
