@@ -24,7 +24,7 @@
 <!-- <button class="btn btn-secondary" (click)="addChannel()">Delete Channels</button> -->
 <div class="row  mx-2 my-4">
     <div *ngFor="let channel of myChannels">
-        <div class="card">
+        <div class="card" (click)="onChannelCardClick(channel)">
             <div class="card-body align-items-center">
                 <span>{{channel}}</span>
                 <div>

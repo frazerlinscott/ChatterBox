@@ -174,7 +174,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(){
-    this.http.post(BACKEND_URL + "/all-users", httpOptions)
+    this.http.get(BACKEND_URL + "/all-users", httpOptions)
     .subscribe(
         (data: any) => {
             if (data) {

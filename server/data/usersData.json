@@ -14,18 +14,7 @@
     "username": "user",
     "birthdate": "2023-05-11",
     "age": 0,
-    "email": "superEmail",
-    "password": "123",
-    "pwdconfirm": "123",
-    "role": 1,
-    "group": [],
-    "valid": true
-  },
-  {
-    "username": "user2",
-    "birthdate": "2023-05-11",
-    "age": 0,
-    "email": "superEmail",
+    "email": "userEmail",
     "password": "123",
     "pwdconfirm": "123",
     "role": 1,
@@ -36,7 +25,7 @@
     "username": "admin",
     "birthdate": "2023-05-11",
     "age": 0,
-    "email": "superEmail",
+    "email": "adminEmail",
     "password": "123",
     "pwdconfirm": "123",
     "role": 2,
@@ -44,13 +33,13 @@
     "valid": true
   },
   {
-    "username": "admin2",
-    "birthdate": "2023-05-11",
-    "age": 0,
-    "email": "superEmail",
+    "username": "user1",
+    "birthdate": "2023-09-28",
+    "age": -1,
+    "email": "email@usercom",
     "password": "123",
     "pwdconfirm": "123",
-    "role": 2,
+    "role": 1,
     "group": [],
     "valid": true
   }

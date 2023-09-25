@@ -44,7 +44,7 @@ export class ChannelsComponent implements OnInit {
   currentChannel:any;
   currentGroupString:any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { 
 }
 
 ngOnInit(): void {
@@ -278,6 +278,14 @@ adminRemoveMember(username: any){
       
   );
   //$('#editmemberUsers').modal('show');
+}
+
+onChannelCardClick(channel:any){
+  console.log('Channel card clicked' , channel);
+  // this.router.navigateByUrl('/chat');
+  this.router.navigate(['/chat'], { queryParams: { yourKey: channel}})
+
+
 }
 
 

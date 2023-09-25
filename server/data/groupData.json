@@ -1,66 +1,25 @@
 [
   {
     "groupID": 1,
-    "groupName": "group 1",
+    "groupName": "superAdmin Group",
     "createdBy": "super",
     "adminRequests": [],
     "groupAdmins": [
       "super"
     ],
-    "userRequests": [
-      "user"
-    ],
+    "userRequests": [],
     "members": [
-      "super",
-      "admin",
-      "admin2",
-      "user2"
+      "user1"
     ],
     "channels": {
-      "ttt": [
-        "admin"
+      "Channels": [
+        "user1",
+        "super"
+      ],
+      "cvsdvfds": [
+        "user1"
       ]
     },
     "valid": true
-  },
-  {
-    "groupID": 2,
-    "groupName": "AdminG",
-    "createdBy": "admin",
-    "adminRequests": [],
-    "groupAdmins": [
-      "admin"
-    ],
-    "userRequests": [],
-    "members": [
-      "admin",
-      "user2",
-      "user"
-    ],
-    "channels": {
-      "Channel1": []
-    },
-    "valid": false
-  },
-  {
-    "groupID": 3,
-    "groupName": "AdminG2",
-    "createdBy": "admin2",
-    "adminRequests": [],
-    "groupAdmins": [
-      "admin2",
-      "admin"
-    ],
-    "userRequests": [],
-    "members": [
-      "admin2",
-      "user2",
-      "admin",
-      "user"
-    ],
-    "channels": {
-      "Channel2": []
-    },
-    "valid": false
   }
 ]

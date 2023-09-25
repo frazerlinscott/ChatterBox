@@ -11,6 +11,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { UsersComponent } from './users/users.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ChannelsComponent } from './channels/channels.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ChannelsComponent } from './channels/channels.component';
     CreateUserComponent,
     UsersComponent,
     GroupsComponent,
-    ChannelsComponent
+    ChannelsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
