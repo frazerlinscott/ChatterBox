@@ -5,7 +5,11 @@
         </div>
         <div class="card-body">
             <ul class="list-group chat-messages">
-                <li class="list-group-item" *ngFor="let message of messages">{{ message }}</li>
+                <li class="list-group-item" 
+                    *ngFor="let msg of messages"
+                    [ngClass]="{'right': msg.username === loggedInUser.username, 'left': msg.username !== loggedInUser.username}">
+                    {{ msg.username }}: {{ msg.message }}
+                </li>
             </ul>
         </div>
         <div class="card-footer">

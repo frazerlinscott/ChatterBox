@@ -2,8 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {SocketService} from 'src/app/service/socket.service';
 import {FormsModule} from '@angular/forms';
-
-
+import { Message } from 'server/models/messageModel';
 
 @Component({
   selector: 'app-chat',
@@ -14,17 +13,25 @@ import {FormsModule} from '@angular/forms';
 export class ChatComponent implements OnInit {
 
   messagecontent: string="";
-  messages: string[] = [];
+  //messages: string[] = [];
   ioConnection:any;
   channel: any;
   currentChannel: string | null = null;
+  loggedInUser : any;
+  messages: Message[] = [];
 
 
-  
 
   constructor (private socketService: SocketService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    const storedUser = window.sessionStorage.getItem('current.user');
+    if (storedUser) {
+
+      this.loggedInUser = JSON.parse(storedUser);
+      console.log(this.loggedInUser.username)
+    }
     this.route.queryParams.subscribe(params => {
         this.channel = params['yourKey'];
         this.initIoConnection();
@@ -37,15 +44,13 @@ export class ChatComponent implements OnInit {
   initIoConnection() {
     this.socketService.initSocket();
     this.ioConnection = this.socketService.getMessage().subscribe((data: any) => {
-      console.log(data); // log the data to check its structure
-      // only add the message to messages array if the channels match
       if (data.channel === this.channel) {
-        this.messages.push(data.message);
+        this.messages.push(data as Message);
+        console.log(this.messages); 
       }
     });
+    
   }
-
-
 
     sendMessage() {
       if (this.messagecontent) {

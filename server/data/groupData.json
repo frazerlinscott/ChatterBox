@@ -9,7 +9,8 @@
     ],
     "userRequests": [],
     "members": [
-      "user1"
+      "user1",
+      "user"
     ],
     "channels": {
       "Channels": [
@@ -17,7 +18,8 @@
         "super"
       ],
       "cvsdvfds": [
-        "user1"
+        "user1",
+        "user"
       ]
     },
     "valid": true
