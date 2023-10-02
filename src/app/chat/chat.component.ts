@@ -27,8 +27,9 @@ export class ChatComponent implements OnInit {
   currentChannel: string | null = null;
   loggedInUser : any;
   messages: Message[] = [];
-
+ 
   group: any;
+  currentGroupString:any
 
   constructor (private http: HttpClient, private socketService: SocketService, private router: Router, private route: ActivatedRoute) { }
 
@@ -42,11 +43,13 @@ export class ChatComponent implements OnInit {
       //console.log(this.loggedInUser.username)
     }
     this.route.queryParams.subscribe(params => {
-        this.channel = params['yourKey'];
-        console.log(this.channel)
-        this.group="group 1"
+      this.channel = params['channel'];
+      this.currentGroupString = params['currentGroup'];
+
         this.initIoConnection();
+
         this.socketService.join(this.channel);
+
         this.messages = []; // Clear the previous messages when changing the channel.
     });
 }
@@ -83,9 +86,8 @@ initIoConnection() {
 
 
 sendMessage() {
-  console.log('Emitting message:', this.messagecontent);
   if (this.messagecontent) {
-    this.socketService.send(this.messagecontent, this.channel);
+    this.socketService.send(this.messagecontent, this.channel, this.currentGroupString);
     this.messagecontent = "";
   }
 }

@@ -100,9 +100,6 @@ export class GroupsComponent implements OnInit {
 
   onGroupCardClick(group:any ){
     this.selectedGroup = group;
-    console.log("card clicked")
-    //.log(group)
-    //this.router.navigate(['/channels', group]);
 
     this.router.navigate(['/channels'], { queryParams: { yourKey: JSON.stringify(group) }})
   }

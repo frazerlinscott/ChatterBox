@@ -280,13 +280,16 @@ adminRemoveMember(username: any){
   //$('#editmemberUsers').modal('show');
 }
 
-onChannelCardClick(channel:any){
-  console.log('Channel card clicked' , channel);
-  // this.router.navigateByUrl('/chat');
-  this.router.navigate(['/chat'], { queryParams: { yourKey: channel}})
-
-
+onChannelCardClick(channel: any) {
+  console.log('Channel card clicked', channel);
+  this.router.navigate(['/chat'], { 
+    queryParams: { 
+      channel: channel,
+      currentGroup: this.currentGroupString 
+    } 
+  });
 }
+
 
 
 getUsers(){

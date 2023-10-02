@@ -54,7 +54,7 @@ module.exports = {
 
                 // Save the message to the database here before emitting it to other clients
                 const messageData = {
-                    groupName: "group1", // Assuming group name is "group1"
+                    groupName: data.groupName,
                     channelName: data.channel,
                     message: {
                         messageString: data.message,
