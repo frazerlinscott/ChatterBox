@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
         this.channel = params['yourKey'];
         console.log(this.channel)
-        this.group="group1"
+        this.group="group 1"
         this.initIoConnection();
         this.socketService.join(this.channel);
         this.messages = []; // Clear the previous messages when changing the channel.
@@ -53,33 +53,30 @@ export class ChatComponent implements OnInit {
 
 
 initIoConnection() {
-  if (this.ioConnection) this.ioConnection.unsubscribe();
+  console.log('initIoConnection called');
+
+  if (this.ioConnection) {
+    this.ioConnection.unsubscribe();
+  }
 
   this.ioConnection = this.socketService.getMessage().subscribe((data: any) => {
       console.log('Received:', data);
+
       if (data.channel === this.channel) {
           this.messages.push(data as Message);
           console.log(this.messages);
 
-          const messageData = {
-              groupName: this.group, // Assuming you have this.group set to the current group name
-              channelName: this.channel,
-              message: {
-                  messageString: data.message, // The actual message content
-                  sentBy: data.username, // The user who sent the message
-                  timestamp: new Date().toISOString() // Current timestamp
-              }
-          };
+          // const messageData = {
+          //     groupName: this.group, // Assuming you have this.group set to the current group name
+          //     channelName: this.channel,
+          //     message: {
+          //         messageString: data.message, // The actual message content
+          //         sentBy: data.username, // The user who sent the message
+          //         timestamp: new Date().toISOString() // Current timestamp
+          //     }
+          // };
 
-          this.http.post(BACKEND_URL + "/messages", messageData, httpOptions).subscribe(
-              response => {
-                  console.log('Message saved on the server.', response);
-              },
-              error => {
-                  console.error('There was an error saving the message on the server.', error);
-                  alert('Error saving message. Please try again.');
-              }
-          )
+
       }
   });
 }

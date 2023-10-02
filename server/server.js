@@ -29,35 +29,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../dist/week4tut')));
 
 // Importing sockets.js
-const sockets = require('./sockets.js');
-sockets.connect(io, PORT);
-
-//const postCreateUser = require('./routes/postCreateUser.js');
-
-// const updateUser = require('./routes/updateUser');
-
-// const AllUserData = require('./routes/getAllUsers');
-
-// const newPermission = require('./routes/updatePermission');
-
-//const getGroups = require('./routes/getGroups');
-
-// const updateGroups = require('./routes/updateGroups');
-
-//app.post("/login", require("./routes/postLogin"));
-
-// app.post('/update-user', updateUser);
-
-// app.post('/create-user', postCreateUser);
-
-// app.get('/all-users', AllUserData);
-
-// app.post('/update-permission', newPermission);
-
-//app.get('/all-groups', getGroups);
-
-// app.post('/update-groups', updateGroups);
-
+// const sockets = require('./sockets.js');
+// sockets.connect(io, PORT);
 
 
 const main = async function(client) {
@@ -70,6 +43,9 @@ const main = async function(client) {
 
         const db = client.db(dbName)
 
+        const sockets = require('./sockets.js');
+        sockets.connect(io, db);  // pass db instead of PORT
+
         require('./routes/updateGroups_DB.js')(app, db, ObjectId);
 
         require('./routes/login_DB.js')(app, db);
@@ -80,7 +56,7 @@ const main = async function(client) {
         require('./routes/getAllGroups_DB.js')(app, db);
         require('./routes/updatePermissions_DB.js')(app, db);
 
-        require('./routes/message_DB.js')(app, db);
+        //require('./routes/message_DB.js')(app, db);
 
 
     } catch (error) {
@@ -88,9 +64,6 @@ const main = async function(client) {
         client.close();
     }
 };
-
-
-
 
 http.listen(PORT, function() {
     let d = new Date();
