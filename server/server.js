@@ -40,11 +40,11 @@ sockets.connect(io, PORT);
 
 // const newPermission = require('./routes/updatePermission');
 
-// const getGroups = require('./routes/getGroups');
+//const getGroups = require('./routes/getGroups');
 
 // const updateGroups = require('./routes/updateGroups');
 
-// app.post("/login", require("./routes/postLogin"));
+//app.post("/login", require("./routes/postLogin"));
 
 // app.post('/update-user', updateUser);
 
@@ -54,7 +54,7 @@ sockets.connect(io, PORT);
 
 // app.post('/update-permission', newPermission);
 
-// app.get('/all-groups', getGroups);
+//app.get('/all-groups', getGroups);
 
 // app.post('/update-groups', updateGroups);
 
@@ -69,8 +69,18 @@ const main = async function(client) {
         const dbName = 'liveChatSystem'
 
         const db = client.db(dbName)
-        
-        require('./routes/addUser.js')(app, db)
+
+        require('./routes/updateGroups_DB.js')(app, db, ObjectId);
+
+        require('./routes/login_DB.js')(app, db);
+        require('./routes/allUsernames_DB.js')(app, db);
+        require('./routes/addUser_DB.js')(app, db)
+        require('./routes/allGroupsNames_DB.js')(app, db);
+        require('./routes/getAllUsers_DB.js')(app, db);
+        require('./routes/getAllGroups_DB.js')(app, db);
+        require('./routes/updatePermissions_DB.js')(app, db);
+
+        require('./routes/message_DB.js')(app, db);
 
 
     } catch (error) {
@@ -79,45 +89,6 @@ const main = async function(client) {
     }
 };
 
-
-
-app.get("/usernames", (req, res) => {
-    console.log("Inside /usernames route handler");  // Check if the route is triggered
-
-    fs.readFile(path.join(__dirname, 'data', 'usersData.json'), 'utf8', (err, data) => {
-      if (err) {
-          console.error("Error reading file:", err);  // Log any file reading errors
-          return res.status(500).json({ success: false, message: 'Internal Server Error.' });
-      }
-      console.log("Data from file:", data);  // Check the file contents
-
-      const users = JSON.parse(data);
-      //console.log("Parsed users:", users);  // Check the parsed data
-
-      //const usernames = users.map(u => u.username);
-      const usernames = users.filter(u => u.valid).map(u => u.username);
-      res.json(usernames);
-    });
-});
-
-app.get("/groups", (req, res) => {
-    //console.log("Inside /groups route handler");  // Check if the route is triggered
-
-    fs.readFile(path.join(__dirname, 'data', 'groupData.json'), 'utf8', (err, data) => {
-      if (err) {
-          console.error("Error reading file:", err);  // Log any file reading errors
-          return res.status(500).json({ success: false, message: 'Internal Server Error.' });
-      }
-      //console.log("Data from file:", data);  // Check the file contents
-
-      const groups = JSON.parse(data);
-
-        // Filter groups where g.valid is true and then map to get their group names
-        const groupsNames = groups.filter(g => g.valid).map(g => g.groupName);
-
-        res.json(groupsNames);
-    });
-});
 
 
 

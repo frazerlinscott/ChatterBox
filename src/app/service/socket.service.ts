@@ -17,32 +17,38 @@ export class SocketService {
   constructor() { }
 
   initSocket(){
-    this.socket = io(SERVER_URL);
-    return () =>{this.socket.disconnect();}
-  }
+    if (!this.socket) {
+        this.socket = io(SERVER_URL);
+    }
+    return () => { this.socket.disconnect(); }
+}
 
   join(channel: string): void {
     this.socket.emit('join', channel);
   }
 
   send(message: string, channel: string): void {
-
+    //console.log('send method called'); // Add this line
     const storedUser = window.sessionStorage.getItem('current.user');
     if (storedUser) {
-      let userObject = JSON.parse(storedUser);
-      console.log(userObject.username)
-      let username=userObject.username
-      console.log(username);
-      this.socket.emit('message', { message, channel, username });
+        let userObject = JSON.parse(storedUser);
+        let username = userObject.username;
+        const timestamp = new Date();
+        const dataToSend = { message, channel, username, timestamp };
+        this.socket.emit('message', dataToSend);
     }
-  }
+}
+
+isSocketInitialized(): boolean {
+  return this.socket ? true : false;
+}
 
 
-  getMessage(): Observable<string> {
-    return new Observable<string>(observer => {
-      this.socket.on('message', (data: string) => {
-        observer.next(data);
+getMessage(): Observable<any> {
+  return new Observable<any>(observer => {
+      this.socket.on('message', (data: any) => {
+          observer.next(data);
       });
-    });
-  }
-};
+  });
+}
+}
