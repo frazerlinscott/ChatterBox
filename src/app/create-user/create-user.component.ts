@@ -47,7 +47,7 @@ export class CreateUserComponent implements OnInit {
 
     const userToSend = { ...this.user };
 
-    this.http.post(BACKEND_URL + "/create-user", userToSend, httpOptions).subscribe(
+    this.http.post(BACKEND_URL + "/addUser", userToSend, httpOptions).subscribe(
       (response: any) => {
         if (response && response.success) {
           this.router.navigateByUrl('login');
