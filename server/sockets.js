@@ -57,8 +57,8 @@ module.exports = {
                     groupName: data.groupName,
                     channelName: data.channel,
                     message: {
-                        messageString: data.message,
-                        sentBy: data.username,
+                        message: data.message,
+                        username: data.username,
                         timestamp: new Date().toISOString()
                     }
                 };

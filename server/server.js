@@ -55,8 +55,7 @@ const main = async function(client) {
         require('./routes/getAllUsers_DB.js')(app, db);
         require('./routes/getAllGroups_DB.js')(app, db);
         require('./routes/updatePermissions_DB.js')(app, db);
-
-        //require('./routes/message_DB.js')(app, db);
+        require('./routes/message_DB.js')(app, db);
 
 
     } catch (error) {

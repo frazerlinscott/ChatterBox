@@ -27,6 +27,8 @@ export class ChatComponent implements OnInit {
   currentChannel: string | null = null;
   loggedInUser : any;
   messages: Message[] = [];
+
+
  
   group: any;
   currentGroupString:any
@@ -50,8 +52,25 @@ export class ChatComponent implements OnInit {
 
         this.socketService.join(this.channel);
 
-        this.messages = []; // Clear the previous messages when changing the channel.
+        this.fetchPreviousMessages(this.currentGroupString, this.channel);
+
+        //this.messages = []; // Clear the previous messages when changing the channel.
     });
+}
+
+fetchPreviousMessages(groupName: string, channelName: string): void {
+  const url = `${BACKEND_URL}/messages?groupName=${groupName}&channelName=${channelName}`;
+  this.http.get<Message[]>(url).subscribe(
+    (data: Message[]) => {
+
+      this.messages = data;
+
+      console.log(this.messages)
+    },
+    error => {
+      console.error("Failed to fetch previous messages", error);
+    }
+  );
 }
 
 
@@ -68,22 +87,9 @@ initIoConnection() {
       if (data.channel === this.channel) {
           this.messages.push(data as Message);
           console.log(this.messages);
-
-          // const messageData = {
-          //     groupName: this.group, // Assuming you have this.group set to the current group name
-          //     channelName: this.channel,
-          //     message: {
-          //         messageString: data.message, // The actual message content
-          //         sentBy: data.username, // The user who sent the message
-          //         timestamp: new Date().toISOString() // Current timestamp
-          //     }
-          // };
-
-
       }
   });
 }
-
 
 sendMessage() {
   if (this.messagecontent) {

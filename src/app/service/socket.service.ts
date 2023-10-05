@@ -27,17 +27,6 @@ export class SocketService {
     this.socket.emit('join', channel);
   }
 
-//   send(message: string, channel: string): void {
-//     //console.log('send method called'); // Add this line
-//     const storedUser = window.sessionStorage.getItem('current.user');
-//     if (storedUser) {
-//         let userObject = JSON.parse(storedUser);
-//         let username = userObject.username;
-//         const timestamp = new Date();
-//         const dataToSend = { message, channel, username, timestamp };
-//         this.socket.emit('message', dataToSend);
-//     }
-// }
 
 send(message: string, channel: string, groupName: string): void {
   const storedUser = window.sessionStorage.getItem('current.user');
