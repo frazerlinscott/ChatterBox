@@ -28,9 +28,22 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../dist/week4tut')));
 
-// Importing sockets.js
-// const sockets = require('./sockets.js');
-// sockets.connect(io, PORT);
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');  
+    },
+    filename: function(req, file, cb) {
+        const username = req.body.username;
+        console.log(username);
+        const fileExtension = file.originalname.split('.').pop();
+        cb(null, username + '.' + fileExtension);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 
 const main = async function(client) {
@@ -47,7 +60,6 @@ const main = async function(client) {
         sockets.connect(io, db);  // pass db instead of PORT
 
         require('./routes/updateGroups_DB.js')(app, db, ObjectId);
-
         require('./routes/login_DB.js')(app, db);
         require('./routes/allUsernames_DB.js')(app, db);
         require('./routes/addUser_DB.js')(app, db)
@@ -56,6 +68,7 @@ const main = async function(client) {
         require('./routes/getAllGroups_DB.js')(app, db);
         require('./routes/updatePermissions_DB.js')(app, db);
         require('./routes/message_DB.js')(app, db);
+        require('./routes/uploadPic_DB.js')(app, upload, db);
 
 
     } catch (error) {

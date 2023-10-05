@@ -41,8 +41,13 @@
             <label for="birthday" class="form-label">Birthday</label>
             <input type="date" class="form-control" id="birthday" [(ngModel)]="user.birthdate" name="birthday" required>
         </div>
+
+        <input type="file" (change)="onFileSelected($event)">
+
         <input type="hidden" [(ngModel)]="user.role" name="roles" value="[1]">
         <input type="hidden" [(ngModel)]="user.group" name="groups" value="[1]">
         <button type="submit" class="btn btn-primary">Create Account</button>
+
+
     </form>
 </div>

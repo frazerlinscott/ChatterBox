@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'server/routes/userModel';
+import { UploadService } from '../service/upload.service';
+
 
 const BACKEND_URL = "http://localhost:3000";
 const httpOptions = {
@@ -16,14 +18,16 @@ const httpOptions = {
 
 export class CreateUserComponent implements OnInit {
 
-  user: User = new User('', '', 0, '', '', '', 1, [], true);
+  user: User = new User('', '', 0, '', '', '', 1, [], true, '');
 
   allUsernames: string[] = [];
   isUniqueUsername: boolean = true;
   isUniquePassword: boolean = true;
   isUniqueEmail:boolean = true;
+  selectedFile: File | null = null;
 
-  constructor(private router: Router, private http: HttpClient) {}
+
+  constructor(private router: Router, private http: HttpClient, private uploadService: UploadService) {}
 
   ngOnInit(): void {
     this.isUniqueEmail=true; 
@@ -50,6 +54,7 @@ export class CreateUserComponent implements OnInit {
     this.http.post(BACKEND_URL + "/addUser", userToSend, httpOptions).subscribe(
       (response: any) => {
         if (response && response.success) {
+          this.onUpload(userToSend.username)
           this.router.navigateByUrl('login');
         } else {
           alert("Email already exists!");
@@ -59,12 +64,31 @@ export class CreateUserComponent implements OnInit {
         console.error('There was an error during user creation:', error);
       if (error && error.error && error.error.message) {
         console.error('Server response:', error.error.message);
-        this.isUniqueEmail=false
+        //this.isUniqueEmail=false
       }
     }
     );
   }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  onUpload(username : string) {
+    const formData = new FormData();
+
+    if (this.selectedFile) {
+      formData.append('photo', this.selectedFile);
+      formData.append('username', username); 
+
+      this.uploadService.uploadFile(formData).subscribe(response => {
+        console.log('Upload successful', response);
+        // Perhaps do something here after successful upload
+      }, error => {
+        console.error('Upload error', error);
+        // Handle upload errors
+      });
+    }
+  }
+
 }
-
-
-

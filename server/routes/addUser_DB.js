@@ -31,7 +31,7 @@ module.exports = function(app, db) {
 
             // Check if the user already exists
             const existingUser = await usersCollection.findOne({
-                $or: [{ username: newUser.username }, { email: newUser.email }]
+                $and: [{ username: newUser.username }, { valid: true }]
             });
 
             if (existingUser) {

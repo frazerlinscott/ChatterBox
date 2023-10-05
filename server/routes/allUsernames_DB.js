@@ -7,7 +7,7 @@ module.exports = function(app, db) {
             const usersCollection = db.collection('UserData');
 
             // Find all users in the collection and project only the username field
-            const users = await usersCollection.find({}, { projection: { username: 1, _id: 0 } }).toArray();
+            const users = await usersCollection.find({ valid: true }, { projection: { username: 1, _id: 0 } }).toArray();
 
             console.log("Users from database:", users);  // Check the fetched data
 

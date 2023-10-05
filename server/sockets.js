@@ -59,7 +59,8 @@ module.exports = {
                     message: {
                         message: data.message,
                         username: data.username,
-                        timestamp: new Date().toISOString()
+                        timestamp: new Date().toISOString(),
+                        profilePic: "path Place Filler" 
                     }
                 };
 
