@@ -7,9 +7,9 @@
         <div class="row">
 
             <!-- Sidebar Navigation -->
-            <div class="col-3 sidebar vh-100">
+            <div *ngIf="currentUser" class="col-3 sidebar vh-100">
                 <div class="d-flex flex-column align-items-center pt-5">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
+                    <img [src]="profilePicPath"class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
                     <h3 class="display-4"> {{loggedInUser.username}}</h3>
                     <a routerLink="/profile" class="btn btn-info mb-2" style="width: 120px">Edit Profile</a>
                     <button *ngIf="isSuperAdmin" (click)="openUsers()"class="btn btn-success mb-2" style="width: 120px">Users</button>

@@ -33,13 +33,12 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads/');  
+        cb(null, 'uploads/');  
     },
     filename: function(req, file, cb) {
-        const username = req.body.username;
-        console.log(username);
         const fileExtension = file.originalname.split('.').pop();
-        cb(null, username + '.' + fileExtension);
+        const currentDate = new Date().toISOString().replace(/:/g, '-'); // to replace any colons, which can be problematic in filenames
+        cb(null, currentDate + '.' + fileExtension);
     }
 });
 
@@ -59,6 +58,8 @@ const main = async function(client) {
         const sockets = require('./sockets.js');
         sockets.connect(io, db);  // pass db instead of PORT
 
+        app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
         require('./routes/updateGroups_DB.js')(app, db, ObjectId);
         require('./routes/login_DB.js')(app, db);
         require('./routes/allUsernames_DB.js')(app, db);
@@ -68,8 +69,8 @@ const main = async function(client) {
         require('./routes/getAllGroups_DB.js')(app, db);
         require('./routes/updatePermissions_DB.js')(app, db);
         require('./routes/message_DB.js')(app, db);
-        require('./routes/uploadPic_DB.js')(app, upload, db);
 
+        require('./routes/uploadPic_DB.js')(app, upload, db);
 
     } catch (error) {
         console.error("Failed to connect to the database:", error);

@@ -33,8 +33,10 @@ send(message: string, channel: string, groupName: string): void {
   if (storedUser) {
     let userObject = JSON.parse(storedUser);
     let username = userObject.username;
+    let profilePic = userObject.profilePic;
+    console.log(profilePic);
     const timestamp = new Date();
-    const dataToSend = { message, channel, username, timestamp, groupName };
+    const dataToSend = { message, channel, username, timestamp, groupName, profilePic };
     this.socket.emit('message', dataToSend);
   }
 }

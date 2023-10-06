@@ -78,8 +78,17 @@ export class CreateUserComponent implements OnInit {
     const formData = new FormData();
 
     if (this.selectedFile) {
+      console.log(username)
       formData.append('photo', this.selectedFile);
       formData.append('username', username); 
+      console.log("username sent")
+
+    //   this.uploadService.testEndpoint().subscribe(response => {
+    //     console.log('Response from test endpoint:', response);
+    // }, error => {
+    //     console.error('Error hitting test endpoint:', error);
+    // });
+
 
       this.uploadService.uploadFile(formData).subscribe(response => {
         console.log('Upload successful', response);
@@ -88,6 +97,7 @@ export class CreateUserComponent implements OnInit {
         console.error('Upload error', error);
         // Handle upload errors
       });
+
     }
   }
 

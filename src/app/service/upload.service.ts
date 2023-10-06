@@ -12,9 +12,17 @@ export class UploadService {
 
   uploadFile(data: FormData) {
 
-    console.log(data)
-    console.log("service hit")
+    console.log("uploadFile: " + JSON.stringify(data));
+    console.log("hit")
+    console.log(this.BACKEND_URL)
 
-    return this.http.post(this.BACKEND_URL + "/uploadPhoto", data);
+    return this.http.post(this.BACKEND_URL+"/uploadPhoto", data);
+
+
+    // return this.http.post(this.BACKEND_URL + "/uploadPhoto", data);
   }
+
+//   testEndpoint() {
+//     return this.http.post(this.BACKEND_URL + "/testEndpoint", {});
+// }
 }

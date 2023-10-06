@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { UserDataService } from 'src/app/service/user-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Group } from 'server/routes/groupModel';
 import { ChangeDetectorRef } from '@angular/core';
+import { Group } from 'server/routes/groupModel'
+
 
 declare var $: any;
 
@@ -34,6 +35,8 @@ export class AccountComponent implements OnInit {
   isUser: boolean = true;
   isAdmin: boolean = true;
   isSuperAdmin: boolean = true;
+  profilePicPath: any;
+
 
   constructor(private http: HttpClient, private router: Router) { 
     this.username = sessionStorage.getItem('username') ?? '';
@@ -44,6 +47,9 @@ export class AccountComponent implements OnInit {
 ngOnInit(): void {
   this.getUsers()
   this.getGroups()
+
+
+
 
   
 //----------------------------------------------------------------
@@ -115,7 +121,11 @@ filterUser(users: any[]) {
 
   if (matchedUser) {
       this.currentUser = matchedUser;
-      //console.log(this.currentUser)
+
+      this.profilePicPath=BACKEND_URL + "/" + this.currentUser.profilePic
+
+      console.log(this.profilePicPath)
+
       console.log('Match found and assigned to this.currentUser!');
   } else {
       console.log('No match found.');
@@ -143,10 +153,7 @@ filterUser(users: any[]) {
 
   onGroupCardClick(group:any ){
     this.selectedGroup = group;
-    console.log("card clicked")
-    //.log(group)
-    //this.router.navigate(['/channels', group]);
-
+    //console.log("card clicked")
     this.router.navigate(['/channels'], { queryParams: { yourKey: JSON.stringify(group) }})
   }
 }

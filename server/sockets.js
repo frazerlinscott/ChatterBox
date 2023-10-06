@@ -60,7 +60,7 @@ module.exports = {
                         message: data.message,
                         username: data.username,
                         timestamp: new Date().toISOString(),
-                        profilePic: "path Place Filler" 
+                        profilePic: data.profilePic
                     }
                 };
 

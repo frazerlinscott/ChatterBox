@@ -5,10 +5,38 @@
         </div>
         <div class="card-body">
             <ul class="list-group chat-messages">
-                <li class="list-group-item" 
+                <li class="custom-message-item" class="list-group-item" 
                     *ngFor="let msg of messages"
                     [ngClass]="{'right': msg.username === loggedInUser.username, 'left': msg.username !== loggedInUser.username}">
-                    {{ msg.username }} : {{ msg.message }}
+
+                    <!-- Message from loggedInUser -->
+                    <div *ngIf="msg.username === loggedInUser.username" class="d-flex align-items-start justify-content-end">
+                        <div class="rounded p-2 bg-primary text-white" style="max-width: 70%;">
+                            {{ msg.message }}
+                        </div>
+                        <div class="ml-2 text-center" style="margin-left: 15px;"> <!-- Added margin-left here -->
+                            <img [src]="URL + msg.profilePic" 
+                                 alt="Profile Image" 
+                                 class="img-fluid rounded-circle" 
+                                 style="width: 40px; height: 40px;">
+                            <div><small class="d-block">{{ msg.username }}</small></div>
+                        </div>
+                    </div>
+
+                    <!-- Message from other users -->
+                    <div *ngIf="msg.username !== loggedInUser.username" class="d-flex align-items-start">
+                        <div class="mr-2 text-center" style="margin-right: 15px;"> <!-- Added margin-right here -->
+                            <img [src]="URL + msg.profilePic" 
+                                 alt="Profile Image" 
+                                 class="img-fluid rounded-circle" 
+                                 style="width: 40px; height: 40px;">
+                            <div><small class="d-block">{{ msg.username }}</small></div>
+                        </div>
+                        <div class="rounded p-2 bg-secondary text-white" style="max-width: 70%;">
+                            {{ msg.message }}
+                        </div>
+                    </div>
+
                 </li>
             </ul>
         </div>

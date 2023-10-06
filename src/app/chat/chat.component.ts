@@ -28,15 +28,19 @@ export class ChatComponent implements OnInit {
   loggedInUser : any;
   messages: Message[] = [];
 
+  profilePicPath: any;
 
  
   group: any;
   currentGroupString:any
+  URL: any;
 
   constructor (private http: HttpClient, private socketService: SocketService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.socketService.initSocket();
+
+    this.URL = BACKEND_URL+"/"
 
     const storedUser = window.sessionStorage.getItem('current.user');
     if (storedUser) {
