@@ -66,8 +66,13 @@ module.exports = {
 
                 try {
                     await saveMessageToDb(db, messageData);
-                    io.to(data.channel).emit('message', {message: data.message, channel: data.channel, username: data.username});
-                } catch (error) {
+                    io.to(data.channel).emit('message', {
+                        message: data.message,
+                        channel: data.channel,
+                        username: data.username,
+                        profilePic: data.profilePic
+                    });
+                    } catch (error) {
                     console.error('Error saving message to database:', error);
                 }
             });

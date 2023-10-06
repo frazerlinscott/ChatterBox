@@ -89,7 +89,14 @@ initIoConnection() {
       console.log('Received:', data);
 
       if (data.channel === this.channel) {
-          this.messages.push(data as Message);
+          const newMessage = data as Message;
+          
+          // Attach profile picture to the new message if it's from the loggedInUser
+          if (newMessage.username === this.loggedInUser.username && !newMessage.profilePic) {
+              newMessage.profilePic = this.loggedInUser.profilePic;
+          }
+
+          this.messages.push(newMessage);
           console.log(this.messages);
       }
   });
