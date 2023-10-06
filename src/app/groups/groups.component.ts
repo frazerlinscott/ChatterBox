@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 //import { UserDataService } from 'src/app/service/user-data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Group } from 'server/routes/groupModel';
+
 import { ChangeDetectorRef } from '@angular/core';
 
 declare var $: any;
@@ -22,8 +23,10 @@ export class GroupsComponent implements OnInit {
 
   loggedInUser : any;
   users: any;
-  groups: any;
+  groups: any[] = [];
   allGroups: any;
+  superGroups: any[] = [];
+
 
   groupsNeedApproval: any;
   groupsAdminNeedApproval:any;
@@ -58,7 +61,11 @@ export class GroupsComponent implements OnInit {
   usersInGroup: any;
 
   usernames: any;
-  
+  firstQuarterGroups: any;
+  secondQuarterGroups: any;
+  thirdQuarterGroups: any;
+  fourthQuarterGroups: any;
+
   group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
   constructor(private http: HttpClient, private router: Router, private cdr: ChangeDetectorRef) { }
@@ -69,7 +76,7 @@ export class GroupsComponent implements OnInit {
     if (storedUser) {
 
       this.loggedInUser = JSON.parse(storedUser);
-      console.log(this.loggedInUser.username)
+      console.log(this.loggedInUser.role)
     }
 
 
@@ -87,10 +94,13 @@ export class GroupsComponent implements OnInit {
     this.isSuperAdmin = true
   }
 
+  console.log(this.isSuperAdmin)
+
     
     this.getGroups()
     this.getUsers()
-    
+
+
 
     this.http.get<string[]>(BACKEND_URL + "/groups").subscribe(groupsNames => {
       this.allGroupNames = groupsNames;
@@ -327,59 +337,45 @@ export class GroupsComponent implements OnInit {
     );
   }
 
-  getGroups(){
+  getGroups() {
     this.http.get(BACKEND_URL + "/all-groups", httpOptions)
     .subscribe(
         (data: any) => {
             if (data) {
+                // All groups that are valid
+                this.superGroups = data.filter((group: { valid: boolean; }) => group.valid === true);
 
-            console.log(this.groups)
+                const quarterLength = Math.ceil(this.superGroups.length / 4);
+  
+                this.firstQuarterGroups = this.superGroups.slice(0, quarterLength);
+                this.secondQuarterGroups = this.superGroups.slice(quarterLength, quarterLength * 2);
+                this.thirdQuarterGroups = this.superGroups.slice(quarterLength * 2, quarterLength * 3);
+                this.fourthQuarterGroups = this.superGroups.slice(quarterLength * 3);
 
+                // Rest of your code remains unchanged...
+                this.groups = this.superGroups;
 
-              this.groups = data.filter((group: { valid: boolean; }) => group.valid === true);
-              console.log(this.groups)
-              // Groups created by loggedInUser
-              this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any;}) => group.createdBy === this.loggedInUser.username || group.groupAdmins.includes(this.loggedInUser.username));
+                // Groups created by loggedInUser
+                this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any; }) => 
+                    group.createdBy === this.loggedInUser.username || group.groupAdmins.includes(this.loggedInUser.username));
 
-              // Groups that loggedInUser is a member of but not created by them
-              this.joinedGroups = this.groups.filter((group: { members: string | any[]; createdBy: any; groupAdmins: any; }) => 
-                  group.members.includes(this.loggedInUser.username) && group.createdBy !== this.loggedInUser.username && !group.groupAdmins.includes(this.loggedInUser.username));
+                // Groups that loggedInUser is a member of but not created by them
+                this.joinedGroups = this.groups.filter((group: { members: string | any[]; createdBy: any; groupAdmins: any; }) => 
+                    group.members.includes(this.loggedInUser.username) && group.createdBy !== this.loggedInUser.username && !group.groupAdmins.includes(this.loggedInUser.username));
 
-              // Groups that loggedInUser has neither created nor joined
-              this.otherGroups = this.groups.filter((group: { createdBy: any; members: string | any[]; }) => 
-                  group.createdBy !== this.loggedInUser.username && !group.members.includes(this.loggedInUser.username));
-
-
-              // console.log(this.loggedInUser)
-              // console.log(this.myGroups)
-              // console.log(this.otherGroups)
-
-
-              //if groupAdmin role filter requests to administered groups -- if superAdmin show all requests
-              if(this.loggedInUser.role == 2){
-                this.groupsNeedApproval = this.groups.filter(
-                  (group: { userRequests: any[]; groupAdmins: string[]; }) => group.userRequests && group.userRequests.length > 0 && group.groupAdmins.includes(this.loggedInUser.username));
-                this.numberOfRequests = this.groupsNeedApproval.length;
-              } else if(this.loggedInUser.role == 3){
-                this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-                this.numberOfRequests=this.groupsNeedApproval.length
-                this.groupsAdminNeedApproval = this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0);
-                this.numberOfAdminRequests=this.groupsAdminNeedApproval.length 
-              }
-
-              //console.log(this.numberOfRequests)
-
-              //this.allGroups = data
-              //console.log(this.groups)
-
-              //console.log(typeof(this.groups))
+                // Groups that loggedInUser has neither created nor joined
+                this.otherGroups = this.groups.filter((group: { createdBy: any; members: string | any[]; }) => 
+                    group.createdBy !== this.loggedInUser.username && !group.members.includes(this.loggedInUser.username));
             } else {
                 alert("no Data Soz");
             }
         },
-        error => {console.error('There was an error:', error);}
+        error => {
+            console.error('There was an error:', error);
+        }
     );
-  }
+}
+
 
   GetNewGroupID(){
     if (this.groups && this.groups.length > 0) {
@@ -398,14 +394,20 @@ export class GroupsComponent implements OnInit {
     if(this.groups.length > 0){
       //this.noRequests=false
       this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
+      
     }
   }
 
   requestAdminButton(group:any){
         
-        //console.log(this.loggedInUser.username)
+        console.log(this.loggedInUser.username)
 
         group.adminRequests.push(this.loggedInUser.username);
+
+        // console.log(group.adminRequests)
+        // this.numberOfAdminRequests = group.adminRequests.length
+        // console.log(this.numberOfAdminRequests)
+
 
 
         this.http.post(BACKEND_URL+"/update-groups", group).subscribe(

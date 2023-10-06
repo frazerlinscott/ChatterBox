@@ -4,7 +4,7 @@
             Chat Room
         </div>
         <div class="card-body">
-            <ul class="list-group chat-messages">
+            <ul #chatMessages class="list-group chat-messages">
                 <li class="custom-message-item" class="list-group-item" 
                     *ngFor="let msg of messages"
                     [ngClass]="{'right': msg.username === loggedInUser.username, 'left': msg.username !== loggedInUser.username}">

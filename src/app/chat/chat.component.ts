@@ -4,6 +4,7 @@ import {SocketService} from 'src/app/service/socket.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { Message } from 'server/models/messageModel';
+import {ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 
 const BACKEND_URL = "http://localhost:3000";
 
@@ -18,7 +19,9 @@ const httpOptions = {
 })
 
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+
+  @ViewChild('chatMessages', { static: false }) chatMessages?: ElementRef;
 
   messagecontent: string="";
   //messages: string[] = [];
@@ -62,6 +65,10 @@ export class ChatComponent implements OnInit {
     });
 }
 
+ngAfterViewChecked(): void {
+  this.scrollToBottom();
+}
+
 fetchPreviousMessages(groupName: string, channelName: string): void {
   const url = `${BACKEND_URL}/messages?groupName=${groupName}&channelName=${channelName}`;
   this.http.get<Message[]>(url).subscribe(
@@ -75,6 +82,13 @@ fetchPreviousMessages(groupName: string, channelName: string): void {
       console.error("Failed to fetch previous messages", error);
     }
   );
+}
+
+private scrollToBottom(): void {
+  if (this.chatMessages) {
+      const chat = this.chatMessages.nativeElement;
+      chat.scrollTop = chat.scrollHeight;
+  }
 }
 
 
