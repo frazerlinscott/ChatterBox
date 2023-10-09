@@ -1,19 +1,18 @@
 <html>
-<body>
+<body style="background-color: #16293C;">
 
 
 <div class="container my-5 text-center">
-
-<div>
-        
-        <h3  class="mx-5 my-4">{{loggedInUser.username}} Groups</h3>
+<div style="padding-bottom: 20px;">
+        <img [src]="profilePicPath"class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
+        <h2>{{loggedInUser.username}}</h2>
 </div>
 
     
     <div class="mb-4">
         
         <button 
-        style="width: 200px; margin-right: 20px;" 
+        style="width: 250px; margin-right: 20px" 
             *ngIf="!isUser && isAdmin || isSuperAdmin" 
             class="btn btn-success custom-btn" 
             (click)="onAddGroup()">
@@ -21,13 +20,13 @@
         </button>
         
      
-        <button *ngIf="!isUser && isAdmin || isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px;" (click)="showRequests()">
+        <button *ngIf="!isUser && isAdmin || isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 250px;" (click)="showRequests()">
             User Requests
             <span *ngIf="numberOfRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfRequests }}</span>
         </button>
 
      
-        <button *ngIf="isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 200px; margin-left: 20px;" (click)="showAdminRequests()">
+        <button *ngIf="isSuperAdmin" class="btn btn-success custom-btn position-relative" style="width: 250px; margin-left: 20px;" (click)="showAdminRequests()">
             Admin Requests
             <span *ngIf="numberOfAdminRequests > 0" class="badge badge-danger position-absolute notification-badge">{{ numberOfAdminRequests }}</span>
         </button>
@@ -35,14 +34,14 @@
 </div>
 
 <!-- SUPERADMIN GROUPS ---------------------------------------------------------------- -->
-<div *ngIf="isSuperAdmin" class="container mt-4 section-card" style="max-height: 600px; overflow-y: scroll;">
-    <h3>All Groups</h3>
+<div *ngIf="isSuperAdmin" class="container mt-4 section-card colored-border-card-light" style="max-height: 600px; background-color: #16293C;">
+    <h3 class="row justify-content-center section-header" style="color: white">All Groups</h3>
     <div class="row justify-content-center">
         
         <!-- Column 1 -->
         <div class="col-md-3">
-            <div *ngFor="let group of firstQuarterGroups" class="mx-2 my-2">
-                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+            <div *ngFor="let group of firstQuarterGroups" class="mx-2 my-2" style="background-color: #16293C;" >
+                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card-light " style="background-color: #16293C;" >
                     <div class="row no-gutters align-items-center">
             
                         <!-- Group Name -->
@@ -51,11 +50,12 @@
                         </div>
             
                         <!-- Action Icons -->
-                        <div class="col-auto">
+                        <div class="col-auto button-container">
                             <button class="btn btn-sm btn-primary mr-2"
-                                (click)="editGroupUsers(group); $event.stopPropagation()">➕</button>
+                                (click)="editGroupUsers(group); $event.stopPropagation()"><i class="fa-solid fa-plus"></i></button>
                             <button class="btn btn-sm btn-danger"
-                                (click)="deleteGroup(group); $event.stopPropagation()">🗑</button>
+                            
+                                (click)="deleteGroup(group); $event.stopPropagation()"><i class="fa-solid fa-trash fa-lg"></i></button>
                         </div>
                     </div>
                 </div>
@@ -63,9 +63,9 @@
         </div>
 
         <!-- Column 2 -->
-        <div class="col-md-3">
+        <div class="col-md-3" >
             <div *ngFor="let group of secondQuarterGroups" class="mx-2 my-2">
-                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card-light"style="background-color: #16293C;">
                     <div class="row no-gutters align-items-center">
             
                         <!-- Group Name -->
@@ -74,11 +74,11 @@
                         </div>
             
                         <!-- Action Icons -->
-                        <div class="col-auto">
+                        <div class="col-auto button-container">
                             <button class="btn btn-sm btn-primary mr-2"
-                                (click)="editGroupUsers(group); $event.stopPropagation()">➕</button>
+                                (click)="editGroupUsers(group); $event.stopPropagation()"><i class="fa-solid fa-plus"></i></button>
                             <button class="btn btn-sm btn-danger"
-                                (click)="deleteGroup(group); $event.stopPropagation()">🗑</button>
+                                (click)="deleteGroup(group); $event.stopPropagation()"><i class="fa-solid fa-trash fa-lg"></i></button>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
         <!-- Column 3 -->
         <div class="col-md-3">
             <div *ngFor="let group of thirdQuarterGroups" class="mx-2 my-2">
-                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card-light"style="background-color: #16293C;">
                     <div class="row no-gutters align-items-center">
             
                         <!-- Group Name -->
@@ -96,11 +96,11 @@
                         </div>
             
                         <!-- Action Icons -->
-                        <div class="col-auto">
+                        <div class="col-auto button-container">
                             <button class="btn btn-sm btn-primary mr-2"
-                                (click)="editGroupUsers(group); $event.stopPropagation()">➕</button>
+                                (click)="editGroupUsers(group); $event.stopPropagation()"><i class="fa-solid fa-plus"></i></button>
                             <button class="btn btn-sm btn-danger"
-                                (click)="deleteGroup(group); $event.stopPropagation()">🗑</button>
+                                (click)="deleteGroup(group); $event.stopPropagation()"><i class="fa-solid fa-trash fa-lg"></i></button>
                         </div>
                     </div>
                 </div>
@@ -110,20 +110,20 @@
         <!-- Column 4 -->
         <div class="col-md-3">
             <div *ngFor="let group of fourthQuarterGroups" class="mx-2 my-2">
-                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                <div (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card-light"style="background-color: #16293C;">
                     <div class="row no-gutters align-items-center">
             
                         <!-- Group Name -->
-                        <div class="col">
+                        <div class="col ">
                             <h5 class="card-title">{{ group.groupName }}</h5>
                         </div>
             
                         <!-- Action Icons -->
-                        <div class="col-auto">
+                        <div class="col-auto button-container">
                             <button class="btn btn-sm btn-primary mr-2"
-                                (click)="editGroupUsers(group); $event.stopPropagation()">➕</button>
+                                (click)="editGroupUsers(group); $event.stopPropagation()"><i class="fa-solid fa-plus"></i></button>
                             <button class="btn btn-sm btn-danger"
-                                (click)="deleteGroup(group); $event.stopPropagation()">🗑</button>
+                                (click)="deleteGroup(group); $event.stopPropagation()"><i class="fa-solid fa-trash fa-lg"></i></button>
                         </div>
                     </div>
                 </div>
@@ -265,27 +265,26 @@
         <div *ngIf="isUser || isAdmin">
 
 
-            <div *ngIf="!isUser" class="container mt-4 section-card">
+            <div *ngIf="!isUser" class="container mt-4 section-card colored-border-card" style="background-color: #16293C;">
                 <h3 class="section-header">Administered Groups</h3>
                 <div class="row justify-content-center mt-4">
                     <div class="col-md-4 mx-2 my-2" *ngFor="let group of myGroups">
-                        <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                        <div style="background-color: #16293C" (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card">
                             <div class="row no-gutters align-items-center">
-            
+                    
                                 <!-- Group Name -->
                                 <div class="col">
                                     <h5 class="card-title">{{ group.groupName }}</h5>
                                 </div>
-            
+                    
                                 <!-- Buttons -->
-                                <div class="col-auto">
+                                <div class="col-auto button-container">
+                                    <button *ngIf="group.createdBy==loggedInUser.username || isSuperAdmin"
+                                    class="btn btn-sm btn-danger" 
+                                    (click)="deleteGroup(group); $event.stopPropagation()"><i class="fa-solid fa-trash"></i></button>
                                     <button *ngIf="!isUser && isAdmin || isSuperAdmin"
                                             class="btn btn-sm btn-primary mr-2" 
-                                            (click)="editGroupUsers(group); $event.stopPropagation()">Add Users</button>
-            
-                                    <button *ngIf="group.createdBy==loggedInUser.username || isSuperAdmin"
-                                            class="btn btn-sm btn-danger" 
-                                            (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
+                                            (click)="editGroupUsers(group); $event.stopPropagation()"><i class="fa-solid fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -294,11 +293,11 @@
             </div>
     
             <!-- My Groups -->
-            <div class="container mt-4 section-card">
+            <div style="background-color: #16293C;" class="container mt-4 section-card colored-border-card">
                 <h3 class="section-header">Joined Groups</h3>
                 <div class="row justify-content-center mt-4">
                     <div class="col-md-4 mx-2 my-2" *ngFor="let group of joinedGroups">
-                        <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                        <div style="background-color: #16293C" (click)="onGroupCardClick(group)" class="card square-card mt-auto colored-border-card-light">
                             <div class="row no-gutters align-items-center">
             
                                 <!-- Group Name -->
@@ -307,18 +306,18 @@
                                 </div>
             
                                 <!-- Buttons -->
-                                <div class="col-auto">
+                                <div class="col-auto button-container">
                                     <button *ngIf="!isUser"
                                             [disabled]="buttonDisabledStates[group.groupID]" 
                                             class="btn btn-success btn-sm" 
                                             (click)="requestAdminButton(group); $event.stopPropagation()">
-                                            ►
+                                            <i class="fa-solid fa-crown"></i>
                                     </button>
             
                                     <button *ngIf="isUser || isAdmin"
                                             class="btn btn-danger btn-sm" 
                                             (click)="leaveGroup(group); $event.stopPropagation()">
-                                            ⎋
+                                            <i class="fa-solid fa-right-from-bracket"></i>
                                     </button>
                                 </div>
                             </div>
@@ -351,15 +350,15 @@
                     </div>
                 </div> -->
 
-                <div *ngIf="otherGroups?.length > 0" class="container mt-4 center-content">
+                <div *ngIf="otherGroups?.length > 0" class="container mt-4 center-content" style="padding-bottom: 100px; padding-top: 50px; ">
                     <h3 class="section-header">Groups</h3>
                     <h4 class="section-text">Select a group to request entry.</h4>
                     <div ngbDropdown>
-                        <button class="btn btn-secondary" id="groupDropdown" ngbDropdownToggle>
+                        <button style="background-color: #615AF7;"  class="custom-dropdown btn btn-secondary" id="groupDropdown" ngbDropdownToggle>
                             Request Entry
                         </button>
-                        <div ngbDropdownMenu aria-labelledby="groupDropdown">
-                            <button class="dropdown-item" 
+                        <div style="background-color: #615AF7;" ngbDropdownMenu aria-labelledby="groupDropdown">
+                            <button class="dropdown-item custom-dropdown-item"
                                     *ngFor="let group of otherGroups" 
                                     (click)="requestButton(group)" 
                                     [disabled]="isGroupClicked(group.groupName)">
@@ -367,11 +366,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                
-                
-
-                
+                </div>      
     
             <!-- Administered Groups (for isAdmin only) -->
 

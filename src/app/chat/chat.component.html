@@ -1,11 +1,11 @@
 <div class="container mt-5">
-    <div class="card">
+    <div class="card colored-border-card-light">
         <div class="card-header">
-            Chat Room
+            channelName
         </div>
         <div class="card-body">
             <ul #chatMessages class="list-group chat-messages">
-                <li class="custom-message-item" class="list-group-item" 
+                <li style="background-color: #16293C;" class="list-group-item" 
                     *ngFor="let msg of messages"
                     [ngClass]="{'right': msg.username === loggedInUser.username, 'left': msg.username !== loggedInUser.username}">
 
@@ -40,12 +40,12 @@
                 </li>
             </ul>
         </div>
-        <div class="card-footer">
+        <div style="padding-bottom: 20px" class="card-footer">
             <form class="form-inline">
-                <div class="form-group flex-grow-1 mr-2">
-                    <input type="text" class="form-control w-100" [(ngModel)]="messagecontent" name="messagecontent" placeholder="Type a message">
+                <div class="form-group flex-grow-1 mr-2" style="padding-bottom: 15px">
+                    <input type="text" class="form-control w-100 textplaceHolder" [(ngModel)]="messagecontent" name="messagecontent" placeholder="Type a message">
                 </div>
-                <button class="btn btn-primary" (click)="sendMessage()" type="button">Send</button>
+                <button  class="btn btn-primary" (click)="sendMessage()" type="button">Send</button>
             </form>
         </div>
     </div>

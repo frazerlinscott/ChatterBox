@@ -3,25 +3,43 @@
 
 <body>
 
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4" style="background-color: #615AF7">
         <div class="row">
 
-            <!-- Sidebar Navigation -->
-            <div *ngIf="currentUser" class="col-3 sidebar vh-100">
-                <div class="d-flex flex-column align-items-center pt-5">
-                    <img [src]="profilePicPath"class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
-                    <h3 class="display-4"> {{loggedInUser.username}}</h3>
-                    <a routerLink="/profile" class="btn btn-info mb-2" style="width: 120px">Edit Profile</a>
-                    <button *ngIf="isSuperAdmin" (click)="openUsers()"class="btn btn-success mb-2" style="width: 120px">Users</button>
+            <div style="background-color: #16293C;" *ngIf="currentUser" class="col-3 sidebar vh-100 d-flex flex-column justify-content-between">
+                <!-- Top Content -->
+                <div class="d-flex flex-column align-items-center pt-5" style="padding-bottom: 20px;">
+                    <img [src]="profilePicPath" class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
+                    <h3 class="userText"> {{loggedInUser.username}}</h3>
+                    <button *ngIf="isSuperAdmin" (click)="openUsers()" class="btn btn-success mb-2" style="width: 120px">Users</button>
                     <button (click)="openGroups()" class="btn btn-success mb-2" style="width: 120px">Groups</button>
-                    <button (click)="logout()" class="btn btn-danger"style="width: 120px">Logout</button>
+                </div>
+            
+                <!-- Bottom Content -->
+                <div class="d-flex flex-column align-items-center pb-5">
+                    <button (click)="logout()" class="btn btn-danger" style="width: 200px">Logout</button>
+                    <a routerLink="/profile" class="btn btn-info mb-2" style="width: 200px;">Edit Profile</a>
                 </div>
             </div>
 
+            
+
             <!-- Group Cards for User/Admin -->
             <div *ngIf="isUser || isAdmin " class="col-9">
+                
                 <div class="row justify-content-center">
-                    <h2 class="display-4 mb-4 w-100 text-center">Your Groups</h2>
+                    <h2 class="display-4 mb-4 w-100 text-center" style="color:#16293C">Your Groups</h2>
+            
+                    <div>
+                        <div class="searchBar">
+                            <input type="text" 
+                                   class="form-control " 
+                                   placeholder="Search for a group..."
+                                   [formControl]="searchForm.get('searchTerm')">
+                        </div>
+                    </div>
+
+                    
                     <div class="col-md-3 mx-2 my-2" *ngFor="let group of currentUserGroups">
                         <div  class="fill" class="card text-white mb-3" style="max-width: 18rem;" (click)="onGroupCardClick(group)">
                             <div class="card-body d-flex flex-column justify-content-center">
@@ -35,18 +53,36 @@
             <!-- Group Cards for SuperAdmin -->
             <div *ngIf="isSuperAdmin" class="col-9">
                 <div class="row justify-content-center">
-                    <h2 class="display-4  mb-4 w-100 text-center text-black">All Groups</h2>
+                    <h2 class="display-4  mb-4 w-100 text-center" style="color:#16293C">All Groups</h2>
+
+                    <div>
+                        <div class="searchBar">
+                            <input type="text" 
+                                   class="form-control " 
+                                   placeholder="Search for a group..."
+                                   [formControl]="searchForm.get('searchTerm')">
+                        </div>
+                    </div>
+
+         
+            
+
                     <div class="col-md-3 mx-2 my-2" *ngFor="let group of allGroups">
                         <div class="fill" class="card text-white mb-3" style="max-width: 18rem;"(click)="onGroupCardClick(group)">
                             <div class="card-body d-flex flex-column justify-content-center">
                                 <h5 class="card-title text-center">{{ group.groupName }}</h5>
                             </div>
+
+                            
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

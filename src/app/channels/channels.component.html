@@ -1,60 +1,65 @@
-<body>
+<body style="background-color: #16293C;" >
 
-    <div class="container mt-4 text-center">
+    <!-- <div class="container mt-4 text-center" style="background-color: #16293C;">
         <div class="mb-4">
             
             <h5>User: {{loggedInUser.username}}</h5>
             
-    </div>
+    </div> -->
 
 
 <div class="container mt-4 text-center">
-    <div class="mb-4">
-        
+    <div class="mb-4 groupHeading">
+
+        <img [src]="profilePicPath"class="img-fluid rounded-circle mb-4" alt="Profile Image" style="width: 120px; height: 120px;">
+
+        <h5> {{loggedInUser.username}}</h5>
+        <h1>GROUP</h1>
         <h1>{{currentGroupString}}</h1>
-        
 </div>
 
     <button *ngIf= "isAdmin" class="btn btn-success custom-btn position-relative" (click)="addChannel('button')">Add Channels</button>
    
 
- <div class="container mt-4 mx-4 my-4 card">
 
-<h2 class="my-4">My Channels</h2>
-<!-- <button class="btn btn-secondary" (click)="addChannel()">Delete Channels</button> -->
-<div class="row  mx-2 my-4">
-    <div *ngFor="let channel of myChannels">
-        <div class="card" (click)="onChannelCardClick(channel)">
-            <div class="card-body align-items-center">
-                <span>{{channel}}</span>
-                <div>
-                    <!-- <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button> -->
-                    <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" style="margin-left: 10px;"(click)="membersChannel(channel)">Members</button>
-                    <button class="btn btn-danger" (click)="removeUserFromChannel(channel)">Leave Channel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<div class="container mt-4 mx-4 my-4 card colored-border-card-light">
+    <h2 class="section-header" style="padding-top: 15px;">My Channels</h2>
 
-
-<div class="container mt-5 mx-4 my-4 card ">
-    <h2 class="my-4">Join Channels</h2>
-    <div class="row mx-4 my-4">
-        <div *ngFor="let channel of toJoinChannels" class="col-12 mb-3">
-            <div class="card">
+    <div class="row mx-2 my-4">
+        <div *ngFor="let channel of myChannels">
+            <div class="card colored-border-card-light" (click)="onChannelCardClick(channel)">
                 <div class="card-body align-items-center">
-                    <span>{{channel}}</span>
-                    <div>
-                        <button class="btn btn-primary mr-2" (click)="addUserToChannel(channel)">Join Channel</button>
-                        <button  *ngIf= "isAdmin" class="btn btn-primary mr-2" style="margin-left: 10px;"(click)="membersChannel(channel)">Members</button>
-                        <button  *ngIf= "isAdmin" class="btn btn-danger mr-2" style="margin-left: 10px;"(click)="deleteChannel(channel)">Delete</button>
+                    <span class="card-title">{{channel}}</span>
+                    <div class="col-auto button-container">
+                        <button *ngIf="isAdmin" class="btn btn-primary btn-sm" style="margin-left: 10px;" (click)="membersChannel(channel); $event.stopPropagation()"><i class="fa-solid fa-user"></i></button>
+                        <button class="btn btn-danger btn-sm" (click)="removeUserFromChannel(channel); $event.stopPropagation()"><i class="fa-solid fa-right-from-bracket"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div> 
+
+<div style="margin-bottom: 50px;"></div>
+
+<div class="container mt-5 mx-4 my-4 card colored-border-card-light">
+    <h2 class="section-header" style="padding-top: 15px;">Join Channels</h2>
+
+    <div class="row mx-4 my-4">
+        <div *ngFor="let channel of toJoinChannels" class="col-12 mb-3">
+            <div class="card colored-border-card-light">
+                <div class="card-body align-items-center">
+                    <span class="card-title">{{channel}}</span>
+                    <div class="col-auto button-container">
+                        <button class="btn btn-sm btn-primary" (click)="addUserToChannel(channel)"><i class="fa-solid fa-right-to-bracket"></i></button>
+                        <button *ngIf="isAdmin" class="btn btn-primary btn-sm" style="margin-left: 10px;" (click)="membersChannel(channel)"><i class="fa-solid fa-user"></i></button>
+                        <button *ngIf="isAdmin" class="btn btn-danger btn-sm" style="margin-left: 10px;" (click)="deleteChannel(channel)"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
 
 
 

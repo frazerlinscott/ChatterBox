@@ -43,6 +43,7 @@ export class ChannelsComponent implements OnInit {
   users: any;
   currentChannel:any;
   currentGroupString:any;
+  profilePicPath: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { 
 }
@@ -53,6 +54,8 @@ ngOnInit(): void {
   if (storedUser) {
 
     this.loggedInUser = JSON.parse(storedUser);
+
+    this.profilePicPath=BACKEND_URL + "/" + this.loggedInUser.profilePic
   }
 
   if (this.loggedInUser.role === 3){
@@ -61,6 +64,7 @@ ngOnInit(): void {
   }
 
   console.log(this.loggedInUser.role)
+
 
   this.route.queryParams.subscribe(params => {
     let currentGroupString = params['yourKey'];

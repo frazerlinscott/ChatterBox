@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { Group } from 'server/routes/groupModel'
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 declare var $: any;
@@ -22,6 +23,8 @@ const BACKEND_URL = "http://localhost:3000";
 
 export class AccountComponent implements OnInit {
 
+  searchForm: FormGroup | any;
+  
   username: string;
   birthdate: string;
   age: number;
@@ -36,6 +39,7 @@ export class AccountComponent implements OnInit {
   isAdmin: boolean = true;
   isSuperAdmin: boolean = true;
   profilePicPath: any;
+  
 
 
   constructor(private http: HttpClient, private router: Router) { 
@@ -47,6 +51,14 @@ export class AccountComponent implements OnInit {
 ngOnInit(): void {
   this.getUsers()
   this.getGroups()
+
+  this.searchForm = new FormGroup({
+    searchTerm: new FormControl(''),
+  });
+
+  this.searchForm.get('searchTerm').valueChanges.subscribe((term: any) => {
+    this.searchfilterGroups(term);
+  });
 
 
 
@@ -77,6 +89,16 @@ ngOnInit(): void {
   }
 }
 //----------------------------------------------------------------
+
+searchfilterGroups(term: string) {
+  // Logic to filter groups based on the search term
+  // For example:
+  if (this.isUser || this.isAdmin) {
+    this.currentUserGroups = this.currentUserGroups.filter((group: { groupName: string | string[]; }) => group.groupName.includes(term));
+  } else if (this.isSuperAdmin) {
+    this.allGroups = this.allGroups.filter((group: { groupName: string | string[]; }) => group.groupName.includes(term));
+  }
+}
 
 getGroups(){
   this.http.get(BACKEND_URL + "/all-groups", httpOptions)

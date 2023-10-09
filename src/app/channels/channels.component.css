@@ -1,5 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #16293C;
 }
 
 .container {
@@ -8,7 +9,12 @@ body {
 
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #16293C;
 }
+h1{
+    font-family: 'CustomFont', sans-serif;
+    color:white !important;
+  }
 
 .card-body {
     display: flex;
@@ -25,6 +31,12 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.groupHeading{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 18px; /* Adjusted to px */
+    color:  #00E0FF;
+  }
+
 
 .custom-modal-margin {
     margin-top: 20x;
@@ -37,3 +49,177 @@ button:hover {
     background-color: #f5f5f5; 
     padding-top: 5px;
   }
+
+  /* Unique and Not Unique Classes */
+.is-unique {
+    border: 2px solid green;
+  }
+  
+  .not-unique {
+    border: 2px solid red;
+  }
+  
+  .colored-border-card {
+    border: 2px solid #615AF7;/* replace with your desired color */
+    border-radius: 10px; /* adjust as desired for corner roundness */
+  }
+  
+  .colored-border-card-light {
+    border: 2px solid #615AF7;/* replace with your desired color */
+    border-radius: 10px; /* adjust as desired for corner roundness */
+  }
+  
+  
+  /* Custom Button */
+  
+  .custom-btn {
+    
+    margin-bottom: 15px; /* Adjusted to px */
+    padding: 10px 30px; /* Adjusted to px */
+    font-size: 18px; /* Adjusted to px */
+    box-shadow:  0px 0px 10px #00E0FF;
+    transition: transform 0.3s, box-shadow 0.3s; /* Added box-shadow to the transition */
+    background-color: #615AF7;
+    border: none; /* Remove default borders */
+    cursor: pointer; /* Show pointer on hover for better UX */
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  .custom-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 12px #00E0FF;
+    background-color: #615AF7;
+    border-radius: 8px; /* Added to make the glow look smoother */
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  
+  .custom-dropdown-item {
+    color: white;
+    font-family: 'TextFont';
+  }
+  
+  .custom-dropdown{
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  .custom-dropdown-item:hover {
+    background-color: #16293C;
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  /* Notification Badge */
+  .notification-badge {
+    top: -0.5px;
+    right: -0.5px;
+    border: 2px solid #fff;
+    font-size: 0.75rem;
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  
+  /* Card Sections */
+  .section-card {
+    box-shadow: 0 0.25rem 0.5rem #00E0FF;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    font-family: 'TextFont', bold;
+  }
+  
+  .card {
+    box-shadow: 0 0.125rem 0.25rem #00E0FF;
+    transition: box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body h5 {
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    font-family: 'TextFont', bold;
+  }
+  
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+    background-color: #00E0FF;
+    color:#16293C;
+    font-family: 'CustomFont', sans-serif;
+  }
+  
+  /* Section Header */
+  .section-header {
+    font-family: 'CustomFont', sans-serif;
+    background-color: #16293C;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+  }
+  .section-text {
+    background-color: #16293C;
+    font-size: 1em;
+    text-align: center;
+    color: white;
+    font-family: 'TextFont';
+  }
+  
+  .center-content {
+    display: flex;
+    flex-direction: column;  /* Stack children vertically */
+    align-items: center;     /* Horizontally center the content */
+    justify-content: center; /* Vertically center the content */
+    height: 100%;            /* Ensure the container takes up full height if needed */
+    text-align: center;      /* Center the text within its container */
+  }
+  
+  /* Square Card */
+  .square-card {
+    position: relative;
+    background-color: #f5f5f5;
+    height: 50px;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    height: 50px;
+    cursor: pointer;
+    padding: 0 15px;  /* padding on the left and right */
+  }
+  
+  .button-container {
+    position: absolute;
+    right: 5px;  /* Adjust this value to your desired distance from the right edge */
+    top: 55%;     /* Centering vertically */
+    transform: translateY(-50%);  /* This helps in perfect vertical centering */
+  }
+  
+  /* Body */
+  body {
+    background-color: #f5f5f5;
+    padding-top: 5px;
+  }
+  
+  .container.mt-4.section-card {
+    background-color: white;
+  }
+  
+  .card-title {
+    font-size: 0.9375rem;
+    margin: 0;
+    padding-top: 5px;
+    font-size: 0.9375rem;
+    text-align: left; 
+    width: 100%; 
+    color: white;
+    font-family: 'TextFont';
+  }
+  
+  .btn-sm {
+    height: 80%;
+    align-items: center;
+    border-radius: 15px; 
+    margin-left: 5px; /* Add some margin between the buttons */
+    margin-right: 8px; /* Add some margin between the buttons */
+    margin-bottom: 5px; /* Add some margin between the buttons */
+  }
+  

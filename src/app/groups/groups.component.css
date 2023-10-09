@@ -7,19 +7,56 @@
   border: 2px solid red;
 }
 
+.colored-border-card {
+  border: 2px solid #615AF7;/* replace with your desired color */
+  border-radius: 10px; /* adjust as desired for corner roundness */
+}
+
+.colored-border-card-light {
+  border: 2px solid #615AF7;/* replace with your desired color */
+  border-radius: 10px; /* adjust as desired for corner roundness */
+}
+
 /* Custom Button */
+h2{
+  font-family: 'CustomFont', sans-serif;
+  color:white !important;
+}
+
 .custom-btn {
-  margin-bottom: 1rem;
-  padding: 0.625rem 1.875rem;
-  font-size: 1.125rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  border-radius: 0.3125rem;
-  transition: transform 0.3s;
+  
+  margin-bottom: 15px; 
+  padding: 10px 30px; 
+  font-size: 18px;
+  box-shadow:  0px 0px 10px #00E0FF;
+  transition: transform 0.3s, box-shadow 0.3s; 
+  background-color: #615AF7;
+  border: none; 
+  cursor: pointer; 
+  font-family: 'CustomFont', sans-serif;
 }
 
 .custom-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 6px 12px #00E0FF;
+  background-color: #615AF7;
+  border-radius: 8px; 
+  font-family: 'CustomFont', sans-serif;
+}
+
+
+.custom-dropdown-item {
+  color: white;
+  font-family: 'TextFont';
+}
+
+.custom-dropdown{
+  font-family: 'CustomFont', sans-serif;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #16293C;
+  font-family: 'CustomFont', sans-serif;
 }
 
 /* Notification Badge */
@@ -28,25 +65,30 @@
   right: -0.5px;
   border: 2px solid #fff;
   font-size: 0.75rem;
+  font-family: 'CustomFont', sans-serif;
 }
 
 /* Global H5 Styles */
 h5 {
+  font-size:5px;
   text-align: center;
-  padding-bottom: 1.875rem;
   width: 50%;
-  margin: 0 auto;
+  color:#00E0FF;
+  font-family: 'TextFont';
+  
 }
+
 
 /* Card Sections */
 .section-card {
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.5rem #00E0FF;
   padding: 1.25rem;
   margin-bottom: 1.25rem;
+  font-family: 'TextFont', bold;
 }
 
 .card {
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.125rem 0.25rem #00E0FF;
   transition: box-shadow 0.3s;
 }
 
@@ -57,24 +99,31 @@ h5 {
 .card-body h5 {
   font-weight: 600;
   margin-bottom: 1.25rem;
+  font-family: 'TextFont', bold;
 }
 
 .btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
-  background-color: rgb(57, 57, 57);
+  background-color: #00E0FF;
+  color:#16293C;
+  font-family: 'CustomFont', sans-serif;
 }
 
 /* Section Header */
 .section-header {
-  background-color: #f8f9fa;
+  font-family: 'CustomFont', sans-serif;
+  background-color: #16293C;
   font-size: 1.5em;
   text-align: center;
+  color: white;
 }
 .section-text {
-  background-color: #f8f9fa;
+  background-color: #16293C;
   font-size: 1em;
   text-align: center;
+  color: white;
+  font-family: 'TextFont';
 }
 
 .center-content {
@@ -88,6 +137,7 @@ h5 {
 
 /* Square Card */
 .square-card {
+  position: relative;
   background-color: #f5f5f5;
   height: 50px;
   cursor: pointer;
@@ -95,6 +145,13 @@ h5 {
   height: 50px;
   cursor: pointer;
   padding: 0 15px;  /* padding on the left and right */
+}
+
+.button-container {
+  position: absolute;
+  right: -10px;  /* Adjust this value to your desired distance from the right edge */
+  top: 55%;     /* Centering vertically */
+  transform: translateY(-50%);  /* This helps in perfect vertical centering */
 }
 
 /* Body */
@@ -114,12 +171,27 @@ body {
   font-size: 0.9375rem;
   text-align: left; 
   width: 100%; 
+  color: white;
+  font-family: 'TextFont';
 }
 
 .btn-sm {
   height: 80%;
+
   align-items: center;
+  border-radius: 15px; 
   margin-left: 5px; /* Add some margin between the buttons */
   margin-right: 8px; /* Add some margin between the buttons */
   margin-bottom: 5px; /* Add some margin between the buttons */
+}
+
+[ngbDropdownMenu] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dropdown-item {
+  text-align: center;
 }

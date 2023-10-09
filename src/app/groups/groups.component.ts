@@ -67,6 +67,7 @@ export class GroupsComponent implements OnInit {
   secondQuarterGroups: any;
   thirdQuarterGroups: any;
   fourthQuarterGroups: any;
+  profilePicPath: any;
 
   group: Group = new Group(0, " ", " ",[], [], [], [], {}, true);
 
@@ -79,6 +80,7 @@ export class GroupsComponent implements OnInit {
 
       this.loggedInUser = JSON.parse(storedUser);
       console.log(this.loggedInUser.role)
+      this.profilePicPath=BACKEND_URL + "/" + this.loggedInUser.profilePic
     }
 
 

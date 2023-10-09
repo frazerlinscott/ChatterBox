@@ -1,23 +1,108 @@
 .right {
     text-align: right;
+    font-family: 'TextFont', bold;
+    color: white;
+  }
+
+  .card-header{
+    color: white;
+    text-align: center;
+    font-family: 'CustomFont', bold;
+    font-size: 35px;
   }
   
   .left {
     text-align: left;
+    font-family: 'TextFont', bold;
+    color: white;
   }
 
   .custom-message-item {
     padding: 0.75rem 1.25rem;
-    /* other styles you want to retain from .list-group-item */
+    border:  #16293C;
 }
 
 .chat-messages {
-  height: 400px; /* Adjust height as needed */
+  height: 400px; 
   overflow-y: scroll;
   overflow-x: hidden;
+  border: 2px solid #16293C;
+}
+.list-group-item{
+  border: 2px solid #16293C;
+}
+.scroll {
+  background-color: #16293C;
 }
 
 .message-username {
-  height: 20px;  /* Adjust based on desired space for usernames */
-  overflow: hidden;  /* Ensures names are truncated if too long */
+  height: 20px;  
+  overflow: hidden;
+  font-family: 'TextFont', bold;
+  color: white;
+}
+
+.textplaceHolder{
+  font-family: 'TextFont', bold;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #16293C;
+  /* border: 8px solid red */
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.groupHeading{
+  font-family: 'CustomFont', sans-serif;
+  font-size: 18px;
+  color:  #00E0FF;
+}
+
+.colored-border-card {
+  border: 2px solid #615AF7;
+  border-radius: 10px; 
+}
+
+.colored-border-card-light {
+  border: 2px solid #615AF7;
+  border-radius: 10px; 
+}
+
+.section-card {
+  box-shadow: 0 0.25rem 0.5rem #00E0FF;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-family: 'TextFont', bold;
+}
+
+.card {
+  box-shadow: 0 0.125rem 0.25rem #00E0FF;
+  transition: box-shadow 0.3s;
+}
+
+.card-body {
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  font-family: 'TextFont', bold;
+}
+
+
+.btn{
+  font-family: 'CustomFont';
+  font-size: 20px;
+  width: 200px
+
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+  background-color: #00E0FF;
+  color:#16293C;
+  font-family: 'CustomFont', sans-serif;
 }
