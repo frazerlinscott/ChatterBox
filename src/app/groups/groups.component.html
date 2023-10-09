@@ -263,11 +263,35 @@
 
         <!-- For isUser & isAdmin -->
         <div *ngIf="isUser || isAdmin">
-    
-            <!-- Other Groups -->
- 
 
 
+            <div *ngIf="!isUser" class="container mt-4 section-card">
+                <h3 class="section-header">Administered Groups</h3>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-4 mx-2 my-2" *ngFor="let group of myGroups">
+                        <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
+                            <div class="row no-gutters align-items-center">
+            
+                                <!-- Group Name -->
+                                <div class="col">
+                                    <h5 class="card-title">{{ group.groupName }}</h5>
+                                </div>
+            
+                                <!-- Buttons -->
+                                <div class="col-auto">
+                                    <button *ngIf="!isUser && isAdmin || isSuperAdmin"
+                                            class="btn btn-sm btn-primary mr-2" 
+                                            (click)="editGroupUsers(group); $event.stopPropagation()">Add Users</button>
+            
+                                    <button *ngIf="group.createdBy==loggedInUser.username || isSuperAdmin"
+                                            class="btn btn-sm btn-danger" 
+                                            (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     
             <!-- My Groups -->
             <div class="container mt-4 section-card">
@@ -304,18 +328,18 @@
             </div>
             
 
-                <div class="container mt-4 section-card">
+                <!-- <div class="container mt-4 section-card">
                     <h3 class="section-header">Groups</h3>
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-4 mx-2 my-2" *ngFor="let group of otherGroups">
                             <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
                                 <div class="row no-gutters align-items-center">
-                                    <!-- Group Name -->
+                          
                                     <div class="col">
                                         <h5 class="card-title">{{ group.groupName }}</h5>
                                     </div>
 
-                                    <!-- Buttons -->
+                            
                                     <div *ngIf="isUser || isAdmin && !isSuperAdmin" class="col-auto">
                                         <button [disabled]="buttonDisabledStates[group.groupID]" 
                                         class="btn btn-success btn-sm" 
@@ -325,37 +349,30 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+                <div *ngIf="otherGroups?.length > 0" class="container mt-4 center-content">
+                    <h3 class="section-header">Groups</h3>
+                    <h4 class="section-text">Select a group to request entry.</h4>
+                    <div ngbDropdown>
+                        <button class="btn btn-secondary" id="groupDropdown" ngbDropdownToggle>
+                            Request Entry
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="groupDropdown">
+                            <button class="dropdown-item" 
+                                    *ngFor="let group of otherGroups" 
+                                    (click)="requestButton(group)" 
+                                    [disabled]="isGroupClicked(group.groupName)">
+                                {{ group.groupName }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                
+                
 
                 
     
             <!-- Administered Groups (for isAdmin only) -->
 
-            <div *ngIf="!isUser" class="container mt-4 section-card">
-                <h3 class="section-header">Administered Groups</h3>
-                <div class="row justify-content-center mt-4">
-                    <div class="col-md-4 mx-2 my-2" *ngFor="let group of myGroups">
-                        <div (click)="onGroupCardClick(group)" class="card square-card mt-auto">
-                            <div class="row no-gutters align-items-center">
-            
-                                <!-- Group Name -->
-                                <div class="col">
-                                    <h5 class="card-title">{{ group.groupName }}</h5>
-                                </div>
-            
-                                <!-- Buttons -->
-                                <div class="col-auto">
-                                    <button *ngIf="!isUser && isAdmin || isSuperAdmin"
-                                            class="btn btn-sm btn-primary mr-2" 
-                                            (click)="editGroupUsers(group); $event.stopPropagation()">Add Users</button>
-            
-                                    <button *ngIf="group.createdBy==loggedInUser.username || isSuperAdmin"
-                                            class="btn btn-sm btn-danger" 
-                                            (click)="deleteGroup(group); $event.stopPropagation()">Delete Group</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             

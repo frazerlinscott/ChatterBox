@@ -12,6 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ChannelsComponent } from './channels/channels.component';
 import { ChatComponent } from './chat/chat.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ChatComponent } from './chat/chat.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

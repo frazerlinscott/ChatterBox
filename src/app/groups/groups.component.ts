@@ -27,6 +27,8 @@ export class GroupsComponent implements OnInit {
   allGroups: any;
   superGroups: any[] = [];
 
+  clickedGroups: any[] = [];
+
 
   groupsNeedApproval: any;
   groupsAdminNeedApproval:any;
@@ -119,6 +121,7 @@ export class GroupsComponent implements OnInit {
     //console.log(this.loggedInUser.username)
 
     group.userRequests.push(this.loggedInUser.username);
+    this.clickedGroups.push(group.groupName);
 
     //console.log(group)
 
@@ -136,6 +139,12 @@ export class GroupsComponent implements OnInit {
     )
     this.buttonDisabledStates[group.groupID] = true;
   }
+
+  isGroupClicked(groupName: string): boolean {
+    return this.clickedGroups.includes(groupName);
+}
+
+
 
   editGroupUsers(group:any){
     this.selectedGroup = group;
@@ -354,6 +363,18 @@ export class GroupsComponent implements OnInit {
 
                 // Rest of your code remains unchanged...
                 this.groups = this.superGroups;
+  
+                this.numberOfAdminRequests= this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0).length
+
+                if (this.loggedInUser.role === 3){
+                  this.numberOfRequests = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0).length
+                } else if(this.loggedInUser.role === 2){
+                  this.numberOfRequests = this.groups.filter((group: { userRequests: string | any[]; groupAdmins: any[]; }) => 
+                  group.groupAdmins.includes(this.loggedInUser.username) && 
+                  group.userRequests && 
+                  group.userRequests.length > 0).length;
+                }
+
 
                 // Groups created by loggedInUser
                 this.myGroups = this.groups.filter((group: { createdBy: any; groupAdmins: any; }) => 
@@ -394,7 +415,6 @@ export class GroupsComponent implements OnInit {
     if(this.groups.length > 0){
       //this.noRequests=false
       this.groupsNeedApproval = this.groups.filter((group: { userRequests: string | any[]; }) => group.userRequests && group.userRequests.length > 0);
-      
     }
   }
 
@@ -403,13 +423,6 @@ export class GroupsComponent implements OnInit {
         console.log(this.loggedInUser.username)
 
         group.adminRequests.push(this.loggedInUser.username);
-
-        // console.log(group.adminRequests)
-        // this.numberOfAdminRequests = group.adminRequests.length
-        // console.log(this.numberOfAdminRequests)
-
-
-
         this.http.post(BACKEND_URL+"/update-groups", group).subscribe(
           response => {
               console.log('User details updated on the server.', response);
@@ -451,7 +464,14 @@ export class GroupsComponent implements OnInit {
     $('#approveAdminRequests').modal('show');
 
     console.log(this.groups)
+
+    if(this.groups.length > 0){
+      //this.noRequests=false
+      this.groupsAdminNeedApproval = this.groups.filter((group: { adminRequests: string | any[]; }) => group.adminRequests && group.adminRequests.length > 0);
+          }
   }
+
+
 
   approveRequest(group: any, userRequest: string){
     console.log(group);

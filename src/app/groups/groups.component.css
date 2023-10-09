@@ -69,6 +69,21 @@ h5 {
 .section-header {
   background-color: #f8f9fa;
   font-size: 1.5em;
+  text-align: center;
+}
+.section-text {
+  background-color: #f8f9fa;
+  font-size: 1em;
+  text-align: center;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;  /* Stack children vertically */
+  align-items: center;     /* Horizontally center the content */
+  justify-content: center; /* Vertically center the content */
+  height: 100%;            /* Ensure the container takes up full height if needed */
+  text-align: center;      /* Center the text within its container */
 }
 
 /* Square Card */
