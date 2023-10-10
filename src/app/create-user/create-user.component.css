@@ -1,5 +1,7 @@
 .container {
     max-width: 600px;
+    justify-content: center;
+    align-items: center;
 }
 
 .is-unique {
@@ -10,3 +12,33 @@
     border: 2px solid red;
   }
 
+  .mb-3{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 18px; /* Adjusted to px */
+    color:  white
+  }
+
+  .text{
+    font-family: 'TextFont';
+  }
+
+  .mb-4{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 30px; /* Adjusted to px */
+    color:  white
+  }
+
+  .btn{
+    font-family: 'CustomFont';
+    font-size: 20px;
+  
+  }
+  
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+    background-color: #00E0FF;
+    color:#16293C;
+    font-family: 'CustomFont', sans-serif;
+  }
+  

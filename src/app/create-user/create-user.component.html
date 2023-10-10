@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h2 class="mb-4">Create Account</h2>
+    <h2 class="mb-4 text-center">Create Account</h2>
     <form (ngSubmit)="onCreate()">
         <div class="mb-3">
 
@@ -10,7 +10,7 @@
                 'not-unique': user.username && !isUniqueUsername}">
         </div>
 
-        <div *ngIf="!isUniqueUsername" class="invalid-feedback d-block">
+        <div *ngIf="!isUniqueUsername" class="invalid-feedback d-block text">
             User already exists, Please choose a new username
         </div>
 
@@ -26,7 +26,7 @@
                 'not-unique': user.pwdconfirm && !isUniquePassword}">
         </div>
 
-        <div *ngIf="!isUniquePassword" class="invalid-feedback d-block">
+        <div *ngIf="!isUniquePassword" class="invalid-feedback d-block text">
             Passwords do not match, Please try again. 
         </div>
         <div class="mb-3">
@@ -42,11 +42,25 @@
             <input type="date" class="form-control" id="birthday" [(ngModel)]="user.birthdate" name="birthday" required>
         </div>
 
-        <input type="file" (change)="onFileSelected($event)">
+        <div class="mb-3 d-flex align-items-center" style="padding-top: 20px">
+            <label style="padding-right: 20px">Profile Picture</label>
+            <label class="btn btn-sm btn-primary mr-2" style="width:50px; padding: 6px 12px;"> 
+                <input type="file" (change)="onFileSelected($event)" style="display: none;">
 
-        <input type="hidden" [(ngModel)]="user.role" name="roles" value="[1]">
-        <input type="hidden" [(ngModel)]="user.group" name="groups" value="[1]">
-        <button type="submit" class="btn btn-primary">Create Account</button>
+                <!-- Show camera icon if there's no attachment -->
+                <i class="fa-solid fa-camera" *ngIf="!selectedFile"></i>
+
+                <!-- Show check icon if there is an attachment -->
+                <i class="fa-solid fa-check" *ngIf="selectedFile"></i>
+            </label>
+
+            <!-- Just a placeholder for visual balance. You can remove or replace it as needed -->
+            <div class="flex-grow-1"></div>
+            <input type="hidden" [(ngModel)]="user.role" name="roles" value="[1]">
+            <input type="hidden" [(ngModel)]="user.group" name="groups" value="[1]">
+            <button type="submit" class="btn btn-primary">Create Account</button>
+    
+        </div>
 
 
     </form>

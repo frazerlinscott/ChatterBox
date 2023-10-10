@@ -187,31 +187,25 @@
                     </button>
                 </div>
     
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item" *ngFor="let group of groupsNeedApproval">
+                <div class="modal-body" style="background-color: #00E0FF;">
+                    <ul class="list-group" style="background-color: #00E0FF;">
+                        <li style="background-color:#16293C;" class="list-group-item list-group-title" *ngFor="let group of groupsNeedApproval">
                             {{ group.groupName }}
-                            <ul class="list-group mt-2">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let userRequest of group.userRequests">
+                            <ul style="background-color: #00E0FF;" class="list-group mt-2">
+                                <li style="background-color: #00E0FF;" class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let userRequest of group.userRequests">
                                     {{ userRequest }}
-                                    <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)">Approve</button>
+                                    <button style="margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)"><i class="fa-solid fa-thumbs-up"></i></button>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-    
-                <!-- If you need any footer buttons, you can add them in a similar fashion here. 
-                     I've left this commented out in case it's not needed.
-    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="someFunction()">Some Button</button>
-                </div>
-                -->
             </div>
         </div>
     </div>
     
+    
+
     
     <div class="modal fade colored-border-card-light" id="approveAdminRequests" tabindex="-1" aria-labelledby="approveAdminRequestsLabel" aria-hidden="true">
         <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
@@ -223,30 +217,23 @@
                     </button>
                 </div>
     
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item" *ngFor="let group of groupsAdminNeedApproval">
-                            {{ group.groupName }} 
-                            <ul class="list-group mt-2">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let adminRequest of group.adminRequests">
+                <div class="modal-body" style="background-color: #00E0FF;">
+                    <ul class="list-group" style="background-color: #00E0FF;">
+                        <li style="background-color:#16293C;"class="list-group-item list-group-title" *ngFor="let group of groupsAdminNeedApproval">
+                            {{ group.groupName }}
+                            <ul style="background-color: #00E0FF;" class="list-group mt-2">
+                                <li style="background-color: #00E0FF;" class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let adminRequest of group.adminRequests">
                                     {{ adminRequest }}
-                                    <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveAdminRequest(group, adminRequest)">Approve</button>
+                                    <button style="margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveAdminRequest(group, adminRequest)"><i class="fa-solid fa-thumbs-up"></i></button>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-    
-                <!-- If you need any footer buttons, you can add them in a similar fashion here. 
-                     I've left this commented out in case it's not needed.
-    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="someFunction()">Some Button</button>
-                </div>
-                -->
             </div>
         </div>
     </div>
+    
     
     
 <div class="modal fade colored-border-card-light" id="editGroupUsers" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">

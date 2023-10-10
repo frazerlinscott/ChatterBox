@@ -44,6 +44,14 @@ h3{
   cursor: not-allowed;
 }
 
+.list-group-item{
+  font-family: 'CustomFont', sans-serif;
+}
+.list-group-title{
+  font-family: 'CustomFont', sans-serif;
+  color: white;
+}
+
 .custom-btn {
   
   margin-bottom: 15px; 
