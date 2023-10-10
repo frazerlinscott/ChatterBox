@@ -134,11 +134,11 @@
 </div>
 <!-- --MODALS-------------------------------------------------------------- -->
 
-    <div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addGroupLabel">Add Group</h5>
+    <div class="modal fade colored-border-card-light" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+        <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+          <div class="modal-content"style="background-color: #00E0FF;">
+            <div class="modal-header"style="background-color: #00E0FF;">
+              <h3 class="modal-title" id="addGroupLabel">Add Group</h3>
               <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -146,8 +146,8 @@
             
             <div class="modal-body">
               <div class="form-group">
-                <label for="groupName">Group Name:</label>
-                <input type="text" class="form-control" id="groupName" (input)="onGroupInput()"[(ngModel)]="newGroupName"
+                <label class="text" for="groupName">Group Name:</label>
+                <input type="text" class="form-control text" id="groupName" (input)="onGroupInput()"[(ngModel)]="newGroupName"
                 [ngClass]="{
                     'is-unique': newGroupName && isUniqueGroup, 
                     'not-unique': newGroupName  && !isUniqueGroup}">
@@ -160,9 +160,9 @@
             </div>
       
               <div class="form-group">
-                <label for="channelName">Channel Name:</label>
-                <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName">
-                <button type="button" class="btn btn-primary mt-2" (click)="addChannel()">Add Channel</button>
+                <label class="text" for="channelName">Channel Name:</label>
+                <input type="text" class="form-control text" id="channelName" [(ngModel)]="newChannelName">
+                <button type="button" class="btn btn-primary mr-2" (click)="addChannel()">Add Channel</button>
               </div>
               
               <ul *ngIf="groupChannels && groupChannels.length">
@@ -177,11 +177,11 @@
       </div>
     
     
-      <div class="modal fade" id="approveRequests" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="approveRequestsLabel">Group Requests</h5>
+      <div class="modal fade colored-border-card-light" id="approveRequests" tabindex="-1" aria-labelledby="approveRequestsLabel" aria-hidden="true">
+        <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+            <div class="modal-content" style="background-color: #00E0FF;">
+                <div class="modal-header" style="background-color: #00E0FF;">
+                    <h3 class="modal-title" id="approveRequestsLabel">Group Requests</h3>
                     <button (click)="closeModal('requestApproval')" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -194,23 +194,30 @@
                             <ul class="list-group mt-2">
                                 <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let userRequest of group.userRequests">
                                     {{ userRequest }}
-    
                                     <button style="width: 80px; margin-left: 10px;" class="btn btn-success btn-sm" (click)="approveRequest(group, userRequest)">Approve</button>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+    
+                <!-- If you need any footer buttons, you can add them in a similar fashion here. 
+                     I've left this commented out in case it's not needed.
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="someFunction()">Some Button</button>
+                </div>
+                -->
             </div>
         </div>
     </div>
     
     
-    <div class="modal fade" id="approveAdminRequests" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="approveRequestsLabel">Group Admin Requests</h5>
+    <div class="modal fade colored-border-card-light" id="approveAdminRequests" tabindex="-1" aria-labelledby="approveAdminRequestsLabel" aria-hidden="true">
+        <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+            <div class="modal-content" style="background-color: #00E0FF;">
+                <div class="modal-header" style="background-color: #00E0FF;">
+                    <h3 class="modal-title" id="approveAdminRequestsLabel">Group Admin Requests</h3>
                     <button (click)="closeModal('requestAdminApproval')" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -218,7 +225,6 @@
     
                 <div class="modal-body">
                     <ul class="list-group">
-      
                         <li class="list-group-item" *ngFor="let group of groupsAdminNeedApproval">
                             {{ group.groupName }} 
                             <ul class="list-group mt-2">
@@ -230,35 +236,45 @@
                         </li>
                     </ul>
                 </div>
+    
+                <!-- If you need any footer buttons, you can add them in a similar fashion here. 
+                     I've left this commented out in case it's not needed.
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="someFunction()">Some Button</button>
+                </div>
+                -->
             </div>
         </div>
     </div>
     
-    <div class="modal fade" id="editGroupUsers" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editUser">Edit Users</h5>
-                    <button (click)="closeModal('editUsers')" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
     
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of userNotinGroup">
-                            {{ username }}
-                            <button class="btn btn-success btn-sm" style="width: 80px; margin-left: 10px;" (click)="addUserFromGroup(selectedGroup, username)">Add User</button>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of usersInGroup">
-                            {{ username }}
-                            <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="removeUserFromGroup(selectedGroup, username)">Remove User</button>
-                        </li>
-                    </ul>
-                </div>
+<div class="modal fade colored-border-card-light" id="editGroupUsers" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">
+    <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+        <div class="modal-content" style="background-color: #00E0FF;">
+            <div class="modal-header" style="background-color: #00E0FF;">
+                <h3 class="modal-title" id="editUser">Edit Users</h3>
+                <button (click)="closeModal('editUsers')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body" style="background-color: #00E0FF;">
+                <ul class="list-group" style="background-color: #00E0FF;">
+                    <li style="background-color: #16293C;"class="inText list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of userNotinGroup">
+                        {{ username }}
+                        <button class="btn btn-success btn-sm" style="margin-left: 10px;" (click)="addUserFromGroup(selectedGroup, username)"><i class="fa-solid fa-plus"></i></button>
+                    </li>
+                    <li style="background-color: #00E0FF;" class="outText list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of usersInGroup">
+                        {{ username }}
+                        <button class="btn btn-danger btn-sm" style="margin-left: 10px;" (click)="removeUserFromGroup(selectedGroup, username)"><i class="fa-solid fa-trash"></i></button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
+
 
 
         <!-- For isUser & isAdmin -->
@@ -361,7 +377,8 @@
                             <button class="dropdown-item custom-dropdown-item"
                                     *ngFor="let group of otherGroups" 
                                     (click)="requestButton(group)" 
-                                    [disabled]="isGroupClicked(group.groupName)">
+                                    [disabled]="isGroupClicked(group.groupName)"
+                                    [ngClass]="{'disabled-item': isGroupClicked(group.groupName)}">
                                 {{ group.groupName }}
                             </button>
                         </div>

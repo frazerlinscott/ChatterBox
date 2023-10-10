@@ -62,50 +62,51 @@
 </div> 
 
 
-
-    <div class="modal fade" id="addChannelModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addGroupLabel">Add Channel</h5>
-              <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
+<div class="modal fade colored-border-card-light" id="addChannelModal" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
+    <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+        <div class="modal-content" style="background-color: #00E0FF;">
+            <div class="modal-header" style="background-color: #00E0FF;">
+                <h3 class="modal-title" id="addGroupLabel">Add Channel</h3>
+                <button (click)="closeModal('newGroup')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="channelName">Channel Name:</label>
-                <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName">
-                <button type="button" class="btn btn-primary mt-2" (click)="addChannel('save')">Add Channel</button>
-              </div>
+            
+            <div class="modal-body" style="background-color: #00E0FF;">
+                <div class="form-group">
+                    <label for="channelName">Channel Name:</label>
+                    <input type="text" class="form-control" id="channelName" [(ngModel)]="newChannelName" style="background-color: #16293C; color: white;">
+                    <button type="button" class="btn btn-primary mt-2" (click)="addChannel('save')">Add Channel</button>
+                </div>
             </div>
-            </div>
-          </div>
         </div>
+    </div>
+</div>
 
 
-        <div class="modal fade" id="editmemberUsers" tabindex="-1" aria-labelledby="addGroupLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editUser">Edit Users</h5>
+
+        <div class="modal fade colored-border-card-light" id="editmemberUsers" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">
+            <div class="modal-dialog colored-border-card-light" style="background-color: #00E0FF;">
+                <div class="modal-content" style="background-color: #00E0FF;">
+                    <div class="modal-header" style="background-color: #00E0FF;">
+                        <h3 class="modal-title" id="editUser">Edit Users</h3>
                         <button (click)="closeModal('editUsers')" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-        
-        
-                    <div class="modal-body">
-                        <ul class="list-group">
-                            <!-- Iterate over each username in userNotInGroup -->
-                            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let username of channelMembers">
+                    
+                    <div class="modal-body" style="background-color: #00E0FF;">
+                        <ul class="list-group" style="background-color: #00E0FF;">
+                            <!-- Iterate over each username in channelMembers -->
+                            <li style="background-color: #16293C;" class="inText list-group-item d-flex justify-content-between align-items-center text" *ngFor="let username of channelMembers">
                                 {{ username }}
-                                <button class="btn btn-danger btn-sm" style="width: 120px; margin-left: 10px;" (click)="adminRemoveMember(username)" >Remove User</button>
+                                <button class="btn btn-danger btn-sm" style="margin-left: 10px;" (click)="adminRemoveMember(username)"><i class="fa-solid fa-trash"></i></button>
                             </li>
-        
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+        
 
      

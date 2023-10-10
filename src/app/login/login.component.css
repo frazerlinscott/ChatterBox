@@ -1,0 +1,46 @@
+.full-height {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow .3s;
+    font-family: 'CustomFont', sans-serif;
+}
+
+.form-group{
+    font-family: 'TextFont';
+}
+
+.login-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.text-center{
+    margin-top: 20px;
+}
+
+.btn{
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: #16293C;
+    height:40px;
+    width:200px;
+    margin-top: 20px;
+
+
+}
+

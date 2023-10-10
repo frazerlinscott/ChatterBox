@@ -64,7 +64,12 @@
         
                 <label class="btn btn-sm btn-primary" style="width:50px; padding: 6px 12px; margin-left: 8px;">
                     <input type="file" name="attachment" (change)="onFileSelected($event)" style="display: none;">
-                    <i class="fa-solid fa-camera"></i>
+                    
+                    <!-- Show camera icon if there's no attachment -->
+                    <i class="fa-solid fa-camera" *ngIf="!attachmentFile"></i>
+                
+                    <!-- Show check icon if there is an attachment -->
+                    <i class="fa-solid fa-check" *ngIf="attachmentFile"></i>
                 </label>
             </form>
         </div>

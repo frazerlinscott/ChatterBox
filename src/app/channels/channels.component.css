@@ -22,6 +22,28 @@ h1{
     align-items: center;
 }
 
+.inText{
+  font-family: 'CustomFont', sans-serif;
+  color: #00E0FF;
+}
+
+/* Custom Button */
+h2{
+  font-family: 'CustomFont', sans-serif;
+  color:white !important;
+}
+
+h3{
+  font-family: 'CustomFont', sans-serif;
+  color:#16293C;
+}
+
+.outText{
+  font-family: 'CustomFont', sans-serif;
+  color:  #16293C
+}
+
+
 button {
     transition: all 0.3s;
 }
@@ -67,6 +89,10 @@ button:hover {
   .colored-border-card-light {
     border: 2px solid #615AF7;/* replace with your desired color */
     border-radius: 10px; /* adjust as desired for corner roundness */
+  }
+  
+  .text{
+    font-family: 'TextFont';
   }
   
   

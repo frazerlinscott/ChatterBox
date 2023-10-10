@@ -23,6 +23,27 @@ h2{
   color:white !important;
 }
 
+h3{
+  font-family: 'CustomFont', sans-serif;
+  color:#16293C;
+}
+
+
+.inText{
+  font-family: 'CustomFont', sans-serif;
+  color: #00E0FF;
+}
+
+.outText{
+  font-family: 'CustomFont', sans-serif;
+  color:  #16293C
+}
+
+.disabled-item {
+  background-color:#16293C;
+  cursor: not-allowed;
+}
+
 .custom-btn {
   
   margin-bottom: 15px; 
@@ -75,7 +96,10 @@ h5 {
   width: 50%;
   color:#00E0FF;
   font-family: 'TextFont';
-  
+}
+
+.text{
+  font-family: 'TextFont';
 }
 
 
@@ -163,6 +187,12 @@ body {
 .container.mt-4.section-card {
   background-color: white;
 }
+
+.btn{
+  font-family: 'CustomFont', sans-serif;
+}
+
+
 
 .card-title {
   font-size: 0.9375rem;
