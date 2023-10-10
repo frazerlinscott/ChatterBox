@@ -28,6 +28,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../dist/week4tut')));
 
+const dir = './attachments';
+
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true }); 
+}
+
 
 const multer = require('multer');
 
@@ -37,12 +43,24 @@ const storage = multer.diskStorage({
     },
     filename: function(req, file, cb) {
         const fileExtension = file.originalname.split('.').pop();
-        const currentDate = new Date().toISOString().replace(/:/g, '-'); // to replace any colons, which can be problematic in filenames
+        const currentDate = new Date().toISOString().replace(/:/g, '-');
         cb(null, currentDate + '.' + fileExtension);
     }
 });
-
 const upload = multer({ storage: storage });
+
+
+const attachment = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'attachments/');  
+    },
+    filename: function(req, file, cb) {
+        const fileExtension = file.originalname.split('.').pop();
+        const currentDate = new Date().toISOString().replace(/:/g, '-');
+        cb(null, currentDate + '.' + fileExtension);
+    }
+});
+const messageAttachment = multer({ storage: attachment });
 
 
 const main = async function(client) {
@@ -59,6 +77,11 @@ const main = async function(client) {
         sockets.connect(io, db);  // pass db instead of PORT
 
         app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+        app.use('/attachments', express.static(path.join(__dirname, '..', 'attachments')));
+
+
+        
+
 
         require('./routes/updateGroups_DB.js')(app, db, ObjectId);
         require('./routes/login_DB.js')(app, db);
@@ -71,6 +94,10 @@ const main = async function(client) {
         require('./routes/message_DB.js')(app, db);
 
         require('./routes/uploadPic_DB.js')(app, upload, db);
+
+        require('./routes/addAttachment_DB.js')(app, messageAttachment, db);
+
+        //require('./routes/getAttachment_DB.js')(app, db);
 
     } catch (error) {
         console.error("Failed to connect to the database:", error);

@@ -28,7 +28,7 @@ export class SocketService {
   }
 
 
-send(message: string, channel: string, groupName: string): void {
+send(message: string, channel: string, groupName: string, attachment: number): void {
   const storedUser = window.sessionStorage.getItem('current.user');
   if (storedUser) {
     let userObject = JSON.parse(storedUser);
@@ -36,7 +36,7 @@ send(message: string, channel: string, groupName: string): void {
     let profilePic = userObject.profilePic;
     console.log(profilePic);
     const timestamp = new Date();
-    const dataToSend = { message, channel, username, timestamp, groupName, profilePic };
+    const dataToSend = { message, channel, username, timestamp, groupName, profilePic, attachment };
     this.socket.emit('message', dataToSend);
   }
 }

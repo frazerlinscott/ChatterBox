@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="card colored-border-card-light">
         <div class="card-header">
-            channelName
+            {{this.channel}}
         </div>
         <div class="card-body">
             <ul #chatMessages class="list-group chat-messages">
@@ -13,8 +13,15 @@
                     <div *ngIf="msg.username === loggedInUser.username" class="d-flex align-items-start justify-content-end">
                         <div class="rounded p-2 bg-primary text-white" style="max-width: 70%;">
                             {{ msg.message }}
+                            <!-- Display attachment if available -->
+                            <div *ngIf="msg.attachment">
+                                <img [src]="attachmentURL + msg.attachment" 
+                                     alt="Attachment Image" 
+                                     class="img-fluid mt-2"
+                                     style="width: 200px; height: auto">
+                            </div>
                         </div>
-                        <div class="ml-2 text-center" style="margin-left: 15px;"> <!-- Added margin-left here -->
+                        <div class="ml-2 text-center" style="margin-left: 15px;">
                             <img [src]="URL + msg.profilePic" 
                                  alt="Profile Image" 
                                  class="img-fluid rounded-circle" 
@@ -25,7 +32,7 @@
 
                     <!-- Message from other users -->
                     <div *ngIf="msg.username !== loggedInUser.username" class="d-flex align-items-start">
-                        <div class="mr-2 text-center" style="margin-right: 15px;"> <!-- Added margin-right here -->
+                        <div class="mr-2 text-center" style="margin-right: 15px;">
                             <img [src]="URL + msg.profilePic" 
                                  alt="Profile Image" 
                                  class="img-fluid rounded-circle" 
@@ -34,6 +41,13 @@
                         </div>
                         <div class="rounded p-2 bg-secondary text-white" style="max-width: 70%;">
                             {{ msg.message }}
+                            <!-- Display attachment if available -->
+                            <div *ngIf="msg.attachment">
+                                <img [src]="attachmentURL + msg.attachment" 
+                                     alt="Attachment Image" 
+                                     class="img-fluid mt-2"
+                                     style="width: 200px; height: auto">
+                            </div>
                         </div>
                     </div>
 
@@ -41,12 +55,16 @@
             </ul>
         </div>
         <div style="padding-bottom: 20px" class="card-footer">
-            <form class="form-inline">
-                <div class="form-group flex-grow-1 mr-2" style="padding-bottom: 15px">
+            <form class="d-flex align-items-center justify-content-between">
+                <div class="form-group flex-grow-1 mr-2">
                     <input type="text" class="form-control w-100 textplaceHolder" [(ngModel)]="messagecontent" name="messagecontent" placeholder="Type a message">
                 </div>
-                <button  class="btn btn-primary" (click)="sendMessage()" type="button">Send</button>
+        
+                <button class="btn btn-primary mr-2" (click)="sendMessage()" type="button" style="padding: 8px 12px; margin-left: 8px;">Send</button>
+        
+                <label class="btn btn-sm btn-primary" style="width:50px; padding: 6px 12px; margin-left: 8px;">
+                    <input type="file" name="attachment" (change)="onFileSelected($event)" style="display: none;">
+                    <i class="fa-solid fa-camera"></i>
+                </label>
             </form>
         </div>
-    </div>
-</div>

@@ -35,6 +35,23 @@
   background-color: #16293C;
 }
 
+.btn-sm {
+  height: 50%;
+  align-items: center;
+  border-radius: 15px; 
+  margin-left: 5px; /* Add some margin between the buttons */
+  margin-right: 8px; /* Add some margin between the buttons */
+  margin-bottom: 5px; /* Add some margin between the buttons */
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+  background-color: #00E0FF;
+  color:#16293C;
+  font-family: 'CustomFont', sans-serif;
+}
+
 .message-username {
   height: 20px;  
   overflow: hidden;

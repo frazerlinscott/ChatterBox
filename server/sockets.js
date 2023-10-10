@@ -53,16 +53,19 @@ module.exports = {
                 console.log('Received message on server:', data);
 
                 // Save the message to the database here before emitting it to other clients
-                const messageData = {
-                    groupName: data.groupName,
-                    channelName: data.channel,
-                    message: {
-                        message: data.message,
-                        username: data.username,
-                        timestamp: new Date().toISOString(),
-                        profilePic: data.profilePic
+
+             
+                    const messageData = {
+                        groupName: data.groupName,
+                        channelName: data.channel,
+                        message: {
+                            message: data.message,
+                            username: data.username,
+                            timestamp: new Date().toISOString(),
+                            profilePic: data.profilePic,
+                            attachment: data.attachment
+                        }
                     }
-                };
 
                 try {
                     await saveMessageToDb(db, messageData);
@@ -70,7 +73,8 @@ module.exports = {
                         message: data.message,
                         channel: data.channel,
                         username: data.username,
-                        profilePic: data.profilePic
+                        profilePic: data.profilePic,
+                        attachment: data.attachment
                     });
                     } catch (error) {
                     console.error('Error saving message to database:', error);

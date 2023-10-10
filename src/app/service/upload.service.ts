@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UploadResponse } from 'server/models/interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +19,14 @@ export class UploadService {
     console.log(this.BACKEND_URL)
 
     return this.http.post(this.BACKEND_URL+"/uploadPhoto", data);
-
-
     // return this.http.post(this.BACKEND_URL + "/uploadPhoto", data);
   }
+
+  uploadAttachment(formData: FormData): Observable<UploadResponse> {
+    console.log(this.BACKEND_URL);
+    return this.http.post<UploadResponse>(this.BACKEND_URL + "/attachPhoto", formData);
+}
+
 
 //   testEndpoint() {
 //     return this.http.post(this.BACKEND_URL + "/testEndpoint", {});

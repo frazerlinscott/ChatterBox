@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'server/routes/userModel';
 import { UploadService } from '../service/upload.service';
 
-
 const BACKEND_URL = "http://localhost:3000";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
