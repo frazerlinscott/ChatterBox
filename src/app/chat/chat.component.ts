@@ -9,6 +9,8 @@ import { UploadService } from '../service/upload.service';
 import { Observable } from 'rxjs';
 import { UploadResponse } from 'server/models/interfaces';
 
+import { CommonModule } from '@angular/common';
+
 
 
 const BACKEND_URL = "http://localhost:3000";

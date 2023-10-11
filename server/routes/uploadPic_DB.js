@@ -48,10 +48,3 @@ module.exports = function(app, upload, db) {
     });
 };
 
-
-// module.exports = function(app) {
-//     app.post('/uploadPhoto', (req, res) => {
-//         console.log('Test endpoint hit!');
-//         res.json({ success: true, message: 'Test endpoint hit successfully!' });
-//     });
-// };

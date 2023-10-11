@@ -14,7 +14,6 @@ const httpOptions = {
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-
 export class CreateUserComponent implements OnInit {
 
   user: User = new User('', '', 0, '', '', '', 1, [], true, '');

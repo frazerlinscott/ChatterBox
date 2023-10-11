@@ -13,6 +13,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { ChannelsComponent } from './channels/channels.component';
 import { ChatComponent } from './chat/chat.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
