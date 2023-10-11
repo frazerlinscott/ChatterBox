@@ -385,8 +385,6 @@ This module establishes a real-time connection between the server and its client
 
 ---
 
-Note: While the above documentation details the functionalities and interactions, always ensure your actual implementation aligns with your desired business logic.
-
 ### `/attachPhoto`
 - **HTTP Method:** POST
 - **Parameters:**
@@ -537,14 +535,7 @@ Note: While the above documentation details the functionalities and interactions
 - `Package.json` - contains meta information like package name, version, dependencies, scripts.
 
 
-
 # Server Changes:
-## Directly on Server: 
-### Get Usernames 
-- Function to retrieve all the usernames in `UserData.json` to use in `create-user` component. Component cross-references stored usernames with user input to ensure user cannot create an account with the same username as an existing username. Makes all username unique. 
-
-### Get Groups 
-- Function to retrieve all the usernames in `GroupData.json` to use in `groups` component. Component cross-references stored groupNames with user input to ensure user cannot create a group with the same groupName as an existing stored groupName. Makes all groupName unique. 
 
 ## Create User Component:
 
@@ -756,8 +747,6 @@ This service provides utilities for fetching user-related data from the server.
 - **getUserData()**: Sends a POST request to fetch data for all users from the backend.
 
 ---
-
-These services encapsulate different functionalities of your application, providing a modular approach to separate concerns, which makes the codebase maintainable and scalable.
 
 
 ## Routing
