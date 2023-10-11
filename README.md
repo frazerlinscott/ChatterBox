@@ -19,6 +19,35 @@ Angular is a popular front-end framework that utilizes Node.js for development. 
    ```bash
    npm install -g @angular/cli
 
+### Main Dependencies:
+- **Bootstrap and UI**:
+  - `@ng-bootstrap/ng-bootstrap`: ^15.1.1
+  - `bootstrap`: ^5.3.1
+  - `jquery`: ^3.7.1
+
+- **Server & Database**:
+  - `cors`: ^2.8.5
+  - `express`: ^4.18.2
+  - `mongodb`: ^6.1.0
+  - `mongoose`: ^7.5.3
+
+- **Files & Networking**:
+  - `multer`: ^1.4.5-lts.1
+  - `node-fetch`: ^3.3.2
+
+- **Real-time Communication**:
+  - `socket.io`: ^4.7.2
+  - `socket.io-client`: ^4.7.2
+
+- **Other Libraries**:
+  - `rxjs`: ~7.8.0
+  - `tslib`: ^2.3.0
+  - `zone.js`: ~0.13.0
+
+- **Testing**:
+  - `jasmine-core`: ~4.6.0
+  - `karma`: ~6.4.0
+
 
 # Git Repository Organization and Development Process
 
