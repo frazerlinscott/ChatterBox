@@ -13,6 +13,13 @@ describe('GroupsComponent', () => {
       imports: [FormsModule, HttpClientTestingModule],
     });
 
+    window.sessionStorage.setItem('current.user', JSON.stringify({ 
+      username: 'testUser', 
+      role: 1, // or any other role you need to mock
+      profilePic: 'path_to_pic.png'
+    }));
+  
+
     fixture = TestBed.createComponent(GroupsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -78,11 +78,7 @@ const main = async function(client) {
 
         app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
         app.use('/attachments', express.static(path.join(__dirname, '..', 'attachments')));
-
-
         
-
-
         require('./routes/updateGroups_DB.js')(app, db, ObjectId);
         require('./routes/login_DB.js')(app, db);
         require('./routes/allUsernames_DB.js')(app, db);
@@ -92,9 +88,7 @@ const main = async function(client) {
         require('./routes/getAllGroups_DB.js')(app, db);
         require('./routes/updatePermissions_DB.js')(app, db);
         require('./routes/message_DB.js')(app, db);
-
         require('./routes/uploadPic_DB.js')(app, upload, db);
-
         require('./routes/addAttachment_DB.js')(app, messageAttachment, db);
 
         //require('./routes/getAttachment_DB.js')(app, db);

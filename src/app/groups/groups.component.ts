@@ -77,40 +77,36 @@ export class GroupsComponent implements OnInit {
 
     const storedUser = window.sessionStorage.getItem('current.user');
     if (storedUser) {
-
+  
       this.loggedInUser = JSON.parse(storedUser);
-      console.log(this.loggedInUser.role)
-      this.profilePicPath=BACKEND_URL + "/" + this.loggedInUser.profilePic
+      console.log(this.loggedInUser.role);
+      this.profilePicPath = BACKEND_URL + "/" + this.loggedInUser.profilePic;
+  
+      if (this.loggedInUser.role === 1) {
+        this.isUser = true;
+        this.isAdmin = false;
+        this.isSuperAdmin = false;
+      } else if (this.loggedInUser.role === 2) {
+        this.isUser = false;
+        this.isAdmin = true;
+        this.isSuperAdmin = false;
+      } else if (this.loggedInUser.role === 3) {
+        this.isUser = false;
+        this.isAdmin = false;
+        this.isSuperAdmin = true;
+      }
+      
+      console.log(this.isSuperAdmin);
     }
-
-
-  if (this.loggedInUser.role === 1){
-    this.isUser = true
-    this.isAdmin = false
-    this.isSuperAdmin = false
-  }else if (this.loggedInUser.role === 2){
-    this.isUser = false
-    this.isAdmin = true
-    this.isSuperAdmin = false
-  }else if (this.loggedInUser.role === 3){
-    this.isUser = false
-    this.isAdmin = false
-    this.isSuperAdmin = true
-  }
-
-  console.log(this.isSuperAdmin)
-
-    
-    this.getGroups()
-    this.getUsers()
-
-
-
+  
+    this.getGroups();
+    this.getUsers();
+  
     this.http.get<string[]>(BACKEND_URL + "/groups").subscribe(groupsNames => {
       this.allGroupNames = groupsNames;
-
     });
   }
+  
 
   onGroupCardClick(group:any ){
     this.selectedGroup = group;
